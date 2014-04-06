@@ -1232,7 +1232,7 @@ This is a sample definition for \userfun{f}.
 \xtc{
 A message is displayed stating what \userfun{f} will cache.
 }{
-\spadcommand{f(4) \free{}\free{cache}}
+\spadcommand{f(4) \free{cache}}
 }
 \xtc{
 This causes all other functions to have all computed values saved by
@@ -2683,7 +2683,7 @@ match an identity element.
 Using the pattern \axiom{x + y}, for example, neither \axiom{x} nor \axiom{y}
 matches the expression \axiom{0}.
 Similarly, if a pattern contains a product \axiom{x*y} or an exponentiation
-\axiom{x^y}, then neither \axiom{x} or \axiom{y} matches \axiom{1}.
+\axiom{x\^y}, then neither \axiom{x} or \axiom{y} matches \axiom{1}.
 %
 \xtc{
 If identical elements were matched, pattern matching would generally loop.

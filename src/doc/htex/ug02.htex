@@ -1563,9 +1563,9 @@ is a list of elements of \axiomType{PositiveInteger}.
 }{
 \spadcommand{[10^i for i in 2..5]}
 }
-What should the type of \axiom{[10^(i-1) for i in 2..5]} be?
+What should the type of \axiom{[10\^(i-1) for i in 2..5]} be?
 On one hand, \axiom{i-1} is always an integer greater than zero
-as \axiom{i} ranges from \axiom{2} to \axiom{5} and so \axiom{10^i}
+as \axiom{i} ranges from \axiom{2} to \axiom{5} and so \axiom{10\^i}
 is also always a positive integer.
 On the other, \axiom{i-1} is a very simple function of \axiom{i}.
 \Language{} does not try to analyze every such function over the

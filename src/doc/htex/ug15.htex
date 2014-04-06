@@ -897,7 +897,7 @@ that modifying FriCAS algebra is now much easier.
 
 \item Braces no longer construct sets. So instead of
   \spad{\{'sin, 'cos\}::Set(Symbol)} use
-  \spad{set(['sin, 'cos])$Set(Symbol)}.
+  \spad{set(['sin, 'cos])\$Set(Symbol)}.
 
 \item Old Spad used colon (\spad{:}) to denote convertion, like
   \spad{pretend} but performing even less checking. This is no longer
@@ -914,7 +914,7 @@ that modifying FriCAS algebra is now much easier.
   \spad{~=,<=,>,>=} in ways which are correct for linear order, but
   may conflict with other uses (as partial order or when generating
   \spad{OutputForm}). FriCAS no longer performs this transformation.
-  Similarely, Spad parser no longer treats \spad{\^} and \spad{\^=} in
+  Similarely, Spad parser no longer treats \spadop{^} and \spadop{^=} in
   special way.
 
 \item Quote in old Spad allowed to insert arbitray literal Lisp data,
@@ -958,11 +958,11 @@ that modifying FriCAS algebra is now much easier.
 There are also library changes that affect user code:
 
 \begin{enumerate}
-\item \spad{**} lost its definition as exponentiation, use \spad{\^}
+\item \spad{**} lost its definition as exponentiation, use \spadop{^}
   instead.
 
-\item \spad{\^} is no longer used as negation (it means exponentiation
-  now) and \spad{\^=} no longer means inequality, use \spad{not} and
+\item \spadop{^} is no longer used as negation (it means exponentiation
+  now) and \spadop{^=} no longer means inequality, use \spad{not} and
   \spad{\~=} instead.
 
 \item \spad{setelt} is renamed to \spad{setelt!}.
@@ -1315,4 +1315,3 @@ Content removed -  NAGLink is no longer included in FriCAS.
 %------------------------------------------------------------------------
 Content removed - no longer relevant since FriCAS runs on different
 Lisp systems.
-

@@ -1760,14 +1760,14 @@ left and from the right.
 \spadcommand{limit(sqrt(y^2)/y,y = 0)}
 }
 \xtc{
-As \axiom{x} approaches \axiom{0} along the real axis, \axiom{exp(-1/x^2)}
+As \axiom{x} approaches \axiom{0} along the real axis, \axiom{exp(-1/x\^2)}
 tends to \axiom{0}.
 }{
 \spadcommand{limit(exp(-1/x^2),x = 0)}
 }
 \xtc{
 However, if \axiom{x} is allowed to approach \axiom{0} along any path in the
-complex plane, the limiting value of \axiom{exp(-1/x^2)} depends on the
+complex plane, the limiting value of \axiom{exp(-1/x\^2)} depends on the
 path taken because the function has an essential singularity at \axiom{x=0}.
 This is reflected in the error message returned by the function.
 }{

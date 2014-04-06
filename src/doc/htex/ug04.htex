@@ -226,7 +226,7 @@ Issue this to redirect FORTRAN output to, for example, the file
 }{
 \spadcommand{)set output fortran linalg}
 }
-\noOutputXtc{
+\nullXtc{
 You must {\it also} turn on the creation of FORTRAN output.
 The above just says where it goes if it is created.
 }{
@@ -239,19 +239,19 @@ that you specified with \spadsys{)cd}.
 \syscmdindex{cd}
 You should use \spadcmd{)cd} before you send the output to the file.
 
-\noOutputXtc{
+\nullXtc{
 You can always direct output back to the screen by issuing this.
 \index{output formats!sending to screen}
 }{
 \spadcommand{)set output fortran console}
 }
-\noOutputXtc{
+\nullXtc{
 Let's make sure FORTRAN formatting is off so that nothing we
 do from now on produces FORTRAN output.
 }{
 \spadcommand{)set output fortran off}
 }
-\noOutputXtc{
+\nullXtc{
 We also delete the demonstrated output file we created.
 }{
 \spadcommand{)system rm linalg.sfort}
@@ -283,12 +283,12 @@ It is usually on when you start the system.
 \index{monospace 2D output format}
 
 \texht{\vskip 4pc}{}
-\noOutputXtc{
+\nullXtc{
 If it is not, issue this.
 }{
 \spadcommand{)set output algebra on \bound{algon}}
 }
-\noOutputXtc{
+\nullXtc{
 Since the printed version of this book
 (as opposed to the \HyperName{} version)
 shows output produced by the
@@ -298,17 +298,25 @@ let us temporarily turn off
 }{
 \spadcommand{)set output tex off \bound{texoff}}
 }
-\xtc{
+\nullXtc{
 Here is an example of what it looks like.
 }{
 \spadcommand{matrix [[i*x^i + j*\%i*y^j for i in 1..2] for j in 3..4] \free{algon texoff}}
 }
-\noOutputXtc{
+\begin{verbatim}
++     3           3     2+
+|3%i y  + x  3%i y  + 2x |
+|                        |
+|     4           4     2|
++4%i y  + x  4%i y  + 2x +
+\end{verbatim}
+
+\nullXtc{
 Issue this to turn off this kind of formatting.
 }{
 \spadcommand{)set output algebra off}
 }
-\noOutputXtc{
+\nullXtc{
 Turn \texht{\TeX}{TeX}{} output on again.
 }{
 \spadcommand{)set output tex on}
@@ -680,7 +688,7 @@ facilities to manipulate templates, store type information, and generate
 code fragments or complete programs.
 
 % ----------------------------------------------------------------------
-\subsubsection{Template Manipulation}
+\head{subsection}{Template Manipulation}{ugGenForTemplate}
 % ----------------------------------------------------------------------
 
 A template is a skeletal program which is ``fleshed out'' with data when
@@ -706,7 +714,7 @@ endVerbatim
 The passive parts lie between the two
 tokens {\tt beginVerbatim} and \texht{\linebreak}{} {\tt endVerbatim}.  There
 are two active statements: one which is simply an \Language{} (
-\texht{\verb+--+}{\-\-})
+{\tt --})
 comment, and one which produces an assignment to the current value
 of {\tt f}.  We could use it as follows:
 \begin{verbatim}
@@ -733,7 +741,7 @@ automatically converted 4.0 and 1 into DOUBLE PRECISION numbers; in
 general, the \Language{} Fortran generation facility will convert
 anything which should be a floating point object into either
 a Fortran REAL or DOUBLE PRECISION object.
-\xtc{
+\noOutputXtc{
 Which alternative is used is determined by the command
 }{
 \spadcommand{)set fortran precision}
@@ -790,32 +798,30 @@ So we could create our comment as follows:
 }
 \xtc{
 }{
-\spadcommand{fortranLiteralLine(concat ["C\ \ \ \ \ \ The\ Matrix\ has\ ",
-nrows(m)::String, "\ rows\ and\ ", ncols(m)::String, "\ columns"]
-)$FortranTemplate \free{m}}
+\spadcommand{fortranLiteralLine(concat ["C\ \ \ \ \ \ The\ Matrix\ has\ ", nrows(m)::String, "\ rows\ and\ ", ncols(m)::String, "\ columns"])\$FortranTemplate \free{m}}
 }
 \xtc{
 or, alternatively:
 }{
-\spadcommand{fortranLiteral("C\ \ \ \ \ \ The\ Matrix\ has\ ")$FortranTemplate}
+\spadcommand{fortranLiteral("C\ \ \ \ \ \ The\ Matrix\ has\ ")\$FortranTemplate}
 }
 \xtc{
 }{
-\spadcommand{fortranLiteral(nrows(m)::String)$FortranTemplate}
+\spadcommand{fortranLiteral(nrows(m)::String)\$FortranTemplate}
 }
 \xtc{
 }{
-\spadcommand{fortranLiteral("\ rows\ and\ ")$FortranTemplate}
+\spadcommand{fortranLiteral("\ rows\ and\ ")\$FortranTemplate}
 }
 \xtc{
 }{
-\spadcommand{fortranLiteral(ncols(m)::String)$FortranTemplate\free{m}}
+\spadcommand{fortranLiteral(ncols(m)::String)\$FortranTemplate\free{m}}
 }
 \xtc{
 }{
-\spadcommand{fortranLiteral("\ columns")$FortranTemplate}
+\spadcommand{fortranLiteral("\ columns")\$FortranTemplate}
 }
-\xtc{
+\noOutputXtc{
 }{
 \spadcommand{fortranCarriageReturn()$FortranTemplate}
 }
@@ -830,7 +836,7 @@ the other hand, these functions can be used to send helpful messages to the
 user, without interfering with the generated Fortran.
 
 % ----------------------------------------------------------------------
-\subsubsection{Manipulating the Fortran Output Stream}
+\head{subsection}{Manipulating the Fortran Output Stream}{ugGneForManipulating}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{FortranOutputStackPackage}}{}
 
@@ -872,7 +878,7 @@ The commands available to manipulate the stack are:
 These commands are all part of \axiomType{FortranOutputStackPackage}.
 
 % ----------------------------------------------------------------------
-\subsubsection{Fortran Types}
+\head{subsection}{Fortran Types}{ugGenForTypes}
 % ----------------------------------------------------------------------
 
 When generating code it is important to keep track of the Fortran types of
@@ -882,7 +888,7 @@ current type system is built up in several layers, and we shall describe each
 in turn.
 
 % ----------------------------------------------------------------------
-\subsubsection{FortranScalarType}
+\head{subsection}{FortranScalarType}{ugGenForScalarType}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{FortranScalarType}}{}
 
@@ -893,7 +899,7 @@ into the domain, test whether two objects are equal, and also apply
 the predicate functions \axiomFunFrom{real?}{FortranScalarType} etc.
 
 % ----------------------------------------------------------------------
-\subsubsection{FortranType}
+\head{subsection}{FortranType}{ugGenForType}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{FortranType}}{}
 
@@ -913,12 +919,12 @@ functions like \axiomFun{fortranReal}.
 \xtc{
 For example:
 }{
-\spadcommand{type:=construct(real,[i,10],false)$FortranType}
+\spadcommand{type:=construct(real,[i,10],false)\$FortranType}
 }
 \xtc{
 or
 }{
-\spadcommand{type:=[real,[i,10],false]$FortranType\bound{type}}
+\spadcommand{type:=[real,[i,10],false]\$FortranType\bound{type}}
 }
 \xtc{
 }{
@@ -934,21 +940,21 @@ or
 }
 \xtc{
 }{
-\spadcommand{fortranLogical()$FortranType}
+\spadcommand{fortranLogical()\$FortranType}
 }
 \xtc{
 }{
-\spadcommand{construct(integer,[],true)$FortranType}
+\spadcommand{construct(integer,[],true)\$FortranType}
 }
 
 % ----------------------------------------------------------------------
-\subsubsection{SymbolTable}
+\head{subsection}{SymbolTable}{ugGenForSymbolTable}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{SymbolTable}}{}
 
 This domain creates and manipulates a symbol table for generated Fortran code.
 This is used by \axiomType{FortranProgram} to represent the types of objects in
-a subprogram.  The commands available are:
+a subprogram.  The commands available are:\newline
 \texht{
 \begin{tabular}{ll}
 \axiomFun{empty} & creates a new \axiomType{SymbolTable} \\
@@ -969,7 +975,6 @@ a subprogram.  The commands available are:
 \end{tabular}
 }
 {
-\newline
 \axiomFun{empty}\tab{25}creates a new \axiomType{SymbolTable}\newline
 \axiomFunX{declare}\tab{25}creates a new entry in a table \newline
 \axiomFun{fortranTypeOf}\tab{25}returns the type of an object in a table \newline
@@ -981,21 +986,19 @@ a subprogram.  The commands available are:
 }
 \xtc{
 }{
-\spadcommand{symbols := empty()$SymbolTable\bound{symbols}}
+\spadcommand{symbols := empty()\$SymbolTable\bound{symbols}}
 }
 \xtc{
 }{
-\spadcommand{declare!(X, fortranReal()$FortranType, symbols)\free{symbols}}
+\spadcommand{declare!(X, fortranReal()\$FortranType, symbols)\free{symbols}}
 }
 \xtc{
 }{
-\spadcommand{declare!(M,construct(real,[i,j],false)$FortranType,symbols)
-\free{symbols}}
+\spadcommand{declare!(M,construct(real,[i,j],false)\$FortranType,symbols)\free{symbols}}
 }
 \xtc{
 }{
-\spadcommand{declare!([i,j], fortranInteger()$FortranType, symbols)
-\free{symbols} \bound{i j} }
+\spadcommand{declare!([i,j], fortranInteger()\$FortranType, symbols)\free{symbols} \bound{i j} }
 }
 \xtc{
 }{
@@ -1015,7 +1018,7 @@ a subprogram.  The commands available are:
 }
 
 % ----------------------------------------------------------------------
-\subsubsection{TheSymbolTable}
+\head{subsection}{TheSymbolTable}{ugGenForTheSymbolTable}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{TheSymbolTable}}{}
 
@@ -1037,13 +1040,13 @@ segment.
 Issuing the following command indicates that from now on all information
 refers to the subprogram \axiom{F}.
 }{
-\spadcommand{newSubProgram(F)$TheSymbolTable}
+\spadcommand{newSubProgram(F)\$TheSymbolTable}
 }
 \xtc{
 It is possible to return to processing the main program segment by issuing
 the command:
 }{
-\spadcommand{endSubProgram()$TheSymbolTable}
+\spadcommand{endSubProgram()\$TheSymbolTable}
 }
 The following commands exist:
 \texht{
@@ -1078,34 +1081,35 @@ the name of a subprogram, and others parameterised by both the name of a
 subprogram and by an instance of \axiomType{TheSymbolTable}.
 \xtc{
 }{
-\spadcommand{newSubProgram(F)$TheSymbolTable \bound{forPleasure}}
+\spadcommand{newSubProgram(F)\$TheSymbolTable \bound{forPleasure}}
 }
 \xtc{
 }{
-\spadcommand{argumentList!(F, [X])$TheSymbolTable\free{forPleasure}}
+\spadcommand{argumentList!(F, [X])\$TheSymbolTable\free{forPleasure}}
 }
 \xtc{
 }{
-\spadcommand{returnType!(F,real)$TheSymbolTable \free{forPleasure}}
+\spadcommand{returnType!(F,real)\$TheSymbolTable \free{forPleasure}}
 }
 \xtc{
 }{
-\spadcommand{declare!(X,fortranReal(),F)$TheSymbolTable \free{forPleasure}}
+\spadcommand{declare!(X,fortranReal(),F)\$TheSymbolTable \free{forPleasure}}
 }
-\xtc{
-}{
-\spadcommand{printHeader(F)$TheSymbolTable\free{forPleasure}}
-}
+%--rhx:
+%\xtc{
+%}{
+%\spadcommand{printHeader(F)\$TheSymbolTable\free{forPleasure}}
+%}
 
 % ----------------------------------------------------------------------
-\subsubsection{Advanced Fortran Code Generation}
+\head{subsection}{Advanced Fortran Code Generation}{ugGenForAdvanced}
 % ----------------------------------------------------------------------
 
 This section describes facilities for representing Fortran statements, and
 building up complete subprograms from them.
 
 % ----------------------------------------------------------------------
-\subsubsection{Switch}
+\head{subsection}{Switch}{ugGenForSwitch}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{Switch}}{}
 
@@ -1147,11 +1151,11 @@ to let us build such statements.  The available constructors are:
 \xtc{
 So for example:
 }{
-\spadcommand{LT(x,y)$Switch}
+\spadcommand{LT(x,y)\$Switch}
 }
 
 % ----------------------------------------------------------------------
-\subsubsection{FortranCode}
+\head{subsection}{FortranCode}{ugGenForCode}
 % ----------------------------------------------------------------------
 
 This domain represents code segments or operations: currently assignments,
@@ -1161,8 +1165,7 @@ and return statements.
 For example we can create quite a complicated conditional statement using
 assignments, and then turn it into Fortran code:
 }{
-\spadcommand{c := cond(LT(X,Y),assign(F,X),cond(GT(Y,Z),assign(F,Y),
-assign(F,Z))$FortranCode)$FortranCode \bound{c}}
+\spadcommand{c := cond(LT(X,Y),assign(F,X),cond(GT(Y,Z),assign(F,Y),assign(F,Z))\$FortranCode)\$FortranCode \bound{c}}
 }
 \xtc{
 }{
@@ -1173,7 +1176,7 @@ The Fortran code is printed
 on the current Fortran output stream.
 
 % ----------------------------------------------------------------------
-\subsubsection{FortranProgram}
+\head{subsection}{FortranProgram}{ugGenForProgram}
 % ----------------------------------------------------------------------
 \texht{\exptypeindex{FortranProgram}}{}
 
@@ -1189,19 +1192,18 @@ or \axiomType{Expression} into it.
 \xtc{
 First of all we create a symbol table:
 }{
-\spadcommand{symbols := empty()$SymbolTable\bound{symbols}}
+\spadcommand{symbols := empty()\$SymbolTable\bound{symbols}}
 }
 \xtc{
 Now put some type declarations into it:
 }{
-\spadcommand{declare!([X,Y],fortranReal()$FortranType,symbols)\free{symbols}}
+\spadcommand{declare!([X,Y],fortranReal()\$FortranType,symbols)\free{symbols}}
 }
 \xtc{
 Then (for convenience)
 we set up the particular instantiation of \axiomType{FortranProgram}
 }{
-\spadcommand{FP := FortranProgram(F,real,[X,Y],symbols)
-\free{symbols}\bound{FP}}
+\spadcommand{FP := FortranProgram(F,real,[X,Y],symbols)\free{symbols}\bound{FP}}
 }
 \xtc{
 Create an object of type \axiomType{Expression(Integer)}:
@@ -1219,12 +1221,10 @@ For example:
 \xtc{
 Augment our symbol table:
 }{
-\spadcommand{declare!(Z,fortranReal()$FortranType,symbols)
-\free{symbols}\bound{Z}}
+\spadcommand{declare!(Z,fortranReal()\$FortranType,symbols)\free{symbols}\bound{Z}}
 }
 \xtc{
 and transform the conditional expression we prepared earlier:
 }{
-\spadcommand{outputAsFortran([c,returns()$FortranCode]::FP) \free{FP c Z}}
+\spadcommand{outputAsFortran([c,returns()\$FortranCode]::FP) \free{FP c Z}}
 }
-

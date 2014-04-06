@@ -84,8 +84,8 @@ These include (where \axiomSyntax{\%} means
 \axiomFun{pi}: \axiom{() -> \%}  \newline
 \axiomFun{sqrt}: \axiom{\% -> \%} \newline
 \axiomFun{nthRoot}: \axiom{(\%, Integer) -> \%}  \newline
-\axiomFunFrom{^}{Float}: \axiom{(\%, Fraction Integer) -> \%} \newline
-\axiomFunFrom{^}{Float}: \axiom{(\%, \%) -> \%}  \newline
+\axiomOpFrom{^}{Float}: \axiom{(\%, Fraction Integer) -> \%} \newline
+\axiomOpFrom{^}{Float}: \axiom{(\%, \%) -> \%}  \newline
 
 The handling of roots depends on whether the floating-point type
 \index{root!numeric approximation}
@@ -157,7 +157,7 @@ The real versions of the functions yield an error if the result is not real.
    }{
 \newline
 \begin{center}
-      \axiom{Beta(u,v) = integrate(t^(u-1)*(1-t)^(b-1), t=0..1).}
+      \axiom{Beta(u,v) = integrate(t\^(u-1)*(1-t)\^(b-1), t=0..1).}
 \end{center}
    }
    This is related to \texht{$\Gamma(z)$}{\axiom{Gamma(z)}} by
@@ -711,7 +711,7 @@ algebraic extensions to factor over.
 \spadcommand{factor(p,[aa]) \free{p aa}}
 }
 \xtc{
-This factors \axiom{x^2+3} over the integers.
+This factors \axiom{x\^2+3} over the integers.
 }{
 \spadcommand{factor(x^2+3)}
 }
@@ -722,7 +722,7 @@ Factor the same polynomial over the field obtained by adjoining
 \spadcommand{factor(x^2+3,[aa]) \free{aa}}
 }
 \xtc{
-Factor \axiom{x^6+108} over the same field.
+Factor \axiom{x\^6+108} over the same field.
 }{
 \spadcommand{factor(x^6+108,[aa]) \free{aa}}
 }
@@ -849,18 +849,18 @@ appears \axiom{n} times in the list.
 \texht{\typeout{Make sure these variables are x0 etc}}{}
 
 \xtc{
-Compute all the roots of \axiom{x^4 + x + 1}.
+Compute all the roots of \axiom{x\^4 + x + 1}.
 }{
 \spadcommand{l := rootsOf(x^4 + x + 1,x) \bound{l}}
 }
 \xtc{
 As a side effect, the variables \axiom{\%x0, \%x1} and \axiom{\%x2} are bound
-to the first three roots of \axiom{x^4 + x + 1}.
+to the first three roots of \axiom{x\^4 + x + 1}.
 }{
 \spadcommand{\%x0^5 \free{l}}
 }
 \xtc{
-Although they all satisfy \axiom{x^4 + x + 1 = 0, \%x0, \%x1,}
+Although they all satisfy \axiom{x\^4 + x + 1 = 0, \%x0, \%x1,}
 and \axiom{\%x2} are different algebraic numbers.
 To find the algebraic relation that defines each of them,
 use \axiomFun{definingPolynomial}.
@@ -876,7 +876,7 @@ use \axiomFun{definingPolynomial}.
 \spadcommand{definingPolynomial \%x2 \free{l}}
 }
 \xtc{
-We can check that the sum and product of the roots of \axiom{x^4 + x + 1} are
+We can check that the sum and product of the roots of \axiom{x\^4 + x + 1} are
 its trace and norm.
 }{
 \spadcommand{x3 := last l \free{l} \bound{x3}}
@@ -891,7 +891,7 @@ its trace and norm.
 }
 \xtc{
 Note, that in general roots are expressions in new symbols. For
-example for \axiom{x^4 + 1} the second root is a product.
+example for \axiom{x\^4 + 1} the second root is a product.
 }{
 \spadcommand{rootsOf(x^4 + 1, x)}
 }
@@ -904,23 +904,23 @@ computes all the roots
 of a given polynomial, but which expresses some of them in terms of
 radicals.
 }{
-\spadpaste{zerosOf(y^4 + y + 1, y) \bound{z}}
+\spadcommand{zerosOf(y^4 + y + 1, y) \bound{z}}
 }
 \xtc{
 As you see, only two implicit algebraic numbers were created
 (\axiom{\%y0,\%y1}), and its defining equations are below.
 The other two roots are expressed in radicals.
 }{
-\spadpaste{definingPolynomial \%y0 \free{z}}
+\spadcommand{definingPolynomial \%y0 \free{z}}
 }
 \xtc{
 }{
 \spadcommand{definingPolynomial \%y1 \free{z}}
 }
 \xtc{
-For \axiom{x^4 + 1} all roots can be expressied in radicals.
+For \axiom{x\^4 + 1} all roots can be expressied in radicals.
 }{
-\spadpaste{zerosOf(x^4 + 1)}
+\spadcommand{zerosOf(x^4 + 1)}
 }
 % *********************************************************************
 \head{section}{Computation of Eigenvalues and Eigenvectors}{ugProblemEigen}
@@ -1935,7 +1935,7 @@ The results of these operations are also power series.
 \spadcommand{(3 + x) / (1 + 7*x)}
 }
 \xtc{
-You can also compute \axiom{f(x) ^ g(x)}, where \axiom{f(x)} and \axiom{g(x)}
+You can also compute \axiom{f(x) \^ g(x)}, where \axiom{f(x)} and \axiom{g(x)}
 are two power series.
 }{
 \spadcommand{base := 1 / (1 - x) \free{x} \bound{base}}
@@ -1965,11 +1965,7 @@ functions
 \xtc{
 To demonstrate this, we first create the power series
 expansion of the rational function
-\texht{
-${\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}$
-}{
-\axiom{x^2/(1 - 6*x + x^2)}
-}
+\texht{${\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}$}{\axiom{x^2/(1 - 6*x + x^2)}}
 about \axiom{x = 0}.
 }{
 \spadcommand{x := series 'x \bound{x}}
@@ -1983,11 +1979,7 @@ about \axiom{x = 0}.
 %
 \xtc{
 If you want to compute the series expansion of
-\texht{
-$\sin\left({\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}\right)$
-}{
-\axiom{sin(x^2/(1 - 6*x + x^2))}
-}
+\texht{$\sin\left({\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}\right)$}{\axiom{sin(x^2/(1 - 6*x + x^2))}}
 you simply compute the sine of \axiom{rat}.
 }{
 \spadcommand{sin(rat) \free{rat}}
@@ -2187,7 +2179,7 @@ However, this command produces what you want.
 Finally, consider the case of functions that do not have Puiseux
 expansions about certain points.
 An example of this is \texht{$x^x$}{\axiom{x^x}} about \axiom{x = 0}.
-\axiom{puiseux(x^x,x=0)}
+\axiom{puiseux(x\^x,x=0)}
 produces an error message because of the
 type of singularity of the function at \axiom{x = 0}.
 \xtc{
@@ -2268,7 +2260,7 @@ log x = (x - 1) - \(x - 1)^2/2 + (x - 1)^3/3 - ...
 \end{verbatim}
 }
 If you were to evaluate the expression
-\axiom{series(n +-> (-1)^(n-1) / n, x = 1)}
+\axiom{series(n +-> (-1)\^(n-1) / n, x = 1)}
 you would get an error message because \Language{} would try to
 calculate a term of degree \axiom{0} and therefore divide by \axiom{0.}
 
@@ -2561,7 +2553,7 @@ we multiply \axiom{1/5} by
 }
 %
 \xtc{
-This is the same formula that we obtained via \axiom{sum(m^4, m = 1..k)}.
+This is the same formula that we obtained via \axiom{sum(m\^4, m = 1..k)}.
 }{
 \spadcommand{sum4 \free{sum4}}
 }
@@ -3082,7 +3074,7 @@ for \smath{n} prime.
 \spadcommand{inv c \free{c}}
 }
 \xtc{
-You can also use \axiom{1/c} and \axiom{c^(-1)} for the inverse of
+You can also use \axiom{1/c} and \axiom{c\^(-1)} for the inverse of
 \smath{c}.
 }{
 \spadcommand{9/c \free{c}}
@@ -3318,7 +3310,7 @@ there are several ways to construct elements of this field.
 
 The operation \axiomFun{index} enumerates the elements of the field
 extension and accepts as argument the integers from 1 to
-\smath{p \texht{^}{^} n}.
+\smath{p \texht{^}{\^} n}.
 %
 \xtc{
 The expression
