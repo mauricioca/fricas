@@ -31,8 +31,6 @@
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-%following definition should go into ug.sty
-\texht{\gdef\aliascon#1#2{\spadtype{#1}}}{}
 \texht{\setcounter{chapter}{13}}{} % Chapter 14
 %
 

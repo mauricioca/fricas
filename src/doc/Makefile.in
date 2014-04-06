@@ -1,7 +1,7 @@
 #------------------------------------------------------------------
 #---
 #--- FriCAS
-#--- Copyright (C) 2013,  Ralf Hemmecke <ralf@hemmecke.org>
+#--- Copyright (C) 2013, 2014,  Ralf Hemmecke <ralf@hemmecke.org>
 #---
 #------------------------------------------------------------------
 
@@ -76,6 +76,9 @@ ADD2HTDB      = ${fricas_target_bindir}/htadd
 HTEX2HT       = ${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU  = ${AWK} -f ${srcdir}/secmenu.awk
 UGSYSCMD2HELP = ${AWK} -f ${srcdir}/syscmd.awk
+HTEX2INPUT    = ${AWK} -f ${srcdir}/htex2input.awk
+SPOOL2TEX     = ${AWK} -f ${srcdir}/spool2tex.awk
+UGEXAMPLES    = ${AWK} -f ${srcdir}/ugexamples.awk
 
 ###################################################################
 # The current chapters. Except for 09, there exists a .htex file for
@@ -143,9 +146,8 @@ HD_EXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${EXAMPLES})
 
 HD_HTEX = ${HD_CHAPTERS_HTEX} ${EXAMPLES_HTEX}
 
-HD_INPUT_FILES  = $(patsubst %.htex, tmp/%.input,  ${HD_HTEX})
-HD_DRIVER_FILES = $(patsubst %.htex, tmp/%.driver, ${HD_HTEX})
-HD_OUT_FILES    = $(patsubst %.htex, tmp/%.out,    ${HD_HTEX})
+HD_INPUT_FILES = $(patsubst %.htex, tmp/%.input, ${HD_HTEX})
+HD_TEX_FILES   = $(patsubst %.htex, tmp/%.tex,   ${HD_HTEX})
 
 ###################################################################
 # A few files exist in a source .ht format under ${htsrcdir}.
@@ -425,3 +427,54 @@ dist:
 	        helptargetdir=$(disttargetdir)/share/spadhelp \
 	        algebratargetdir=$(disttargetdir)/algebra \
 	    copy-to-dist
+
+
+###################################################################
+###################################################################
+# The following targets create .input files from .htex files.
+# The .input files contain the same text as the .htex file except that
+# anything outside of the second argument of an \xtc command appears
+# prefixed with "-- ". For simplicity, we require and \xtc command to
+# be written like this:
+## \xtc{
+##   SOME TEXT
+## }{
+##   COMMANDS
+## }
+# where SOME TEXT must not contain "}{" at the beginning of the line
+# and COMMAND must not include "}" at the beginning of the line.
+# COMMANDS is either one line of the form
+## \spadcommand{.... \free{...} \bound{}}
+# where \free and \bound are optional or can occur multiple times or
+# of the form
+## \begin{spadsrc}[...]
+## ...
+## \end{spadsrc}
+###################################################################
+${HD_INPUT_FILES}: tmp/%.input: ${htexsrcdir}/%.htex
+	mkdir -p tmp
+	${HTEX2INPUT} $< > $@
+
+HD_SPOOL_FILES=${HD_TEX_FILES:%.tex=%.spool}
+
+${HD_SPOOL_FILES}: tmp/%.spool: tmp/%.input
+	mkdir -p tmp
+	echo ")read $<" | ${INTERPSYS} > $@
+
+${HD_TEX_FILES}: tmp/%.tex: tmp/%.spool
+	mkdir -p tmp
+	cat $< | ${SPOOL2TEX} > $@
+
+input-files: ${HD_INPUT_FILES}
+
+spool-files: ${HD_SPOOL_FILES}
+
+tex-files: ${HD_TEX_FILES}
+
+ug09.tex: examples.list
+	${UGEXAMPLES} $< > $@
+
+book.dvi: ug09.tex tex-files
+	TEXINPUTS=$$TEXINPUTS:${srcdir}:tmp:. latex book.tex
+
+###################################################################

@@ -104,7 +104,7 @@ If \spad{x = \#X}  and  \spad{y = \#Y} then
 \tt x+y  &\tt =&\tt  \#(X+Y)  & cardinality of the disjoint union \\
 \tt x-y  &\tt =&\tt  \#(X-Y)  & cardinality of the relative complement \\
 \tt x*y  &\tt =&\tt  \#(X*Y)  & cardinality of the Cartesian product \\
-\tt x^y &\tt =&\tt  \#(X^Y) & cardinality of the set of maps from \spad{Y} to \spad{X}
+\tt x\^y &\tt =&\tt  \#(X\^Y) & cardinality of the set of maps from \spad{Y} to \spad{X}
 \end{tabular}
 \end{texonly}
 \htonly

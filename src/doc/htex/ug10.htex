@@ -666,9 +666,9 @@ To avoid a pole at the origin, the number of points is taken
 to be odd.
 
 \begin{xmpLinesNoReset}
-\xmpLine{realSteps: INT := 25}{Number of real steps.}
-\xmpLine{imagSteps: INT := 25}{Number of imaginary steps.}
-\xmpLine{)read arrows}
+\xmpLine{realSteps: INT := 25}{Number of real steps.}{}
+\xmpLine{imagSteps: INT := 25}{Number of imaginary steps.}{}
+\xmpLine{)read arrows}{}
 \end{xmpLinesNoReset}
 
 Now define the function \userfun{drawComplexVectorField} to draw the arrows.
@@ -950,12 +950,12 @@ It returns the dummy variable \spad{x} if \spad{f} has no variables.
 Let's now apply \userfun{newtonStep} to the formula for computing
 cube roots of two.
 %
-\xtc{
+\noOutputXtc{
 Read the input file with the definitions.
 }{
 \spadcommand{)read newton\bound{n1}}
 }
-\xtc{}{
+\noOutputXtc{}{
 \spadcommand{)read vectors \bound{n1a}}
 }
 
@@ -992,7 +992,7 @@ A useful operation to consider here is \spadop{*}, which means
 composition.
 For example \spad{g*g} causes the Newton iteration formula
 to be applied twice.
-Correspondingly, \spad{g^n} means to apply the iteration formula
+Correspondingly, \spad{g\^n} means to apply the iteration formula
 \spad{n} times.
 
 %

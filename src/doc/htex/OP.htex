@@ -97,7 +97,7 @@ Can you guess what is the action of the following operator?
 %
 \xtc{
 Hint: applying \spad{rho} four times gives the identity, so
-\spad{rho^4-1} should return 0 when applied to any two by two matrix.
+\spad{rho\^4-1} should return 0 when applied to any two by two matrix.
 }{
 \spadcommand{z := rho^4 - 1\free{rho}\bound{z}}
 }

@@ -84,8 +84,8 @@ These include (where \spadSyntax{\%} means
 \spadfun{pi}: \spad{() -> \%}  \newline
 \spadfun{sqrt}: \spad{\% -> \%} \newline
 \spadfun{nthRoot}: \spad{(\%, Integer) -> \%}  \newline
-\spadfunFrom{^}{Float}: \spad{(\%, Fraction Integer) -> \%} \newline
-\spadfunFrom{^}{Float}: \spad{(\%, \%) -> \%}  \newline
+\spadopFrom{^}{Float}: \spad{(\%, Fraction Integer) -> \%} \newline
+\spadopFrom{^}{Float}: \spad{(\%, \%) -> \%}  \newline
 
 The handling of roots depends on whether the floating-point type
 \index{root!numeric approximation}
@@ -904,14 +904,14 @@ computes all the roots
 of a given polynomial, but which expresses some of them in terms of
 radicals.
 }{
-\spadpaste{zerosOf(y^4 + y + 1, y) \bound{z}}
+\spadcommand{zerosOf(y^4 + y + 1, y) \bound{z}}
 }
 \xtc{
 As you see, only two implicit algebraic numbers were created
 (\spad{\%y0,\%y1}), and its defining equations are below.
 The other two roots are expressed in radicals.
 }{
-\spadpaste{definingPolynomial \%y0 \free{z}}
+\spadcommand{definingPolynomial \%y0 \free{z}}
 }
 \xtc{
 }{
@@ -920,7 +920,7 @@ The other two roots are expressed in radicals.
 \xtc{
 For \spad{x^4 + 1} all roots can be expressied in radicals.
 }{
-\spadpaste{zerosOf(x^4 + 1)}
+\spadcommand{zerosOf(x^4 + 1)}
 }
 % *********************************************************************
 \head{section}{Computation of Eigenvalues and Eigenvectors}{ugProblemEigen}
@@ -1965,11 +1965,7 @@ functions
 \xtc{
 To demonstrate this, we first create the power series
 expansion of the rational function
-\texht{
-${\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}$
-}{
-\spad{x^2/(1 - 6*x + x^2)}
-}
+\texht{${\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}$}{\spad{x^2/(1 - 6*x + x^2)}}
 about \spad{x = 0}.
 }{
 \spadcommand{x := series 'x \bound{x}}
@@ -1983,11 +1979,7 @@ about \spad{x = 0}.
 %
 \xtc{
 If you want to compute the series expansion of
-\texht{
-$\sin\left({\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}\right)$
-}{
-\spad{sin(x^2/(1 - 6*x + x^2))}
-}
+\texht{$\sin\left({\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}\right)$}{\spad{sin(x^2/(1 - 6*x + x^2))}}
 you simply compute the sine of \spad{rat}.
 }{
 \spadcommand{sin(rat) \free{rat}}
@@ -3318,7 +3310,7 @@ there are several ways to construct elements of this field.
 
 The operation \spadfun{index} enumerates the elements of the field
 extension and accepts as argument the integers from 1 to
-\smath{p \texht{^}{^} n}.
+\smath{p \texht{^}{\^} n}.
 %
 \xtc{
 The expression

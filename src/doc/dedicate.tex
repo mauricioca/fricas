@@ -31,35 +31,17 @@
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-%
-% OVAR.htex
-
-The domain \spadtype{OrderedVariableList} provides symbols
-which are restricted to a particular list and have a definite
-ordering. Those two features are specified by a \spadtype{List Symbol}
-object that is the argument to the domain.
-\xtc{
-This is a sample ordering of three symbols.
-}{
-\spadcommand{ls:List Symbol:=['x,'a,'z] \bound{ls}}
-}
-\xtc{
-Let's build the domain
-}{
-\spadcommand{Z:=OVAR ls \bound{Z} \free{ls}}
-}
-\xtc{
-How many variables does it have?
-}{
-\spadcommand{size()\$Z \free{Z}}
-}
-\xtc{
-They are (in the imposed order)
-}{
-\spadcommand{lv:=[index(i::PI)\$Z for i in 1..size()\$Z] \bound{lv}\free{Z}}
-}
-\xtc{
-Check that the ordering is right
-}{
-\spadcommand{sorted?(>,lv) \free{lv}}
-}
+\setcounter{page}{4}
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{11pc}
+\begin{center}\it
+To my children, Douglas, Daniel, and Susan, \\
+for their love, support, and understanding over the years. \\
+%R.D.$\,$J.
+R.D.J.
+\\ \quad \\
+To Judith and Kate, \\ to whom my debt is
+beyond computation. \\
+R.S.S.
+\end{center}

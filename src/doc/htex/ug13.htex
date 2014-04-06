@@ -707,7 +707,7 @@ Its explicit exports include
 \xmpLine{    Implementation == add}{}
 \xmpLine{      Qeelist :=  }{}
 \xmpLine{        [q.unitVector(i::PI) for i in 1..n]}{}
-\xmpLine{      dim     :=  2^n}{}
+\xmpLine{      dim     :=  2\^n}{}
 \xmpLine{      Rep     := PrimitiveArray K}{}
 \xmpLine{      New ==> new(dim, 0\$K)\$Rep}{}
 \xmpLine{      x + y ==}{}

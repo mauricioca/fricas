@@ -1067,9 +1067,6 @@ Now we set the point sizes for all components of the graph.
 }
 \xtc{
 }{
-}
-\xtc{
-}{
 \spadcommand{size2 := 8::PositiveInteger \bound{size2}}
 }
 \xtc{
@@ -1229,37 +1226,37 @@ stream of \spad{x}- and \spad{y}-values. For example,
 \end{verbatim}
 
 \begin{xmpLines}
-\xmpLine{drawPoints(lp:List Point DoubleFloat):VIEW2D ==}
-\xmpLine{  g := graphImage()\$GRIMAGE}
-\xmpLine{  for p in lp repeat}
-\xmpLine{    component(g,p,pointColorDefault(),lineColorDefault(),}
-\xmpLine{      pointSizeDefault())}
-\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}
-\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}
-\xmpLine{}
-\xmpLine{drawLines(lp:List Point DoubleFloat):VIEW2D ==}
-\xmpLine{  g := graphImage()\$GRIMAGE}
-\xmpLine{  component(g, lp, pointColorDefault(), lineColorDefault(),}
-\xmpLine{    pointSizeDefault())\$GRIMAGE}
-\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}
-\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}
-\xmpLine{}
-\xmpLine{plotData2D(name, title) ==}
-\xmpLine{  f:File(DFLOAT) := open(name,"input")}
-\xmpLine{  lp:LIST(Point DFLOAT) := empty()}
-\xmpLine{  while ((x := readIfCan!(f)) case DFLOAT) repeat}
-\xmpLine{    y : DFLOAT := read!(f)}
-\xmpLine{    lp := cons(point [x,y]\$(Point DFLOAT), lp)}
-\xmpLine{    lp}
-\xmpLine{  close!(f)}
-\xmpLine{  drawPoints(lp)}
-\xmpLine{  drawLines(lp)}
+\xmpLine{drawPoints(lp:List Point DoubleFloat):VIEW2D ==}{}
+\xmpLine{  g := graphImage()\$GRIMAGE}{}
+\xmpLine{  for p in lp repeat}{}
+\xmpLine{    component(g,p,pointColorDefault(),lineColorDefault(),}{}
+\xmpLine{      pointSizeDefault())}{}
+\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}{}
+\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}{}
+\xmpLine{}{}
+\xmpLine{drawLines(lp:List Point DoubleFloat):VIEW2D ==}{}
+\xmpLine{  g := graphImage()\$GRIMAGE}{}
+\xmpLine{  component(g, lp, pointColorDefault(), lineColorDefault(),}{}
+\xmpLine{    pointSizeDefault())\$GRIMAGE}{}
+\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}{}
+\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}{}
+\xmpLine{}{}
+\xmpLine{plotData2D(name, title) ==}{}
+\xmpLine{  f:File(DFLOAT) := open(name,"input")}{}
+\xmpLine{  lp:LIST(Point DFLOAT) := empty()}{}
+\xmpLine{  while ((x := readIfCan!(f)) case DFLOAT) repeat}{}
+\xmpLine{    y : DFLOAT := read!(f)}{}
+\xmpLine{    lp := cons(point [x,y]\$(Point DFLOAT), lp)}{}
+\xmpLine{    lp}{}
+\xmpLine{  close!(f)}{}
+\xmpLine{  drawPoints(lp)}{}
+\xmpLine{  drawLines(lp)}{}
 \end{xmpLines}
 %
 This command will actually create the viewport and the graph if
 the point data is in the file \spad{"file.data"}.
 \begin{xmpLines}
-\xmpLine{plotData2D("file.data", "2D Data Plot")}
+\xmpLine{plotData2D("file.data", "2D Data Plot")}{}
 \end{xmpLines}
 
 % *********************************************************************
@@ -1302,7 +1299,7 @@ Display the new \spadtype{TwoDimensionalViewport} containing both graphs.
 %
 }
 % XXX: Without close we have trouble during documentation build
-\xtc{
+\noOutputXtc{
 The viewports \spad{v1} and \spad{v2} are no longer needed so
 we close them.
 }{

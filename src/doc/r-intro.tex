@@ -1,0 +1,614 @@
+
+\head{schapter}{Introduction to \Language{}}{ugNewIntro}
+
+\texht{\pagenumbering{arabic}}{}
+
+
+Welcome to the world of \Language{}.
+We call \Language{} a scientific computation system:
+a self-contained toolbox designed to meet
+your scientific programming needs,
+from symbolics, to numerics, to graphics.
+
+This introduction is a quick overview of what \Language{} offers.
+
+\pseudoSection{Symbolic computation}
+
+\Language{} provides a wide range of
+simple commands for
+symbolic mathematical problem solving.
+Do you need to solve an equation,
+to expand a series,
+or to obtain an integral?
+If so, just ask \Language{} to do it.
+
+%
+\xtcLong{
+Integrate \texht{${{1\over{(x^3 \  {(a+b x)}^{1/3})}}}$}{} with \break
+respect to \smath{x}.
+}{
+\spadcommand{integrate(1/(x**3 * (a+b*x)**(1/3)),x)}
+}{
+\[
+{\left(
+\begin{array}{@{}l}
+\displaystyle
+-{2 \ {b^2}\ {x^2}\ {\sqrt{3}}\ {\log \left({{{\root{3}\of{a}}\ {{\root{3}\of{{b
+\  x}+ a}}^2}}+{{{\root{3}\of{a}}^2}\ {\root{3}\of{{b \  x}+
+a}}}+ a}\right)}}+
+\\
+\\
+\displaystyle
+{4 \ {b^2}\ {x^2}\ {\sqrt{3}}\ {\log \left({{{{\root{3}\of{a}}^
+2}\ {\root{3}\of{{b \  x}+ a}}}- a}\right)}}+
+\\
+\\
+\displaystyle
+{{12}\ {b^2}\ {x^2}\ {\arctan \left({{{2 \ {\sqrt{3}}\ {{\root{3}\of{a}}^
+2}\ {\root{3}\of{{b \  x}+ a}}}+{a \ {\sqrt{3}}}}\over{3 \  a}}\right)}}+
+
+\\
+\\
+\displaystyle
+{{\left({{12}\  b \  x}-{9 \  a}\right)}\ {\sqrt{3}}\ {\root{3}\of{a}}\ {{\root{3}\of{{b
+\  x}+ a}}^2}}
+\end{array}
+\right)}\over{{18}\ {a^2}\ {x^2}\ {\sqrt{3}}\ {\root{3}\of{a}}}
+\]
+}{1}{%
+Union(Expression Integer, ...)%
+}
+
+\newpage
+\Language{} provides state-of-the-art algebraic machinery to
+handle your most advanced symbolic problems.
+For example, \Language{}'s integrator gives you the answer
+when an answer exists.
+If one does not, it provides a proof that
+there is no answer.
+Integration is just one of a multitude of symbolic operations that
+\Language{} provides.
+
+\pseudoSection{Numeric computation}
+
+\Language{} has a numerical library that includes operations for
+linear algebra, solution of equations, and special functions.
+For many of these operations, you can select any number of
+floating point digits to be carried out in the computation.
+
+%
+\xtcLong{
+Solve \texht{$x^{49}-49x^4+9$}{} to
+49 digits \break of accuracy.
+}{
+\spadcommand{solve(x**49-49*x**4+9 = 0,1.e-49)}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+\left[{x = -{0.6546536706904271136718122105095984761851224331
+556}}, \: \right.
+\\
+\\
+\displaystyle
+\left.{x ={1.086921395653859508493939035954893289009213388763}},
+ \: \right.
+\\
+\\
+\displaystyle
+\left.{x ={0.654653670725527173969468606613676483536148760766
+1}}\right]
+\end{array}
+\]
+}{2}{%
+List Equation Polynomial Float%
+}
+
+The output of a computation can be converted to FORTRAN to be used
+in a later numerical computation.
+Besides floating point numbers, \Language{} provides literally
+dozens of kinds of numbers to compute with.
+These range from various kinds of integers, to fractions, complex
+numbers, quaternions, continued fractions, and to numbers represented
+with an arbitrary base.
+
+%
+\xtcLong{
+What is \spad{10} to
+the \eth{\spad{100}} power in base \spad{32}?
+}{
+\spadcommand{radix(10^100,32)}
+}{
+\[
+\begin{array}{@{}l}
+\tt
+4 I 9 LKIP 9 GRSTC
+5 IF 164 PO 5 V 72 ME 827226 JSLAP 46258
+5 Q 7 H \\ \tt
+00000000000000000000
+\end{array}
+\]
+}{3}{%
+RadixExpansion 32%
+}
+
+
+\pseudoSection{Graphics}
+
+You may often want to visualize a symbolic formula or draw
+a graph from a set of numerical values.
+To do this, you can call upon the \Language{}
+graphics capability.
+
+\psXtc{
+Draw \texht{$J_0(\sqrt{x^2+y^2})$}{} for \newline
+\texht{$-20 \leq x,y \leq 20$}{}.
+}{
+\spadgraph{draw(5*besselJ(0,sqrt(x**2+y**2)), x=-20..20, y=-20..20)}
+}{
+\epsffile[0 0 295 295]{../ps/bessintr.ps}
+}
+
+Graphs in \Language{} are interactive objects you can manipulate with
+your mouse.
+Just click on the graph, and a control panel pops up.
+Using this mouse and the control panel, you can translate,
+rotate, zoom,
+change the coloring, lighting, shading, and
+perspective on the picture.
+You can also generate a PostScript copy of your graph to produce
+hard-copy output.
+
+\pseudoSection{\HyperName{}}
+
+\HyperName{} presents you windows on the world of \Language{}, offering
+on-line help,
+examples, tutorials, a browser, and reference material.
+\HyperName{} gives you on-line access to this book in a ``hypertext'' format.
+Words that appear in a different font
+(for example, \spadtype{Matrix}, \spadfun{factor}, and
+\spadgloss{category}) are generally mouse-active; if you click on one
+with your mouse, \HyperName{} shows you a new window for that word.
+
+As another example of a \HyperName{} facility,
+suppose that you want to compute the roots of
+\texht{$x^{49} - 49x^4 + 9$}{} to \smath{49} digits (as in our previous example)
+and you don't know how to tell \Language{} to do this.
+The ``basic command'' facility of \HyperName{} leads the way.
+Through the series of \HyperName{} windows shown in Figure \ref{fig-intro-br}
+and the specified mouse clicks, you and \HyperName{}
+generate the correct command to issue to compute the answer.
+
+
+{%
+\begin{figure}[thb]
+\vspace*{5.10in}
+\simpleCaption{Computing the roots of $x^{49}-49x^4+9.$}\label{fig-intro-br}
+\vskip .5\baselineskip
+\end{figure}
+}%
+
+\pseudoSection{Interactive Programming }
+
+\Language{}'s interactive programming language lets you
+define your own functions.
+A simple example of a user-defined function is one
+that computes the successive Legendre polynomials.
+\Language{} lets you define these polynomials in a piece-wise way.
+
+%
+\xtcLong{
+The first Legendre polynomial.
+}{
+\spadcommand{p(0) == 1}
+}{
+\vbox{\hbox{\quad}}%
+}{}{%
+Void%
+}
+%
+\xtcLong{
+The second Legendre polynomial.
+}{
+\spadcommand{p(1) == x}
+}{
+\vbox{\hbox{\quad}}%
+}{}{%
+Void%
+}
+%
+\xtcLong{
+The \eth{\spad{n}} Legendre polynomial for \texht{$(n > 1)$}{\spad{n > 1}}.
+}{
+\spadcommand{p(n) == ((2*n-1)*x*p(n-1) - (n-1) * p(n-2))/n}
+}{
+\vbox{\hbox{\quad}}%
+}{}{%
+Void%
+}
+
+In addition to letting you define simple functions like this,
+the interactive language can be used
+to create entire application packages.
+All the graphs in the \Gallery{} section
+in the center of the book, for example,
+were created by programs written in the interactive language.
+
+The above definitions for \spad{p} do no computation---they simply
+tell \Language{} how to compute \spad{p(k)} for some positive
+integer \spad{k}.
+To actually get a value of a Legendre polynomial, you ask for it.
+\index{Legendre polynomials}
+
+%
+\xtcLong{
+What is the tenth Legendre polynomial?
+}{
+\spadcommand{p(10)}
+}{
+\vbox{\Isize{}%
+\vbox{\outputMsg{} Compiling\ function\ p\ with\ type\ Integer\ ->\ Polynomial\ \hfill}
+\vbox{\outputMsg{} Fraction\ Integer\ \hfill}
+\vbox{\outputMsg{} Compiling\ function\ p\ as\ a\ recurrence\ relation.\hfill}
+\vbox{\outputMsg{} \hfill}
+\vbox{%
+\[
+{{{46189}\over{256}}\ {x^{10}}}-{{{109395}\over{256}}\ {x^8}}+
+{{{45045}\over{128}}\ {x^6}}-{{{15015}\over{128}}\ {x^4}}+{{{3
+465}\over{256}}\ {x^2}}-{{63}\over{256}}
+\]
+}% end of \vbox
+}% end of \vbox
+}{7}{%
+Polynomial Fraction Integer%
+}
+
+\Language{} applies the above pieces for
+\spad{p} to obtain the value of \spad{p(10)}.
+But it does more:
+it creates an optimized, compiled function for \spad{p}.
+The function is formed by putting the pieces together into
+a single piece of code.
+By {\it compiled}, we mean that the function is translated into
+basic machine-code.
+By {\it optimized}, we mean that certain transformations are
+performed on that code to make it run faster.
+For \spad{p}, \Language{} actually translates the original definition
+that is recursive (one that calls itself)
+to one that is iterative (one that consists of a simple loop).
+
+%
+\xtcLong{
+What is the coefficient of \smath{x^{90}} in \spad{p(90)}?
+}{
+\spadcommand{coefficient(p(90),x,90)}
+}{
+\[
+{5688265542052017822223458237426581853561497449095175}\over{7
+7371252455336267181195264}
+\]
+}{8}{%
+Polynomial Fraction Integer%
+}
+
+In general, a user function is type-analyzed and compiled on first use.
+Later, if you use it with a different kind of object, the function
+is recompiled if necessary.
+
+\pseudoSection{Data Structures}
+
+A variety of data structures are available for interactive use.
+These include strings, lists, vectors, sets, multisets, and hash
+tables.
+A particularly useful structure for interactive use is the
+infinite stream:
+
+%
+\xtcLong{
+Create the infinite stream of derivatives of Legendre
+polynomials
+}{
+\spadcommand{[D(p(i),x) for i in 1..]}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+\left[ 1, \:{3 \  x}, \:{{{{15}\over 2}\ {x^2}}-{3 \over 2}},
+ \:{{{{35}\over 2}\ {x^3}}-{{{15}\over 2}\  x}}, \:{{{{315}\over
+8}\ {x^4}}-{{{105}\over 4}\ {x^2}}+{{15}\over 8}}, \: \right.
+\\
+\\
+\displaystyle
+\left.{{{{693}\over 8}\ {x^5}}-{{{315}\over 4}\ {x^3}}+{{{105}\over
+8}\  x}}, \:{{{{3003}\over{16}}\ {x^6}}-{{{3465}\over{16}}\ {x^
+4}}+{{{945}\over{16}}\ {x^2}}-{{35}\over{16}}}, \: \ldots \right]
+\end{array}
+\]
+}{9}{%
+Stream Polynomial Fraction Integer%
+}
+
+Streams display only a few of their initial elements.
+Otherwise, they are ``lazy'': they
+only compute elements when you ask for them.
+
+Data structures are an important component for building
+application software. Advanced users can
+represent data for applications in optimal fashion.
+In all, \Language{} offers
+over forty kinds of aggregate data structures, ranging
+from mutable structures (such as cyclic lists and flexible arrays) to
+storage efficient structures (such as bit vectors).
+As an example, streams are used as the internal data structure
+for power series.
+
+%
+\xtcLong{
+What is the series expansion
+of \texht{$\log(\cot(x))$}{}
+about \texht{$x=\pi/2$}{}?
+}{
+\spadcommand{series(log(cot(x)),x = \%pi/2)}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+{\log \left({{{2 \  x}- \%pi}\over 2}\right)}+{\log \left({-
+1}\right)}+{{1 \over 3}\ {{\left(x -{\%pi \over 2}\right)}^2}}+
+{{7 \over{90}}\ {{\left(x -{\%pi \over 2}\right)}^4}}+
+\\
+\\
+\displaystyle
+{{{62}\over{2835}}\ {{\left(x -{\%pi \over 2}\right)}^6}}+{O
+\left({{\left(x -{\%pi \over 2}\right)}^8}\right)}
+\end{array}
+\]
+}{10}{%
+UnivariatePuiseuxSeries(Expression Integer, x, pi/2)%
+}
+
+Series and streams make no attempt to compute {\it all} their elements!
+Rather, they stand ready to deliver elements on demand.
+
+%
+\xtcLong{
+What is the coefficient of the \eth{\spad{50}}
+term of this series?
+}{
+\spadcommand{coefficient(\%,50)}
+}{
+\[
+{44590788901016030052447242300856550965644}\over{713146928643
+8669111584090881309360354581359130859375}
+\]
+}{11}{%
+Expression Integer%
+}
+
+\pseudoSection{Mathematical Structures}
+
+\Language{} also has many kinds of mathematical structures.
+These range from simple ones (like polynomials and matrices) to
+more esoteric ones (like ideals and Clifford algebras).
+Most structures allow the construction of arbitrarily complicated
+``types.''
+
+%
+\xtcLong{
+Even a simple input expression can
+result in a type with several levels.
+}{
+\spadcommand{matrix [[x + \%i,0], [1,-2]]}
+}{
+\[
+\left[
+\begin{array}{cc}
+{x + \%i}& 0
+\\
+1 & - 2
+\end{array}
+\right]
+\]
+}{12}{%
+Matrix Polynomial Complex Integer%
+}
+
+The \Language{} interpreter builds types in response to user
+input.
+Often, the type of the result is changed in order to be applicable
+to an operation.
+
+%
+\xtcLong{
+The inverse operation requires that elements of the above matrices
+are fractions.
+}{
+\spadcommand{inverse(\%)}
+}{
+\[
+\left[
+\begin{array}{cc}
+{1 \over{x + \%i}}& 0
+\\
+{1 \over{{2 \  x}+{2 \  \%i}}}& -{1 \over 2}
+\end{array}
+\right]
+\]
+}{13}{%
+Union(Matrix Fraction Polynomial Complex Integer, ...)%
+}
+
+\pseudoSection{Pattern Matching}
+
+A convenient facility for symbolic computation is ``pattern
+matching.''
+Suppose you have a trigonometric expression and you want to
+transform it to some equivalent form.
+Use a \spad{rule} command to describe the transformation rules you
+\spadkey{rule}
+need.
+Then give the rules a name and apply that name as a function to
+your trigonometric expression.
+
+%
+\xtcLong{
+Introduce two rewrite rules.
+}{
+\vtop{
+\vbox{\outputMsg{} sinCosExpandRules\ :=\ rule\hfill}
+\vbox{\outputMsg{} \ \ sin(x+y)\ ==\ sin(x)*cos(y)\ +\ sin(y)*cos(x)\hfill}
+\vbox{\outputMsg{} \ \ cos(x+y)\ ==\ cos(x)*cos(y)\ -\ sin(x)*sin(y)\hfill}
+\vbox{\outputMsg{} \ \ sin(2*x)\ ==\ 2*sin(x)*cos(x)\hfill}
+\vbox{\outputMsg{} \ \ cos(2*x)\ ==\ cos(x)**2\ -\ sin(x)**2\hfill}
+}}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+\left\{{{\sin \left({y + x}\right)}= ={{{\cos \left({x}\right)}\ {\sin
+\left({y}\right)}}+{{\cos \left({y}\right)}\ {\sin \left({x}\right)}}}},
+ \: \right.
+\\
+\\
+\displaystyle
+\left.{{\cos \left({y + x}\right)}= ={-{{\sin \left({x}\right)}\ {\sin
+\left({y}\right)}}+{{\cos \left({x}\right)}\ {\cos \left({y}\right)}}}},
+ \: \right.
+\\
+\\
+\displaystyle
+\left.{{\sin \left({2 \  x}\right)}= ={2 \ {\cos \left({x}\right)}\ {\sin
+\left({x}\right)}}}, \:{{\cos \left({2 \  x}\right)}= ={-{{\sin
+\left({x}\right)}^2}+{{\cos \left({x}\right)}^2}}}\right\}
+\end{array}
+\]
+}{14}{%
+Ruleset(Integer, Integer, Expression Integer)%
+}
+
+%
+\xtcLong{
+Apply the rules to a simple trigonometric expression.
+}{
+\spadcommand{sinCosExpandRules(sin(a+2*b+c))}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+{{\left(-{{\cos \left({a}\right)}\,{{\sin \left({b}\right)}^2}}-
+{2 \,{\cos \left({b}\right)}\,{\sin \left({a}\right)}\,{\sin
+\left({b}\right)}}+{{\cos \left({a}\right)}\,{{\cos \left({b}\right)}^
+2}}\right)}\,{\sin \left({c}\right)}}-
+\\
+\\
+\displaystyle
+{{\cos \left({c}\right)}\,{\sin \left({a}\right)}\,{{\sin \left({b}\right)}^
+2}}+{2 \,{\cos \left({a}\right)}\,{\cos \left({b}\right)}\,{\cos
+\left({c}\right)}\,{\sin \left({b}\right)}}+
+\\
+\\
+\displaystyle
+{{{\cos \left({b}\right)}^2}\,{\cos \left({c}\right)}\,{\sin
+\left({a}\right)}}
+\end{array}
+\]
+}{15}{%
+Expression Integer%
+}
+
+Using input files, you can create your own library of
+transformation rules relevant to your applications, then
+selectively apply the rules you need.
+
+\pseudoSection{Polymorphic Algorithms}
+
+All components of the \Language{} algebra library are written in
+the \Language{} library language.
+This language is similar to the interactive language
+except for protocols that authors are obliged to follow.
+The library language permits you to write ``polymorphic
+algorithms,'' algorithms defined to work in
+their most natural settings and over a variety of types.
+
+%
+\xtcLong{
+Define a system of polynomial equations \spad{S}.
+}{
+\spadcommand{S := [3*x**3 + y + 1 = 0,y**2 = 4]}
+}{
+\[
+\left[{{y +{3 \ {x^3}}+ 1}= 0}, \:{{y^2}= 4}\right]
+\]
+}{16}{%
+List Equation Polynomial Integer%
+}
+%
+\xtcLong{
+Solve the system \spad{S} using rational number arithmetic and
+30 digits of accuracy.
+}{
+\spadcommand{solve(S,1/10**30)}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+\left[{\left[{y = - 2}, \:{x ={{17578796712111842452830704145
+07}\over{2535301200456458802993406410752}}}\right]}, \: \right.
+\\
+\\
+\displaystyle
+\left.{\left[{y = 2}, \:{x = - 1}\right]}\right]
+\end{array}
+\]
+}{17}{%
+List List Equation Polynomial Fraction Integer%
+}
+%
+\xtcLong{
+Solve \spad{S} with the solutions expressed in radicals.
+}{
+\spadcommand{radicalSolve(S)}
+}{
+\[
+\begin{array}{@{}l}
+\displaystyle
+\left[{\left[{y = 2}, \:{x = - 1}\right]}, \:{\left[{y = 2},
+\:{x ={{-{\sqrt{- 3}}+ 1}\over 2}}\right]}, \: \right.
+\\
+\\
+\displaystyle
+\left.{\left[{y = 2}, \:{x ={{{\sqrt{- 3}}+ 1}\over 2}}\right]},
+ \:{\left[{y = - 2}, \:{x ={1 \over{\root{3}\of{3}}}}\right]},
+ \: \right.
+\\
+\\
+\displaystyle
+\left.{\left[{y = - 2}, \:{x ={{{{\sqrt{- 1}}\ {\sqrt{3}}}- 1}\over{2
+\ {\root{3}\of{3}}}}}\right]}, \:{\left[{y = - 2}, \:{x ={{-{{\sqrt{-
+ 1}}\ {\sqrt{3}}}- 1}\over{2 \ {\root{3}\of{3}}}}}\right]}\right]
+\end{array}
+\]
+}{18}{%
+List List Equation Expression Integer%
+}
+
+While these solutions look very different, the results were
+produced by the same internal algorithm!
+The internal algorithm actually works with equations over any ``field.''
+Examples of fields are the rational numbers, floating point
+numbers, rational functions, power series, and general expressions
+involving radicals.
+
+\pseudoSection{Extensibility}
+
+Users and system developers alike can augment the \Language{}
+library, all using one common language.
+Library code, like interpreter code, is compiled into machine
+binary code for run-time efficiency.
+
+Using this language, you can create new computational types and
+new algorithmic packages.
+All library code is polymorphic, described in terms of a database
+of algebraic properties.
+By following the language protocols, there is an automatic,
+guaranteed interaction between your code and that of colleagues
+and system implementers.
