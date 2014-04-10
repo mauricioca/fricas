@@ -183,7 +183,7 @@ Add the ribbon for
 }{
 \spadgraph{vp := draw(x^3,x=-1..1,y=1..2,var2Steps==1, space==sp)\bound{d6}\free{d5}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbons.ps}
+\epsffile[0 0 295 295]{ps/ribbons.ps}
 }
 
 Unless you moved the original viewport, the new viewport covers
@@ -199,14 +199,14 @@ Show quadrilateral polygon outlines.
 }{
 \spadcommand{drawStyle(vp,"shade");outlineRender(vp,"on")\bound{d10}\free{d6}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbons2.ps}
+\epsffile[0 0 295 295]{ps/ribbons2.ps}
 }
 \psXtc{
 Enclose the ribbons in a box.
 }{
 \spadcommand{rotate(vp,20,-60); showRegion(vp,"on")\bound{d11}\free{d10}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbons2b.ps}
+\epsffile[0 0 295 295]{ps/ribbons2b.ps}
 }
 
 This process has become tedious!
@@ -309,7 +309,7 @@ for \texht{$-1 \leq x \leq 1$}{-1 <= x <= 1}
 }{
 \spadgraph{drawRibbons([x^i for i in 1..5],x=-1..1) \free{s0}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbons5.ps}
+\epsffile[0 0 295 295]{ps/ribbons5.ps}
 }
 
 
@@ -487,14 +487,14 @@ Create a \threedim{} viewport containing that space.
 }{
 \spadgraph{vp := makeViewport3D(sp,"Arrow")\bound{v4}\free{v3}}
 }{
-\epsffile[0 0 295 295]{../ps/arrow.ps}
+\epsffile[0 0 295 295]{ps/arrow.ps}
 }
 \psXtc{
 Here is a better viewing angle.
 }{
 \spadcommand{rotate(vp,200,-60)\bound{v5}\free{v4}}
 }{
-\epsffile[0 0 295 295]{../ps/arrowr.ps}
+\epsffile[0 0 295 295]{ps/arrowr.ps}
 }
 
 
@@ -552,7 +552,7 @@ A bouquet of a dozen arrows.
 }{
 \spadgraph{drawBouquet(12,"A Dozen Arrows")\free{b1}}
 }{
-\epsffile[0 0 295 295]{../ps/bouquet.ps}
+\epsffile[0 0 295 295]{ps/bouquet.ps}
 }
 \
 
@@ -726,7 +726,7 @@ Draw the complex vector field of \spad{sin(x)}.
 }{
 \spadgraph{drawComplexVectorField(sin,-2..2,-2..2) \free{readVI}}
 }{
-\epsffile[0 0 295 295]{../ps/vectorSin.ps}
+\epsffile[0 0 295 295]{ps/vectorSin.ps}
 }
 \
 
@@ -816,7 +816,7 @@ Draw it with an odd number of steps to avoid the pole.
 }{
 \spadgraph{drawComplex(f,-2..2,-2..2)\free{e1 readVI}}
 }{
-\epsffile[0 0 295 295]{../ps/complexExp.ps}
+\epsffile[0 0 295 295]{ps/complexExp.ps}
 }
 \
 
@@ -1017,13 +1017,12 @@ The vector field.
 }{
 \spadgraph{drawComplexVectorField(g^3,-3..3,-3..3)\free{n3}}
 }{
-\epsffile[0 0 295 295]{../ps/vectorRoot.ps}
+\epsffile[0 0 295 295]{ps/vectorRoot.ps}
 }
 \psXtc{
 The surface.
 }{
 \spadgraph{drawComplex(g^3,-3..3,-3..3)\free{n3}}
 }{
-\epsffile[0 0 295 295]{../ps/complexRoot.ps}
+\epsffile[0 0 295 295]{ps/complexRoot.ps}
 }
-\
