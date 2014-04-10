@@ -474,7 +474,16 @@ tex-files: ${HD_TEX_FILES}
 ug09.tex: examples.list
 	${UGEXAMPLES} $< > $@
 
+pics.mk:
+	grep '\(\\head{\|\\psXtc\|\xtc\|\\noOutputXtc\|\\nullXtc\|epsffile\|\\spadgraph\)' ${srcdir}/htex/ug*.htex \
+	| awk -f ${srcdir}/ugepsf.awk > $@
+
+pics: pics.mk
+	mkdir -p ps
+	${MAKE} -f pics.mk pics
+
 book.dvi: ug09.tex tex-files
 	TEXINPUTS=$$TEXINPUTS:${srcdir}:tmp:. latex book.tex
+
 
 ###################################################################
