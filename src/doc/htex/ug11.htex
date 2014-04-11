@@ -33,21 +33,6 @@
 
 \texht{\setcounter{chapter}{10}}{} % Chapter 11
 
-\begin{texonly}
-\hyphenation{
-In-dexed-Aggre-gate
-Lin-ear-Aggre-gate
-shallowly-Mutable
-draw-Vector-Field
-set-Real-Steps
-set-Imag-Steps
-set-Clip-Value
-}
-\begin{discard}
-)expose DRAWCX
-\end{discard}
-\end{texonly}
-
 % Here and throughout the book we should use the terminology
 % "type of a function", rather than talking about source and target.
 % This is how the brave new world of SMWATT regards them. A function
@@ -406,7 +391,7 @@ operation.
 \nullXtc{
 Compile the package.
 }{
-\nullspadcommand{)compile drawpak}
+\spadcommand{)compile drawpak}
 }
 \xtc{
 Expose the package.
@@ -773,26 +758,16 @@ operations from the package become known to the interpreter.
 Each of these operations is expressed as a {\it modemap} in which the type
 \index{modemap}
 of the operation is written in terms of symbolic domains.
-\nullXtc{
+\noOutputXtc{
+}{
+\spadcommand{)expose SORTPAK}
+}
+
+\xtc{
 See the modemaps for \fakeAxiomFun{bubbleSort!}.
 }{
-\nullspadcommand{)display op bubbleSort!}
+\spadcommand{)display op bubbleSort!}
 }
-\begin{verbatim}
-There are 2 exposed functions called bubbleSort! :
-
-   [1] D1 -> D1 from SortPackage(D2,D1)
-         if D2 has ORDSET and D2 has OBJECT and D1 has
-         IndexedAggregate(Integer, D2) with
-              finiteAggregate
-              shallowlyMutable
-
-   [2] (D1,((D3,D3) -> Boolean)) -> D1 from SortPackage(D3,D1)
-         if D3 has OBJECT and D1 has
-         IndexedAggregate(Integer,D3) with
-              finiteAggregate
-              shallowlyMutable
-\end{verbatim}
 
 What happens if you ask for \axiom{bubbleSort!([1,-5,3])}?
 There is a unique modemap for an operation named

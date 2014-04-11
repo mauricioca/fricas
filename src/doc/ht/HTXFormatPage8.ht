@@ -45,7 +45,7 @@ For your convenience, there are two macros defined
 in \centerline{ {\bf \env{AXIOM}{}/share/hypertex/pages/util.ht}.}
 The {\tt \\viewport} macro eliminates the need to specify
 the {\tt .VIEW/image} part and the
-{\tt \\axiomViewport} macro automatically selects viewport
+{\tt \\spadviewport} macro automatically selects viewport
 files in the system directories. The above {\tt \\inputimage}
 could have been written
 \beginImportant
@@ -53,7 +53,7 @@ could have been written
 \endImportant
 or
 \beginImportant
-{\tt \\axiomViewport\{ugProblemNumericPage30\}}
+{\tt \\spadviewport\{ugProblemNumericPage30\}}
 \endImportant
 
 

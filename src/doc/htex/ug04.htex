@@ -198,7 +198,7 @@ The names are
 \bf script  & for IBM Script Formula Format output.
 \end{tabular}
 \end{texonly}
-\htonly
+\begin{htonly}
 \begin{description}
 \item[fortran]  for FORTRAN output.
 \item[algebra]  for monospace two-dimensional mathematical output.
@@ -207,7 +207,7 @@ The names are
 \item[texmacs]  for Texmacs output.
 \item[script]   for IBM Script Formula Format output.
 \end{description}
-\endhtonly
+\end{htonly}
 
 For example, issue \spadsys{)set output fortran on} to turn on
 FORTRAN format and
@@ -1159,11 +1159,10 @@ subprogram and by an instance of \axiomType{TheSymbolTable}.
 }{
 \spadcommand{declare!(X,fortranReal(),F)\$TheSymbolTable \free{forPleasure}}
 }
-%--rhx:
-%\xtc{
-%}{
-%\spadcommand{printHeader(F)\$TheSymbolTable\free{forPleasure}}
-%}
+\xtc{
+}{
+\spadcommand{printHeader(F)\$TheSymbolTable\free{forPleasure}}
+}
 
 % ----------------------------------------------------------------------
 \head{subsection}{Advanced Fortran Code Generation}{ugGenForAdvanced}

@@ -58,7 +58,7 @@ of \HyperName{} to get the {\it front page} of \Browse{}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-brfront.ps}
+\special{psfile=ps/h-brfront.ps}
 \end{picture}
 \caption{The Browse front page.}
 \end{figure}
@@ -101,9 +101,9 @@ the string ``{\tt matrix}.''
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-consearch.ps}
+\special{psfile=ps/h-consearch.ps}
 \end{picture}
-\caption{Table of exposed constructors matching {\tt *matrix*} .}
+\caption{Table of exposed constructors matching \texttt{*matrix*}.}
 \end{figure}
 \end{texonly}
 
@@ -149,9 +149,9 @@ matrix} or {\tt Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matrixops.ps}
+\special{psfile=ps/h-matrixops.ps}
 \end{picture}
-\caption{Table of operations matching {\tt *matrix} .}
+\caption{Table of operations matching \texttt{*matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -177,7 +177,7 @@ Click on \UpBitmap{} to return to the \Browse{} front page.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-atsearch.ps}
+\special{psfile=ps/h-atsearch.ps}
 \end{picture}
 \caption{Table of \Language{} attributes.}
 \end{figure}
@@ -198,9 +198,9 @@ matrix} as a part of their name.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-gensearch.ps}
+\special{psfile=ps/h-gensearch.ps}
 \end{picture}
-\caption{Table of all constructs matching {\tt *matrix*} .}
+\caption{Table of all constructs matching \texttt{*matrix*}.}
 \end{figure}
 \end{texonly}
 
@@ -223,9 +223,9 @@ matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-docsearch.ps}
+\special{psfile=ps/h-docsearch.ps}
 \end{picture}
-\caption{Table of constructs with documentation matching {\tt *matrix*} .}
+\caption{Table of constructs with documentation matching \texttt{*matrix*}.}
 \end{figure}
 \end{texonly}
 
@@ -238,9 +238,9 @@ This search combines both {\bf General} and {\bf Documentation}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-comsearch.ps}
+\special{psfile=ps/h-comsearch.ps}
 \end{picture}
-\caption{Table summarizing complete search for pattern {\tt *matrix*} .}
+\caption{Table summarizing complete search for pattern \texttt{*matrix*}.}
 \end{figure}
 \end{texonly}
 
@@ -256,9 +256,9 @@ and click on {\bf Constructors}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matpage.ps}
+\special{psfile=ps/h-matpage.ps}
 \end{picture}
-\caption{Constructor page for \axiomType{Matrix}.}
+\caption{Constructor page for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -275,9 +275,9 @@ of {\tt R}, or a table of \spadgloss{rings} in \Language{}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matargs.ps}
+\special{psfile=ps/h-matargs.ps}
 \end{picture}
-\caption{Table of acceptable domain parameters to \axiomType{Matrix}.}
+\caption{Table of acceptable domain parameters to \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -295,9 +295,9 @@ of \axiomType{Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,168)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matsource.ps}
+\special{psfile=ps/h-matsource.ps}
 \end{picture}
-\caption{Source code for \axiomType{Matrix}.}
+\caption{Source code for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -323,9 +323,9 @@ can be found directly over the constructor definition.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matdesc.ps}
+\special{psfile=ps/h-matdesc.ps}
 \end{picture}
-\caption{Description page for \axiomType{Matrix}.}
+\caption{Description page for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -339,9 +339,9 @@ below.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matops.ps}
+\special{psfile=ps/h-matops.ps}
 \end{picture}
-\caption{Table of operations from \axiomType{Matrix}.}
+\caption{Table of operations from \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -362,9 +362,9 @@ These are two computational properties that result from
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matats.ps}
+\special{psfile=ps/h-matats.ps}
 \end{picture}
-\caption{Attributes from \axiomType{Matrix}.}
+\caption{Attributes from \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -376,9 +376,9 @@ create and manipulate matrices.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matexamp.ps}
+\special{psfile=ps/h-matexamp.ps}
 \end{picture}
-\caption{Example page for \axiomType{Matrix}.}
+\caption{Example page for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -402,9 +402,9 @@ If you want to see \Language{} execute the command, then click on it!
 A new \Language{} window appears on your screen and the command is
 executed.
 
-\httex{At the end of the page is generally a menu of buttons that lead
+\texht{}{At the end of the page is generally a menu of buttons that lead
 you to further sections.
-Select one of these topics to explore its contents.}{}
+Select one of these topics to explore its contents.}
 
 \subsubsection{Exports}
 
@@ -414,9 +414,9 @@ exactly as described by the source code.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matexports.ps}
+\special{psfile=ps/h-matexports.ps}
 \end{picture}
-\caption{Exports of \axiomType{Matrix}.}
+\caption{Exports of \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -431,9 +431,9 @@ the following exercise.
 \begin{texonly}
 Otherwise, go on to the next section.
 \end{texonly}
-\htonly
+\begin{htonly}
 Otherwise, click on \UpButton{} and go on to the next section.
-\endhtonly
+\end{htonly}
 \axiomType{Matrix} explicitly exports only two operations.
 The other operations are thus exports of \axiomType{MatrixCategory}.
 In general, operations are usually not explicitly exported by a domain.
@@ -474,9 +474,9 @@ Click here bringing up a table of operations that are exported by
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matrelops.ps}
+\special{psfile=ps/h-matrelops.ps}
 \end{picture}
-\caption{Related operations of \axiomType{Matrix}.}
+\caption{Related operations of \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -495,9 +495,9 @@ under the respective buttons.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matxref.ps}
+\special{psfile=ps/h-matxref.ps}
 \end{picture}
-\caption{Cross-reference page for \axiomType{Matrix}.}
+\caption{Cross-reference page for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -574,10 +574,10 @@ Otherwise, you best skip this button and go on to {\bf Users}.
 Clicking on {\bf Search Path} gives you a
 list of domain constructors:
 \axiomType{InnerIndexedTwoDimensionalArray},
-\aliascon{MatrixCategory\&}{MATCAT-},
-\aliascon{TwoDimensionalArrayCategory\&}{ARR2CAT-},
-\aliascon{HomogeneousAggregate\&}{HOAGG-},
-\aliascon{Aggregate\&}{AGG-},
+\aliascon{MatrixCategory&}{MATCAT-},
+\aliascon{TwoDimensionalArrayCategory&}{ARR2CAT-},
+\aliascon{HomogeneousAggregate&}{HOAGG-},
+\aliascon{Aggregate&}{AGG-},
 \aliascon{Evalable&}{EVALAB-},
 \aliascon{SetCategory&}{SETCAT-},
 \aliascon{InnerEvalable&}{IEVALAB-},
@@ -825,9 +825,9 @@ This takes you to a page showing the documentation for this operation.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matinv.ps}
+\special{psfile=ps/h-matinv.ps}
 \end{picture}
-\caption{Operation \axiomFunFrom{inverse}{Matrix} from \axiomType{Matrix}.}
+\caption{Operation \protect\axiomFunFrom{inverse}{Matrix} from \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -869,9 +869,9 @@ You find these comments in the source code for \axiomType{Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matmap.ps}
+\special{psfile=ps/h-matmap.ps}
 \end{picture}
-\caption{Operations \axiomFun{map} from \axiomType{Matrix}.}
+\caption{Operations \protect\axiomFun{map} from \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -982,9 +982,9 @@ the matrix operations, organized by the various domains and packages.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-matimp.ps}
+\special{psfile=ps/h-matimp.ps}
 \end{picture}
-\caption{Implementation domains for \axiomType{Matrix}.}
+\caption{Implementation domains for \protect\axiomType{Matrix}.}
 \end{figure}
 \end{texonly}
 
@@ -1012,9 +1012,9 @@ above, select the {\bf description} button.}
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-allrank.ps}
+\special{psfile=ps/h-allrank.ps}
 \end{picture}
-\caption{All operations named \axiomFun{rank} in \Language{}.}
+\caption{All operations named \protect\axiomFun{rank} in \Language{}.}
 \end{figure}
 \end{texonly}
 
@@ -1032,7 +1032,7 @@ export a \axiomFun{rank} operation.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\hspace*{\baseLeftSkip}\special{psfile=../ps/h-alldoms.ps}
+\special{psfile=ps/h-alldoms.ps}
 \end{picture}
 \caption{Table of all domains that export \axiomFun{rank}.}
 \end{figure}
@@ -1111,7 +1111,7 @@ For example, for the category default package
 %\begin{texonly}
 %\begin{figure}[htbp]
 %\begin{picture}(324,180)%(-54,0)
-%\hspace*{\baseLeftSkip}\special{psfile=../ps/h-consearch2.ps}
+%\hspace*{\baseLeftSkip}\special{psfile=ps/h-consearch2.ps}
 %\end{picture}
 %\caption{Table of all constructors matching {\tt *matrix*} .}
 %\end{figure}

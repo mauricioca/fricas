@@ -955,7 +955,8 @@ Read the input file with the definitions.
 }{
 \spadcommand{)read newton\bound{n1}}
 }
-\noOutputXtc{}{
+\noOutputXtc{
+}{
 \spadcommand{)read vectors \bound{n1a}}
 }
 

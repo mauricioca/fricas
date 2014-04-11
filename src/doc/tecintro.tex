@@ -269,7 +269,7 @@ However fields and integral domains are not ordered sets.
 \vfill
 \texht{
 \vskip .5\baselineskip
-\horizontalline
+%\horizontalline
 \begin{figure}[htbp]
 \vspace*{3in}
 \begin{center}
@@ -283,9 +283,9 @@ $\downarrow$      &    \\
 \spadtype{Field}&            &    \\
 \end{tabular}
 \end{center}
-\simpleCaption{A simplified category hierarchy.}\label{fig:techintro-1}
+\caption{A simplified category hierarchy.}\label{fig:techintro-1}
 \end{figure}
-\horizontalline
+%\horizontalline
 \vskip .5\baselineskip
 }
 {
@@ -404,7 +404,7 @@ The \Language{} interpreter reads user input then builds whatever types
 it needs to perform the indicated computations.
 For example, to create the matrix
 %
-\texht{$$M = \pmatrix{x^2+1&0\cr0&x / 2\cr}$$}
+\texht{\[M = \begin{pmatrix}x^2+1&0\\0&x / 2\end{pmatrix}\]}
 {\spad{M = [[x**2+1,0],[0,x / 2]]}}
 %
 the interpreter first loads the

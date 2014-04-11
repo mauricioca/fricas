@@ -1070,13 +1070,13 @@ $$
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{  x +   y +   z = 8} \\
 \axiom{3*x - 2*y +   z = 0} \\
 \axiom{  x + 2*y + 2*z = 17}
 \end{center}
-\endhtonly
+\end{htonly}
 evaluate this expression.
 }{
 \spadcommand{solve([x+y+z=8,3*x-2*y+z=0,x+2*y+2*z=17],[x,y,z])}
@@ -1098,13 +1098,13 @@ $$
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{  x + 2*y + 3*z = 2} \\
 \axiom{2*x + 3*y + 4*z = 2} \\
 \axiom{3*x + 4*y + 5*z = 2}
 \end{center}
-\endhtonly
+\end{htonly}
 with this expression
 you get a solution involving a parameter.
 }{
@@ -1129,13 +1129,13 @@ $$
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{  x +   y +   z = 8} \\
 \axiom{3*x - 2*y +   z = 0} \\
 \axiom{  x + 2*y + 2*z = 17}
 \end{center}
-\endhtonly
+\end{htonly}
 in matrix form you would evaluate this expression.
 }{
 \spadcommand{solve([[1,1,1],[3,-2,1],[1,2,2]],[8,0,17])}
@@ -1163,13 +1163,13 @@ $$
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{  x + 2*y + 3*z = 2} \\
 \axiom{2*x + 3*y + 4*z = 2} \\
 \axiom{3*x + 4*y + 5*z = 2}
 \end{center}
-\endhtonly
+\end{htonly}
 with this command.
 }{
 \spadcommand{solve([[1,2,3],[2,3,4],[3,4,5]],[2,2,2])}
@@ -1205,13 +1205,13 @@ $$
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{  x + 2*y + 3*z = 0} \\
 \axiom{2*x + 3*y + 4*z = 0} \\
 \axiom{3*x + 4*y + 5*z = 0}
 \end{center}
-\endhtonly
+\end{htonly}
 The result is given as a list of vectors and
 these vectors form a basis for the solution space.
 }{
@@ -1309,7 +1309,7 @@ Given a system of equations of rational functions with exact coefficients:
 p_1(x_1, \ldots, x_n) \\ \vdots \\ p_m(x_1,\ldots,x_n)
 \end{array}}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{p1(x1,...,xn)} \\
 \axiom{.}             \\
@@ -1317,7 +1317,7 @@ p_1(x_1, \ldots, x_n) \\ \vdots \\ p_m(x_1,\ldots,x_n)
 \axiom{.}             \\
 \axiom{pm(x1,...,xn)}
 \end{center}
-\endhtonly
+\end{htonly}
 \Language{} can find
 numeric or symbolic solutions.
 The system is first split into irreducible components, then for
@@ -1330,7 +1330,7 @@ from substitution of partial solutions from the previous stage.
 q_1(x_1, \ldots, x_n) \\ \vdots \\ q_m(x_n)
 \end{array}}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{q1(x1,...,xn)} \\
 \axiom{.} \\
@@ -1338,7 +1338,7 @@ q_1(x_1, \ldots, x_n) \\ \vdots \\ q_m(x_n)
 \axiom{.} \\
 \axiom{qm(xn)}
 \end{center}
-\endhtonly
+\end{htonly}
 
 Symbolic solutions can be presented using ``implicit'' algebraic numbers
 defined as roots of irreducible polynomials or in terms of radicals.
@@ -2279,11 +2279,11 @@ Next consider the Taylor expansion of an odd function, say,
 \narrowDisplay{%
 \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{verbatim}
 sin x = x - x^3/3! + x^5/5! - ...
 \end{verbatim}
-\endhtonly
+\end{htonly}
 Here every other coefficient is zero and we would like to give an
 explicit formula only for the odd Taylor coefficients.
 %
@@ -2501,7 +2501,7 @@ integers \axiom{a} and \axiom{b}, with \axiom{a < b}:
   b^{n-1}       & = & {1 \over n}   (B_n(b + 1) - B_n(b))
 \end{array}}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{verbatim}
   a^(n-1)       = 1/n * (Bn(a + 1) - Bn(a))
   (a + 1)^(n-1) = 1/n * (Bn(a + 2) - Bn(a + 1))
@@ -2512,7 +2512,7 @@ integers \axiom{a} and \axiom{b}, with \axiom{a < b}:
   (b - 1)^(n-1) = 1/n * (Bn(b) - Bn(b - 1))
   b^(n-1)       = 1/n * (Bn(b + 1) - Bn(b))
 \end{verbatim}
-\endhtonly
+\end{htonly}
 
 When we add these equations we find that
 the sum of the left-hand sides is
@@ -2531,11 +2531,11 @@ Replacing \axiom{n} by \axiom{n + 1}, we have shown that
 \sum_{m = a}^{b} m^n = {1 \over {\displaystyle n + 1}} \:
 (B_{n+1}(b + 1) - B_{n+1}(a)).}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{sum(m = a..b,m ^ n) = 1/(n + 1) * (B<n+1>(b + 1) - B<n+1>(a))}.
 \end{center}
-\endhtonly
+\end{htonly}
 
 Let's use this to obtain the formula for the sum of fourth powers.
 \xtc{
@@ -3553,11 +3553,11 @@ An element \smath{x} of \smath{K} is said to be
 \begin{texonly}
 \narrowDisplay{1, x^q, x^{q^2}, \ldots, x^{q^{n-1}}}%
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \axiom{1, x^q, x^(q^2), ..., x^(q^(n-1))}
 \end{center}
-\endhtonly
+\end{htonly}
 form a basis of \smath{K} as a vector space over \smath{F}.
 Such a basis is called a {\it normal basis}.\footnote{This
 agrees with the general definition of a normal basis because the

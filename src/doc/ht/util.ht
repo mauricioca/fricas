@@ -14,14 +14,10 @@
 
 \newcommand{\Browse}{Browse}
 \newcommand{\Language}{FriCAS}
-\newcommand{\SpadName}{\Language}
-\newcommand{\LangName}{\Language}
 \newcommand{\HyperName}{HyperDoc}
-\newcommand{\axiomxl}{AXIOM-XL}
-\newcommand{\anatural}{AXIOM-XL}
+\newcommand{\aldor}{Aldor}
 \newcommand{\Clef}{Clef}
 \newcommand{\Lisp}{Common LISP}
-\newcommand{\naglib}{NAG Foundation Library}
 
 
 % ----------------------------------------------------------------------
@@ -80,7 +76,6 @@ The page you requested was not found in the \HyperName{} database.
 % All unix commands should be done as macros defined here so we don't
 % have to go hunting when moving between Unix versions.
 
-\newcommand{\newspadclient}[1]{xterm -n "#1" -e \$AXIOM/bin/clef \$AXIOM/lib/spadclient}
 \newcommand{\searchwindow}[2]{\unixwindow{#1}{\$AXIOM/lib/htsearch "#2"}}
 \newcommand{\unixwindow}[2]{\unixlink{#1}{#2}}
 \newcommand{\menuunixlink}[2]{\item\unixlink{\menuitemstyle{#1}}{#2}}
@@ -194,20 +189,17 @@ The page you requested was not found in the \HyperName{} database.
 % Including viewport bitmaps within \HyperName pages:
 
 \newcommand{\viewport}[1]{\inputimage{{#1}.VIEW/image}}
-\newcommand{\axiomViewport}[1]{\inputimage{\env{AXIOM}/share/viewports/{#1}.VIEW/image}}
-\newcommand{\spadviewport}[1]{\axiomViewport{#1}}
+\newcommand{\spadviewport}[1]{\inputimage{\env{AXIOM}/share/viewports/{#1}.VIEW/image}}
 
 % Creating a real live viewport:
 
 \newcommand{\viewportbutton}[2]{\unixcommand{#1}{\$AXIOM/bin/viewAlone #2}}
-\newcommand{\axiomViewportbutton}[2]{\unixcommand{#1}{\$AXIOM/bin/viewAlone \$AXIOM/share/viewports/{#2}}}
-\newcommand{\spadviewportbutton}[2]{\axiomViewportbutton{#1}{#2}}
+\newcommand{\spadviewportbutton}[2]{\unixcommand{#1}{\$AXIOM/bin/viewAlone \$AXIOM/share/viewports/{#2}}}
 
 % Making active viewport buttons:
 
 \newcommand{\viewportasbutton}[1]{\unixcommand{\inputimage{{#1}.VIEW/image}}{\$AXIOM/bin/viewAlone {#1}}}
-\newcommand{\axiomViewportasbutton}[1]{\unixcommand{\inputimage{\env{AXIOM}/share/viewports/{#1}.VIEW/image}}{\$AXIOM/bin/viewAlone \$AXIOM/share/viewports/{#1}}}
-\newcommand{\spadviewportasbutton}[1]{\axiomViewportasbutton{#1}}
+\newcommand{\spadviewportasbutton}[1]{\unixcommand{\inputimage{\env{AXIOM}/share/viewports/{#1}.VIEW/image}}{\$AXIOM/bin/viewAlone \$AXIOM/share/viewports/{#1}}}
 
 % ----------------------------------------------------------------------
 % 8. TeX and LaTeX compatibility macros.
@@ -347,7 +339,6 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\not=}{\inputbitmap{\htbmdir{}/not=.bitmap}}
 \newcommand{\notequal}{\inputbitmap{\htbmdir{}/notequal.bitmap}}
 \newcommand{\nullXtc}[2]{\xtc{#1}{#2}}      % comment and then \spadcommand or spadsrc
-\newcommand{\nullspadcommand}[1]{\spadcommand}
 \newcommand{\pp}{\newline}              % Use this instead of \par for now.
 \newcommand{\psXtc}[3]{\xtc{#1}{#2}}        % comment and then \spadcommand or spadsrc
 \newcommand{\ref}[1]{(see the graph)}
@@ -438,6 +429,7 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\spadcmd}[1]{\spadsyscom{#1}}
 \newcommand{\spadsys}[1]{\spadsyscom{#1}}
 
+\newcommand{\cs}[1]{\\#1}
 
 % Following macros should be phased out in favor of ones above:
 
