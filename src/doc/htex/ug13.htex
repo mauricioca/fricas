@@ -33,16 +33,6 @@
 
 \texht{\setcounter{chapter}{12}}{} % Chapter 13
 
-\begin{texonly}
-\hyphenation{
-Quad-rat-ic-Form
-}
-\begin{discard}
-\spadcommand{)read alql.boot}
-\spadcommand{)load DLIST ICARD DBASE QEQUAT MTHING OPQUERY )update}
-\end{discard}
-\end{texonly}
-
 % *********************************************************************
 \head{chapter}{Domains}{ugDomains}
 % *********************************************************************
@@ -676,12 +666,12 @@ e_i \  e_j & = & -e_j \  e_i & \hbox{for } i \neq j
 \end{array}
 $$
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{verbatim}
 ei*ei = Q(ei)
 ei*ej = -ej*ei,  i ^= j
 \end{verbatim}
-\endhtonly
+\end{htonly}
 
 Now look at the snapshot of its definition given in Figure
 \ref{fig-clifalg}.

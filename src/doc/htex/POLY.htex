@@ -103,7 +103,7 @@ The fully factored form can be recovered by using
 \spadcommand{factor(q) \free{q}}
 }
 This is the same name used for the operation to factor integers.
-Such reuse of names is called \spadglos{overloading} and makes it much easier
+Such reuse of names is called \spadgloss{overloading} and makes it much easier
 to think of solving problems in general ways.
 \Language{} facilities for factoring polynomials created with
 \spadtype{Polynomial} are currently restricted to

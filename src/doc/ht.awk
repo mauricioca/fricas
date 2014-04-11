@@ -7,7 +7,7 @@
 # One argument case:
 #   - argument 1 is a ugXX.htex Users Guide chapter file where XX
 #     is the chapter number.
-#   - \head{chapter}... or \headTODO{chapter}... tags are included
+#   - \head{chapter}... tag is included
 #
 # Four argument case:
 #   - this is an example file for an exposed constructor of the form
@@ -77,53 +77,16 @@ BEGIN           {
 }
 
 # delete lines between \begin{texonly} and \end{texonly}
-/^\\begin{texonly}/     {
-        while (substr($1,1,13) != "\\end{texonly}") # might have trailing %
-                getline
-        next
-}
-# delete lines between \texonly and \endtexonly
-/^\\texonly/     {
-        while (substr($1,1,11) != "\\endtexonly") # might have trailing %
-                getline
-        next
-}
+/^\\begin{texonly}/,/^\\end{texonly}/ {next}
 
 # delete lines between \begin{inputonly} and \end{inputonly}
-/^\\begin{inputonly}/     {
-        while (substr($1,1,15) != "\\end{inputonly}") # might have trailing %
-                getline
-        next
-}
+/^\\begin{inputonly}/,/^\\end{inputonly}/ {next}
 
 # handle discard stuff (delete the lines)
-/^\\begin{discard}/   {
-        while (substr($1,1,13) != "\\end{discard}") # might have trailing %
-                getline
-        next
-}
+/^\\begin{discard}/,/^\\end{discard}/ {next}
 
-# delete \htonly and \endhtonly lines (leaving what is in between)
-/^\\htonly/ || /^\\endhtonly/  {
-        next
-}
-
-# ignore towrite environment
-/^\\begin{towrite}/ || /^\\end{towrite}/ {
-    next
-}
-
-# translate tinyverbatim mode to verbatim and pass through
-/^\\begin{tinyverbatim}/        {
-        print "\\begin{verbatim}"
-        getline
-        while ($1 != "\\end{tinyverbatim}") {
-                print
-                getline
-        }
-        print "\\end{verbatim}"
-        next
-}
+# delete \begin{htonly} and \end{htonly} lines (leaving what is in between)
+/^\\begin{htonly}/ || /^\\end{htonly}/  {next}
 
 # handle various xmpLines and figXmpLines environments
 
@@ -202,11 +165,6 @@ BEGIN           {
 /^\\spadcommand/        {
         gsub(/\\_/,"_")
         print "\\spadpaste"substr($0,13)
-        next
-}
-/^\\nullspadcommand/        {
-        gsub(/\\_/,"_")
-        print "\\spadpaste"substr($0,17)
         next
 }
 /^\\spadpaste/          {
@@ -311,29 +269,13 @@ BEGIN           {
         startPage(16)
         next
 }
-/^\\headTODO{chapter}/      {
-        inChap = 1
-        inSubSect = 0
-        subSecNum = 0
-        startPage(20)
-        next
-}
 
 /^\\head{section}/      {
         handleSection(16)
         next
 }
-/^\\headTODO{section}/      {
-        handleSection(20)
-        next
-}
-
 /^\\head{subsection}/      {
         handleSubSection(19)
-        next
-}
-/^\\headTODO{subsection}/      {
-        handleSubSection(23)
         next
 }
 
@@ -519,44 +461,4 @@ function unnumber(s) {
         gsub(/9/,"Nine",s)
         gsub(/0/,"Zero",s)
         return s
-}
-
-function endMacroIndex(line,parms,    pp,x,bc,cc) {
-# assumes start of line is a macro call and returns position of final "}"
-        x = 0
-        pp = index(line,"{")
-        if (pp != 0) {
-          bc = 1
-          for (x = pp+1; ; x++) {
-            cc = substr(line,x,1)
-            if (cc == "{")
-              bc++
-            else if (cc == "}") {
-              bc--
-              if (bc == 0) {
-                parms--
-                if (parms == 0)
-                  break
-              }
-            }
-          }
-        }
-        return x
-}
-
-function extractArg(line,num,   p,arg) {
-# assumes line is a macro call and extracts the num-th arg
-        arg = ""
-        p = index(line,"{")
-        if (p != 0) {
-          line = substr(line,p)
-
-          if (num > 1) {
-            p = endMacroIndex(line,num-1)
-            line = substr(line,p+1)
-          }
-          p = endMacroIndex(line,1)
-          arg = substr(line,2,p-2)
-        }
-        return arg
 }

@@ -1003,7 +1003,7 @@ we describe many of the more important topics here.
 %
 % A new compiler is now available for \Language{}.
 % The programming language is referred to as the \Language{} Extension Language
-% (or \axiomxl{} for short), and
+% (or \aldor{} for short), and
 % improves upon the old \Language{} language in many ways.
 % The \spadcmd{)compile} command has been upgraded to be able to
 % invoke the new or old compilers.
@@ -1018,7 +1018,7 @@ we describe many of the more important topics here.
 % using the new syntax.
 % Please be aware that the translation is not necessarily one
 % hundred percent complete or correct.
-% You should attempt to compile the output with the \axiomxl{} compiler
+% You should attempt to compile the output with the \aldor{} compiler
 % and make any necessary corrections.
 
 
@@ -1051,7 +1051,7 @@ Curly braces are now used to enclose a block (see section
 for more information). For compatibility, a block can still be
 enclosed by parentheses as well.
 
-% ``Free functions'' created by the \axiomxl{} compiler can now be
+% ``Free functions'' created by the \aldor{} compiler can now be
 % loaded and used within the AXIOM interpreter. A {\it free
 % function} is a library function that is implemented outside a
 % domain or category constructor.
@@ -1219,7 +1219,7 @@ for details.
 
 Documentation for the \spadcmd{)compile}, \spadcmd{)library} and
 \spadcmd{)load} commands has been greatly changed. This reflects
-the ability of the \spadcmd{)compile} to now invoke the \axiomxl{}
+the ability of the \spadcmd{)compile} to now invoke the \aldor{}
 compiler, the impending deletion of the \spadcmd{)load} command
 and the new \spadcmd{)library} command.
 The \spadcmd{)library} command replaces \spadcmd{)load} and is
@@ -1227,9 +1227,9 @@ compatible with the compiled output from both the old and new
 compilers.
 
 %------------------------------------------------------------------------
-\head{subsection}{\axiomxl{} compiler - Enhancements and Additions}{ugTwoTwoAldor}
+\head{subsection}{\aldor{} compiler - Enhancements and Additions}{ugTwoTwoAldor}
 %------------------------------------------------------------------------
-Content removed - \axiomxl{} (now using name {\it Aldor}) is a separate
+Content removed - \aldor{} (now using name {\it Aldor}) is a separate
 project.
 %
 %------------------------------------------------------------------------

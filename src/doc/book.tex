@@ -1,9 +1,5 @@
-\documentstyle[twoside,epsf]{fricas}
-
-\newenvironment{TeXOutput}{}{}
-\newenvironment{MessageOutput}{}{}
-\newenvironment{SysCmdOutput}{}{}
-\newenvironment{inputonly}{}{}
+\documentclass[twoside,a4paper]{book}
+\usepackage{fricas}
 
 \begin{document}
 %
@@ -26,14 +22,15 @@
 \setcounter{page}{0}
 \input{dedicate}
 \input{foreword}
-\newpage\ssectionmark{} % this cleans up right running footing
+\clearpage
 \tableofcontents
 \input{bios}
 %
-\input{r-intro}
+\pagenumbering{arabic}
+\input{ug00}
 \input{tecintro}
 %
-\part{Basic Features of AXIOM}
+\part{Basic Features of \Language{}}
 %
 \input{ug01}
 \input{ug02}
@@ -48,7 +45,7 @@
 \input{ug08}
 \input{ug09}
 %
-\part{Advanced Programming in AXIOM}
+\part{Advanced Programming in \Language{}}
 %
 \input{ug10}
 \input{ug11}

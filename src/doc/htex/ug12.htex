@@ -255,13 +255,16 @@ All lines of the description following the initial line are
 indented by the same amount.
 
 {\texht{\sloppy}{}
-Surround the name of any constructor (with or without parameters) with an
-\texht{\verb+\spadtype{}+}{\\spadtype\{\}}.
-Similarly, surround an
-operator name with \texht{\verb+\spadop{}+}{\\spadop\{\}},
-an \Language{} operation with \texht{\verb+\spadfun{}+}{\\spadfun\{\}}, and a
+Mark the name of any constructor (with or without parameters) with
+\cs{spadtype} like this
+\begin{verbatim}
+\spadtype{Polynomial(Integer)}
+\end{verbatim}
+Similarly, mark an
+operator name with \cs{spadop},
+a \Language{} operation (function) with \cs{spadfun}, and a
 variable or \Language{} expression with
-\texht{\verb+\spad{}+}{\\spad\{\}}.
+\cs{spad}.
 Library documentation is given in a \TeX{}-like language so that
 it can be used both for hard-copy and for \Browse{}.
 These different wrappings cause operations and types to have
@@ -413,11 +416,11 @@ using repeated multiplication:
 \narrowDisplay{x^n = {\underbrace{x \, x \, x \, \cdots \,
 x}_{\displaystyle n \hbox{\ times}}}}
 \end{texonly}%
-\htonly
+\begin{htonly}
 \begin{center}
 \spad{x ^ n = x * x * ... * x}   ( \spad{n} copies of \spad{x} )
 \end{center}
-\endhtonly
+\end{htonly}
 This definition for \spadop{^} is called a {\it default} definition.
 In general, a category can give default definitions for any
 operation it exports.

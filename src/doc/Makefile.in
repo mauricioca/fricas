@@ -21,7 +21,7 @@ subdir = src/doc/
 # files without the xvfb-run programm will popping up image windows in
 # X and makes working during compilation impossible.
 # The intro.htex and util.ht files are not relevant for image generation.
-GPHTS = coverex explot2d explot3d graphics SEGBIND ug01 ug07 ug08 ug10 ug11
+GPHTS = coverex explot2d explot3d graphics SEGBIND ug00 ug01 ug07 ug08 ug10 ug11
 MAYBE_VIEWPORTS=@MAYBE_VIEWPORTS@
 XVFB=@XVFB@
 
@@ -95,6 +95,7 @@ UGEXAMPLES    = ${AWK} -f ${srcdir}/ugexamples.awk
 # must be 09.
 # (The g below stands for "is generated".)
 
+# 00   Introduction to FriCAS
 # 01   An Overview of \Language{}
 # 02   Using Types and Modes
 # 03   Using \HyperName{}
@@ -118,7 +119,7 @@ UGEXAMPLES    = ${AWK} -f ${srcdir}/ugexamples.awk
 # 21   Programs for FriCAS Images
 
 # The stuff that should be visible in HyperDoc
-CHAPTERS=01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21
+CHAPTERS=00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21
 EXAMPLES_CHAPTER = 09
 EXAMPLES_CHAPTER_NO_LEADING_ZERO = 9
 EXAMPLES = ALIST ARRAY1 ARRAY2 BBTREE BINARY BOP BSTREE CARD CARTEN	\

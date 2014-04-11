@@ -48,7 +48,7 @@
 %
 \begin{figure}[htbp]
 {\epsfverbosetrue\epsfxsize=12.5pc%
-\def\epsfsize#1#2{\epsfxsize}\hspace*{\baseLeftSkip}%
+\def\epsfsize#1#2{\epsfxsize}
 \epsffile[10 0 300 300]{ps/knot3.ps}}
 \vskip -.5\baselineskip
 \caption{Torus knot of type (15,17).}
@@ -344,10 +344,10 @@ clip&curveColor&range\\
 toScale&pointColor&coordinates\\
 \end{tabular}
 \end{texonly}
-\htonly
+\begin{htonly}
 \table{ {adaptive} {clip} {unit} {clip} {curveColor} {range}
 {toScale} {pointColor} {coordinates}}
-\endhtonly
+\end{htonly}
 
 The \spad{adaptive} option turns adaptive plotting on or off.
 \index{adaptive plotting}
@@ -621,7 +621,7 @@ current state of the graph.
 %\def\epsfsize#1#2{\epsfxsize}\hspace*{\baseLeftSkip}%
 %\epsffile[0 0 144 289]{ps/2Dctrl.ps}}
 \begin{picture}(147,252)%(-143,0)
-\hspace*{\baseLeftSkip}\special{psfile=ps/2Dctrl.ps}
+\special{psfile=ps/2Dctrl.ps}
 \end{picture}
 \caption{Two-dimensional control-panel.}
 \end{figure}
@@ -1559,10 +1559,10 @@ style&tubeRadius&var2Steps\\
 colorFunction&tubePoints&space\\
 \end{tabular}
 \end{texonly}
-\htonly
+\begin{htonly}
 \table{ {title} {coordinates} {var1Steps} {style} {tubeRadius} {var2Steps}
 {colorFunction} {tubePoints} {space}}
-\endhtonly
+\end{htonly}
 
 \psXtc{
 The option \spad{title} gives your graph a title.
@@ -2185,7 +2185,7 @@ that is closest to where you clicked.
 %\def\epsfsize#1#2{\epsfxsize}\hspace*{\baseLeftSkip}%
 %\epsffile[0 0 144 289]{ps/3Dctrl.ps}}
 \begin{picture}(183,252)%(-125,0)
-\hspace*{\baseLeftSkip}\special{psfile=ps/3Dctrl.ps}
+\special{psfile=ps/3Dctrl.ps}
 \end{picture}
 \caption{Three-dimensional control-panel.}
 \end{figure}
