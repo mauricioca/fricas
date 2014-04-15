@@ -599,6 +599,23 @@ DEFPARAMETER($setOptions, '(
         chkOutputFileName
         "console"))
       NIL)
+     (latex
+      "create output in LaTeX style"
+      interpreter
+      FUNCTION
+      setOutputLaTex
+      (("create output in LaTeX format"
+        LITERALS
+        $latexFormat
+        (off on)
+        off)
+       (break $latexFormat)
+       ("where LaTeX output goes (enter {\em console} or a pathname)"
+        FILENAME
+        $latexOutputFile
+        chkOutputFileName
+        "console"))
+      NIL)
      (mathml
       "create output in MathML style"
       interpreter

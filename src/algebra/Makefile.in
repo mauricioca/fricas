@@ -53,7 +53,7 @@ SPAD_SRCS= \
      groebsol gseries hashstate html ideal idecomp indexedp infprod \
      intaf intalg intaux intclos intden intef integer \
      integrat interval intfact intpm intrf irexpand \
-     irsn ituple jet kl kovacic laplace laurent \
+     irsn ituple jet kl kovacic laplace latex laurent \
      leadcdet lie limitps lindep lingrob liouv \
      listgcd list lmdict lodof lodop lodo \
      manip mantepse mappkg matcat matfuns matrix \
@@ -186,7 +186,7 @@ SPADLIST4=\
      JBE JBFC JBLF JBP JBSA JBUNDLE JBX JCT \
      JDE JDIFF JGB JLF JVF JORDAN KAFILE \
      KDAGG KERNEL2 KERNEL KOERCE KOERCEF KONVERF KONVERT KOVACIC \
-     LALG LAMBDA LAPLACE LA LAUPOL LAZM3PK LEADCDET \
+     LALG LAMBDA LAPLACE LA LATEX LAUPOL LAZM3PK LEADCDET \
      LEXP LEXTRIPK LFCAT LF LGROBP LIB \
      LIECAT LIE LIMITPS LIMITRF LINDEP LINEXP \
      LIST2MAP LIST2 LIST3 LIST LMDICT LMODULE \

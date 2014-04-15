@@ -1284,6 +1284,78 @@ describeSetOutputTex() ==
   '"the one you set with the )cd system command.",'%l,_
   '"The current setting is: ",'%b,setOutputTex "%display%",'%d)
 
+setOutputLaTex arg ==
+  arg = "%initialize%" =>
+    $latexOutputStream := mkOutputConsoleStream()
+    $latexOutputFile := '"CONSOLE"
+    $latexFormat := NIL
+
+  arg = "%display%" =>
+    if $latexFormat then label := '"On:" else label := '"Off:"
+    STRCONC(label,$latexOutputFile)
+
+  (null arg) or (arg = "%describe%") or (first arg = '_?) =>
+    describeSetOutputLaTex()
+
+  -- try to figure out what the argument is
+
+  if arg is [fn] and
+    fn in '(Y N YE YES NO O ON OF OFF CONSOLE y n ye yes no o on of off console)
+      then 'ok
+      else arg := [fn,'slatex]
+
+  arg is [fn] =>
+    UPCASE(fn) in '(Y N YE O OF) =>
+      sayKeyedMsg("S2IV0002",'(LaTeX latex))
+    UPCASE(fn) in '(NO OFF)  => $latexFormat := NIL
+    UPCASE(fn) in '(YES ON) => $latexFormat := true
+    UPCASE(fn) = 'CONSOLE =>
+      SHUT $latexOutputStream
+      $latexOutputStream := mkOutputConsoleStream()
+      $latexOutputFile := '"CONSOLE"
+
+  (arg is [fn,ft]) or (arg is [fn,ft,fm]) => -- aha, a file
+    if (ptype := pathnameType fn) then
+      fn := STRCONC(pathnameDirectory fn,pathnameName fn)
+      ft := ptype
+    filename := make_full_namestring([fn, ft])
+    null filename =>
+      sayKeyedMsg("S2IV0003",[fn,ft])
+    (testStream := MAKE_-OUTSTREAM(filename)) =>
+      SHUT $latexOutputStream
+      $latexOutputStream := testStream
+      $latexOutputFile := object2String filename
+      sayKeyedMsg("S2IV0004",['"LaTeX",$latexOutputFile])
+    sayKeyedMsg("S2IV0003",[fn,ft])
+
+  sayKeyedMsg("S2IV0005",NIL)
+  describeSetOutputLaTex()
+
+describeSetOutputLaTex() ==
+  sayBrightly LIST ('%b,'")set output latex",'%d,_
+   '"is used to tell FriCAS to turn LaTeX-style output",'%l,_
+   '"printing on and off, and where to place the output.  By default, the",'%l,_
+   '"destination for the output is the screen but printing is turned off.",'%l,_
+   '%l,_
+   '"Syntax:   )set output latex <arg>",'%l,_
+  '"    where arg can be one of",'%l,_
+  '"  on          turn LaTeX printing on",'%l,_
+  '"  off         turn LaTeX printing off (default state)",'%l,_
+  '"  console     send LaTeX output to screen (default state)",'%l,_
+  '"  fp<.fe>     send LaTeX output to file with file prefix fp and file",'%l,_
+  '"              extension .fe. If not given, .fe defaults to .stex.",'%l,
+  '%l,_
+  '"If you wish to send the output to a file, you must issue this command",'%l,_
+  '"twice: once with",'%b,'"on",'%d,'"and once with the file name. For example, to send",'%l,_
+  '"LaTeX output to the file",'%b,'"polymer.stex,",'%d,'"issue the two commands",'%l,_
+  '%l,_
+  '"  )set output latex on",'%l,_
+  '"  )set output latex polymer",'%l,_
+  '%l,_
+  '"The output is placed in the directory from which you invoked FriCAS or",'%l,_
+  '"the one you set with the )cd system command.",'%l,_
+  '"The current setting is: ",'%b,setOutputLaTex "%display%",'%d)
+
 setStreamsCalculate arg ==
   arg = "%initialize%" =>
     $streamCount := 10
