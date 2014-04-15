@@ -1290,6 +1290,17 @@ fortranFormat expr ==
     if not $collectOutput then TERPRI $fortranOutputStream
     FORCE_-OUTPUT $fortranOutputStream
 
+latexFormat expr ==
+  ioHook("startLaTeXOutput")
+  tf := '(LaTeXFormat)
+  formatFn :=
+    getFunctionFromDomain("convert",tf,[$OutputForm,$Integer])
+  displayFn := getFunctionFromDomain("display",tf,[tf])
+  SPADCALL(SPADCALL(expr,$IOindex,formatFn),displayFn)
+  TERPRI $latexOutputStream
+  FORCE_-OUTPUT $texOutputStream
+  ioHook("endOfLaTeXOutput")
+  NIL
 
 texFormat expr ==
   ioHook("startTeXOutput")
@@ -1348,22 +1359,23 @@ output(expr,domain) ==
   if isWrapped expr then expr := unwrap expr
   isMapExpr expr =>
     if $formulaFormat then formulaFormat expr
+    if $latexFormat   then latexFormat expr
     if $texFormat     then texFormat expr
     if $algebraFormat then mathprintWithNumber expr
     if $mathmlFormat  then mathmlFormat expr
     if $texmacsFormat then texmacsFormat expr
     if $htmlFormat    then htmlFormat expr
   categoryForm? domain or domain = ["Mode"] =>
-    if $algebraFormat then
-      mathprintWithNumber outputDomainConstructor expr
-    if $texFormat     then
-      texFormat outputDomainConstructor expr
+    if $algebraFormat then mathprintWithNumber outputDomainConstructor expr
+    if $texFormat     then texFormat outputDomainConstructor expr
+    if $latexFormat   then latexFormat outputDomainConstructor expr
   T := coerceInteractive(objNewWrap(expr,domain),$OutputForm) =>
     x := objValUnwrap T
     if $formulaFormat then formulaFormat x
     if $fortranFormat then fortranFormat x
     if $algebraFormat then
       mathprintWithNumber x
+    if $latexFormat   then latexFormat x
     if $texFormat     then texFormat x
     if $mathmlFormat  then mathmlFormat x
     if $texmacsFormat then texmacsFormat x
