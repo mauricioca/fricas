@@ -2,7 +2,40 @@
 \def\epsfsize#1#2{.24\textheight}
 
 \usepackage{amsmath}
+\usepackage{flexisym}
+\usepackage{breqn}
 \usepackage{verbatim} % Needed for the discard environment.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RH: The following code is mainly from Manuel Kauers. I'm not sure
+% whether I should include it, but it fixes the problem that breqn
+% \ProvidesExplPackage{breqn}{2012/05/10}{0.98b}{Breaking equations}
+% does seemingly not process numerator and denominator of \frac{}{}
+% separately. In the book, we often have just a top-level \frac{}{}
+% whose numerator is too wide. Therefore, in the LaTeXOutput
+% environment, we check whether the first token is \frac and basically
+% replace it by \mkfrac or otherwise enter the dmath environment.
+\newbox\numeratorbox
+\newbox\denominatorbox
+\def\mkfrac#1#2{%
+  \begin{equation}
+  \mathchoice{% display
+    \setbox\numeratorbox=\hbox{$\textstyle #1$}
+    \ifdim\wd\numeratorbox>.75\hsize
+    \setbox\numeratorbox=\vbox{\hsize=.7\hsize\hangindent=1em\hangafter=1\relax\noindent\begin{flushleft}$\textstyle #1$\end{flushleft}}
+    \fi
+    \setbox\denominatorbox=\hbox{$\textstyle #2$}
+    \ifdim\wd\denominatorbox>.75\textwidth
+    \setbox\denominatorbox=\vbox{\hsize=.75\textwidth\hangindent=1em\hangafter=1\relax\noindent\begin{flushleft}$\textstyle #2$\end{flushleft}}
+    \fi
+    \frac{\box\numeratorbox}{\box\denominatorbox}
+  }
+  {\frac{#1}{#2}} % text
+  {\frac{#1}{#2}} % script
+  {\frac{#1}{#2}} % scriptscript
+  \end{equation}
+}
+\def\tomkfrac#1{\mkfrac}
 \usepackage{boxedminipage}
 \usepackage{color}
 \definecolor{spadinputcolor}{rgb}{0.95,1,0.95}
@@ -15,15 +48,15 @@
 \DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
 
 % some things that are produced by latex.spad
-\usepackage{flexisym}
-\usepackage{breqn}
 \DeclareMathOperator{\csch}{csch}
 \DeclareMathOperator{\erf}{erf}
 \def\zag#1#2{\frac{\left.{#1}\right|}{\left|{#2}\right.}}
 \newenvironment{LaTeXMath}{}{}
+\def\tomkfrac#1{\mkfrac}
 \newenvironment{LaTeXOutput}%
-  {\def\stepNumber##1{}\begin{ColoredBackground}{mathoutput}\begin{dmath}}%
-  {\end{dmath}\end{ColoredBackground}}
+  {\def\stepNumber##1{}\begin{ColoredBackground}{mathoutput}\small%
+      \@ifnextchar\frac{\def\endXMATH{}\tomkfrac}{\def\endXMATH{\end{dmath}}\begin{dmath}[]}}%
+  {\endXMATH\end{ColoredBackground}}
 
 
 \def\schapter{\chapter*} %foreword.tex
