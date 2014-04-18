@@ -118,39 +118,37 @@ A complete domain constructor definition for
 Interestingly, this little domain illustrates all the new
 concepts you need to learn.
 
-\begin{figXmpLines}
-\xmpLine{)abbrev domain QFORM QuadraticForm}{}
-\xmpLine{}{}
-\xmpLine{++ Description:}{}
-\xmpLine{++   This domain provides modest support for}{}
-\xmpLine{++   quadratic forms.}{}
-\xmpLine{QuadraticForm(n, K): Exports == Implementation where}{}
-\xmpLine{    n: PositiveInteger}{}
-\xmpLine{    K: Field}{}
-\xmpLine{}{}
-\xmpLine{    Exports == AbelianGroup with}{The exports.}
-\xmpLine{      quadraticForm: SquareMatrix(n,K) -> \%}{The export \axiomFun{quadraticForm}.}
-\xmpLine{        ++ \bs{}axiom\{quadraticForm(m)\} creates a quadratic}{}
-\xmpLine{        ++ quadratic form from a symmetric,}{}
-\xmpLine{        ++ square matrix \bs{}axiom\{m\}.}{}
-\xmpLine{      matrix: \% -> SquareMatrix(n,K)}{The export \axiomFun{matrix}.}
-\xmpLine{        ++ \bs{}axiom\{matrix(qf)\} creates a square matrix}{}
-\xmpLine{        ++ from the quadratic form \bs{}axiom\{qf\}.}{}
-\xmpLine{      elt: (\%, DirectProduct(n,K)) -> K}{The export \axiomFun{elt}.}
-\xmpLine{        ++ \bs{}axiom\{qf(v)\} evaluates the quadratic form}{}
-\xmpLine{        ++ \bs{}axiom\{qf\} on the vector \bs{}axiom\{v\},}{}
-\xmpLine{        ++ producing a scalar.}{}
-\xmpLine{}{}
-\xmpLine{    Implementation == SquareMatrix(n,K) add}{The definitions of the exports}
-\xmpLine{      Rep := SquareMatrix(n,K)}{The ``representation.''}
-\xmpLine{      quadraticForm m ==}{The definition of}
-\xmpLine{        not symmetric? m => error}{\axiomFun{quadraticForm}.}
-\xmpLine{          "quadraticForm requires a symmetric matrix"}{}
-\xmpLine{        m :: \%}{}
-\xmpLine{      matrix q == q :: Rep}{The definition of \axiomFun{matrix}.}
-\xmpLine{      elt(q,v) == dot(v, (matrix q * v))}{The definition of \axiomFun{elt}.}
-%
-\caption{The \protect\axiomType{QuadraticForm} domain.}\label{fig-quadform}
+\begin{figXmpLines}[caption={The \protect\axiomType{QuadraticForm} domain.},label={fig-quadform}]
+)abbrev domain QFORM QuadraticForm
+
+++ Description:
+++   This domain provides modest support for
+++   quadratic forms.
+QuadraticForm(n, K): Exports == Implementation where
+    n: PositiveInteger
+    K: Field
+
+    Exports == AbelianGroup with                         -- The exports.
+      quadraticForm: SquareMatrix(n,K) -> %              -- The export \axiomFun{quadraticForm}.
+        ++ \axiom{quadraticForm(m)} creates a quadratic
+        ++ quadratic form from a symmetric,
+        ++ square matrix \axiom{m}.
+      matrix: % -> SquareMatrix(n,K)                     -- The export \axiomFun{matrix}.
+        ++ \axiom{matrix(qf)} creates a square matrix
+        ++ from the quadratic form \axiom{qf}.
+      elt: (%, DirectProduct(n,K)) -> K                  -- The export \axiomFun{elt}.
+        ++ \axiom{qf(v)} evaluates the quadratic form
+        ++ \axiom{qf} on the vector \axiom{v},
+        ++ producing a scalar.
+
+    Implementation == SquareMatrix(n,K) add              -- The definitions of the exports
+      Rep := SquareMatrix(n,K)                           -- The ``representation.''
+      quadraticForm m ==                                 -- The definition of
+        not symmetric? m => error                        -- \axiomFun{quadraticForm}.
+          "quadraticForm requires a symmetric matrix"
+        m :: %
+      matrix q == q :: Rep                               -- The definition of \axiomFun{matrix}.
+      elt(q,v) == dot(v, (matrix q * v))                 -- The definition of \axiomFun{elt}.
 \end{figXmpLines}
 
 A domain constructor can take any number and type of parameters.
@@ -599,7 +597,7 @@ To create such a type, you could compile the following
 ``short-form'' definition:
 
 \begin{xmpLines}
-\xmpLine{RationalNumber() == Fraction(Integer)}{}
+RationalNumber() == Fraction(Integer)
 \end{xmpLines}
 
 The {\tt Exports} part of this definition is missing and is taken
@@ -618,9 +616,9 @@ define such domains as \axiomType{MultivariatePolynomial}:
 \exptypeindex{MultivariatePolynomial}
 
 \begin{xmpLines}
-\xmpLine{MultivariatePolynomial(vl: List Symbol, R: Ring) ==}{}
-\xmpLine{   SparseMultivariatePolynomial(R,}{}
-\xmpLine{      OrderedVariableList vl)}{}
+MultivariatePolynomial(vl: List Symbol, R: Ring) ==
+   SparseMultivariatePolynomial(R,
+      OrderedVariableList vl)
 \end{xmpLines}
 
 %% *********************************************************************
@@ -681,40 +679,39 @@ an algebra over \axiom{K}, and a vector space over \axiom{K}.
 Its explicit exports include
 \axiom{e(n),} which returns the \eth{\axiom{n}} unit element.
 
-\begin{figXmpLines}
-\xmpLine{NNI ==> NonNegativeInteger}{}
-\xmpLine{PI  ==> PositiveInteger}{}
-\xmpLine{}{}
-\xmpLine{CliffordAlgebra(n,K,q): Exports == Implementation where}{}
-\xmpLine{    n: PI}{}
-\xmpLine{    K: Field}{}
-\xmpLine{    q: QuadraticForm(n, K)}{}
-\xmpLine{}{}
-\xmpLine{    Exports == Join(Ring,Algebra(K),VectorSpace(K)) with}{}
-\xmpLine{      e: PI -> \%}{}
-\xmpLine{          ...        }{}
-\xmpLine{}{}
-\xmpLine{    Implementation == add}{}
-\xmpLine{      Qeelist :=  }{}
-\xmpLine{        [q.unitVector(i::PI) for i in 1..n]}{}
-\xmpLine{      dim     :=  2\^n}{}
-\xmpLine{      Rep     := PrimitiveArray K}{}
-\xmpLine{      New ==> new(dim, 0\$K)\$Rep}{}
-\xmpLine{      x + y ==}{}
-\xmpLine{        z := New}{}
-\xmpLine{        for i in 0..dim-1 repeat z.i := x.i + y.i}{}
-\xmpLine{        z}{}
-\xmpLine{      addMonomProd: (K, NNI, K, NNI, \%) -> \%}{}
-\xmpLine{      addMonomProd(c1, b1, c2, b2, z) ==  ...}{}
-\xmpLine{      x * y ==}{}
-\xmpLine{        z := New}{}
-\xmpLine{        for ix in 0..dim-1 repeat}{}
-\xmpLine{          if x.ix \notequal{} 0 then for iy in 0..dim-1 repeat}{}
-\xmpLine{            if y.iy \notequal{} 0}{}
-\xmpLine{            then addMonomProd(x.ix,ix,y.iy,iy,z)}{}
-\xmpLine{          z}{}
-\xmpLine{           ...}{}
-\caption{Part of the \protect\axiomType{CliffordAlgebra} domain.}\label{fig-clifalg}
+\begin{figXmpLines}[caption={Part of the \protect\axiomType{CliffordAlgebra} domain.},label={fig-clifalg}]
+NNI ==> NonNegativeInteger
+PI  ==> PositiveInteger
+
+CliffordAlgebra(n,K,q): Exports == Implementation where
+    n: PI
+    K: Field
+    q: QuadraticForm(n, K)
+
+    Exports == Join(Ring,Algebra(K),VectorSpace(K)) with
+      e: PI -> %
+          ...
+
+    Implementation == add
+      Qeelist :=
+        [q.unitVector(i::PI) for i in 1..n]
+      dim     :=  2^n
+      Rep     := PrimitiveArray K
+      New ==> new(dim, 0$K)$Rep
+      x + y ==
+        z := New
+        for i in 0..dim-1 repeat z.i := x.i + y.i
+        z
+      addMonomProd: (K, NNI, K, NNI, %) -> %
+      addMonomProd(c1, b1, c2, b2, z) ==  ...
+      x * y ==
+        z := New
+        for ix in 0..dim-1 repeat
+          if x.ix ~= 0 then for iy in 0..dim-1 repeat
+            if y.iy ~= 0
+            then addMonomProd(x.ix,ix,y.iy,iy,z)
+          z
+           ...
 \end{figXmpLines}
 
 The {\tt Implementation} part begins by defining a local variable
@@ -864,24 +861,24 @@ Here is the \Language{} program defining the \pspadtype{Database}
 domain.
 
 \begin{xmpLines}
-\xmpLine{PI ==> PositiveInteger}{}
-\xmpLine{Database(S): Exports == Implementation where}{}
-\xmpLine{  S: Object with }{}
-\xmpLine{    elt: (\%, Symbol) -> String}{}
-\xmpLine{    display: \% -> Void}{}
-\xmpLine{    fullDisplay: \% -> Void}{}
-\xmpLine{}{}
-\xmpLine{  Exports == with}{}
-\xmpLine{    elt: (\%,QueryEquation) -> \%}{Select by an equation.}
-\xmpLine{    elt: (\%, Symbol) -> DataList String}{Select by a field name.}
-\xmpLine{    "+": (\%,\%) -> \%}{Combine two databases.}
-\xmpLine{    "-": (\%,\%) -> \%}{Subtract one from another.}
-\xmpLine{    display: \% -> Void}{A brief database display.}
-\xmpLine{    fullDisplay: \% -> Void}{A full database display.}
-\xmpLine{    fullDisplay: (\%,PI,PI) -> Void}{A selective display.}
-\xmpLine{    coerce: \% -> OutputForm}{Display a database.}
-\xmpLine{  Implementation == add}{}
-\xmpLine{      ...}{}
+PI ==> PositiveInteger
+Database(S): Exports == Implementation where
+  S: Object with
+    elt: (%, Symbol) -> String
+    display: % -> Void
+    fullDisplay: % -> Void
+
+  Exports == with
+    elt: (%,QueryEquation) -> %                          -- Select by an equation.
+    elt: (%, Symbol) -> DataList String                  -- Select by a field name.
+    "+": (%,%) -> %                                      -- Combine two databases.
+    "-": (%,%) -> %                                      -- Subtract one from another.
+    display: % -> Void                                   -- A brief database display.
+    fullDisplay: % -> Void                               -- A full database display.
+    fullDisplay: (%,PI,PI) -> Void                       -- A selective display.
+    coerce: % -> OutputForm                              -- Display a database.
+  Implementation == add
+      ...
 \end{xmpLines}
 
 The domain constructor takes a parameter \axiom{S}, which
@@ -929,20 +926,20 @@ object.
 
 The {\tt Implementation} part of \axiomType{Database} is straightforward.
 \begin{xmpLines}
-\xmpLine{  Implementation == add}{}
-\xmpLine{    s: Symbol}{}
-\xmpLine{    Rep := List S}{}
-\xmpLine{    elt(db,equation) == ...}{}
-\xmpLine{    elt(db,key) == [x.key for x in db]::DataList(String)}{}
-\xmpLine{    display(db) ==  for x in db repeat display x}{}
-\xmpLine{    fullDisplay(db) == for x in db repeat fullDisplay x}{}
-\xmpLine{    fullDisplay(db, n, m) == for x in db for i in 1..m}{}
-\xmpLine{      repeat}{}
-\xmpLine{        if i >= n then fullDisplay x}{}
-\xmpLine{    x+y == removeDuplicates! merge(x,y)}{}
-\xmpLine{    x-y == mergeDifference(copy(x::Rep),}{}
-\xmpLine{                           y::Rep)\$MergeThing(S)}{}
-\xmpLine{    coerce(db): OutputForm == (\#db):: OutputForm}{}
+  Implementation == add
+    s: Symbol
+    Rep := List S
+    elt(db,equation) == ...
+    elt(db,key) == [x.key for x in db]::DataList(String)
+    display(db) ==  for x in db repeat display x
+    fullDisplay(db) == for x in db repeat fullDisplay x
+    fullDisplay(db, n, m) == for x in db for i in 1..m
+      repeat
+        if i >= n then fullDisplay x
+    x+y == removeDuplicates! merge(x,y)
+    x-y == mergeDifference(copy(x::Rep),
+                           y::Rep)$MergeThing(S)
+    coerce(db): OutputForm == (#db):: OutputForm
 \end{xmpLines}
 
 The database is represented by a list of elements of \axiom{S} (index cards).
@@ -979,17 +976,17 @@ The predicate for our search is given by an object of type
 have to invent it.
 
 \begin{xmpLines}
-\xmpLine{QueryEquation(): Exports == Implementation where}{}
-\xmpLine{  Exports == with}{}
-\xmpLine{    equation: (Symbol, String) -> \%}{}
-\xmpLine{    variable: \% -> Symbol}{}
-\xmpLine{    value:\ \ \ \ \% -> String}{}
-\xmpLine{}{}
-\xmpLine{  Implementation == add}{}
-\xmpLine{    Rep := Record(var:Symbol, val:String)}{}
-\xmpLine{    equation(x, s) == [x, s]}{}
-\xmpLine{    variable q == q.var}{}
-\xmpLine{    value\ \ \ \ q == q.val}{}
+QueryEquation(): Exports == Implementation where
+  Exports == with
+    equation: (Symbol, String) -> %
+    variable: % -> Symbol
+    value:    % -> String
+
+  Implementation == add
+    Rep := Record(var:Symbol, val:String)
+    equation(x, s) == [x, s]
+    variable q == q.var
+    value    q == q.val
 \end{xmpLines}
 
 \Language{} converts an input expression of the form
@@ -1007,10 +1004,10 @@ Here is the missing definition for the \axiomFun{elt} function of
 \pspadtype{Database} in the last section:
 
 \begin{xmpLines}
-\xmpLine{    elt(db,eq) ==}{}
-\xmpLine{      field\  := variable eq}{}
-\xmpLine{      value := value eq}{}
-\xmpLine{      [x for x in db | matches?(value,x.field)]}{}
+    elt(db,eq) ==
+      field  := variable eq
+      value := value eq
+      [x for x in db | matches?(value,x.field)]
 \end{xmpLines}
 
 Recall that a database is represented by a list.
@@ -1029,19 +1026,19 @@ have special \axiomFun{elt} operations defined on them for
 sorting and removing duplicates.
 
 \begin{xmpLines}
-\xmpLine{DataList(S:OrderedSet) : Exports == Implementation where}{}
-\xmpLine{  Exports == ListAggregate(S) with}{}
-\xmpLine{    elt: (\%,"unique") -> \%}{}
-\xmpLine{    elt: (\%,"sort") -> \%}{}
-\xmpLine{    elt: (\%,"count") -> NonNegativeInteger}{}
-\xmpLine{    coerce: List S -> \%}{}
-\xmpLine{}{}
-\xmpLine{  Implementation ==  List(S) add}{}
-\xmpLine{    Rep := List S}{}
-\xmpLine{    elt(x,"unique") == removeDuplicates(x)}{}
-\xmpLine{    elt(x,"sort") == sort(x)}{}
-\xmpLine{    elt(x,"count") == \#x}{}
-\xmpLine{    coerce(x:List S) == x :: \%}{}
+DataList(S:OrderedSet) : Exports == Implementation where
+  Exports == ListAggregate(S) with
+    elt: (%,"unique") -> %
+    elt: (%,"sort") -> %
+    elt: (%,"count") -> NonNegativeInteger
+    coerce: List S -> %
+
+  Implementation ==  List(S) add
+    Rep := List S
+    elt(x,"unique") == removeDuplicates(x)
+    elt(x,"sort") == sort(x)
+    elt(x,"count") == #x
+    coerce(x:List S) == x :: %
 \end{xmpLines}
 
 The {\tt Exports} part asserts that datalists belong to the
@@ -1067,13 +1064,13 @@ Each field has a name that
 is passed as a second argument to \axiomFun{elt}.
 
 \begin{xmpLines}
-\xmpLine{IndexCard() == Implementation where}{}
-\xmpLine{  Exports == with}{}
-\xmpLine{    elt: (\%, Symbol) -> String}{}
-\xmpLine{    display: \% -> Void}{}
-\xmpLine{    fullDisplay: \% -> Void}{}
-\xmpLine{    coerce: String -> \%}{}
-\xmpLine{  Implementation == String add ...}{}
+IndexCard() == Implementation where
+  Exports == with
+    elt: (%, Symbol) -> String
+    display: % -> Void
+    fullDisplay: % -> Void
+    coerce: String -> %
+  Implementation == String add ...
 \end{xmpLines}
 
 We leave the {\tt Implementation} part to the reader.
@@ -1096,12 +1093,12 @@ Similarly, \axiom{"c"}, \axiom{"d"}, and \axiom{"p"} give
 you all category, domain and package lines respectively.
 %
 \begin{xmpLines}
-\xmpLine{OperationsQuery(): Exports == Implementation where}{}
-\xmpLine{  Exports == with}{}
-\xmpLine{    getDatabase: String -> Database(IndexCard)}{}
-\xmpLine{}{}
-\xmpLine{  Implementation == add}{}
-\xmpLine{    getDatabase(s) == getBrowseDatabase(s)\$Lisp}{}
+OperationsQuery(): Exports == Implementation where
+  Exports == with
+    getDatabase: String -> Database(IndexCard)
+
+  Implementation == add
+    getDatabase(s) == getBrowseDatabase(s)$Lisp
 \end{xmpLines}
 
 We do not bother creating a special name for databases of index
@@ -1123,12 +1120,12 @@ At the top of the file put \spadcmd{)abbrev} commands, giving the
 constructor abbreviations you created.
 
 \begin{xmpLines}
-\xmpLine{)abbrev domain  ICARD   IndexCard}{}
-\xmpLine{)abbrev domain  QEQUAT  QueryEquation}{}
-\xmpLine{)abbrev domain  MTHING  MergeThing}{}
-\xmpLine{)abbrev domain  DLIST   DataList}{}
-\xmpLine{)abbrev domain  DBASE   Database}{}
-\xmpLine{)abbrev package OPQUERY OperationsQuery}{}
+)abbrev domain  ICARD   IndexCard
+)abbrev domain  QEQUAT  QueryEquation
+)abbrev domain  MTHING  MergeThing
+)abbrev domain  DLIST   DataList
+)abbrev domain  DBASE   Database
+)abbrev package OPQUERY OperationsQuery
 \end{xmpLines}
 
 With all this in {\bf alql.spad}, for example, compile it using
@@ -1161,9 +1158,9 @@ Break this down into the number of categories, domains, and packages.
 \spadcommand{[ks.(kind=k) for k in ["c","d","p"]]\bound{q3}\free{q1}}
 }
 \xtc{
-What are all the domain constructors that take no parameters?
+What are all the domain constructors that take 5 parameters?
 }{
-\spadcommand{elt(ks.(kind="d").(nargs="0"),name)\bound{q4}\free{q1}}
+\spadcommand{elt(ks.(kind="d").(nargs="5"),name)\bound{q4}\free{q1}}
 }
 \xtc{
 How many constructors have ``Matrix'' in their name?

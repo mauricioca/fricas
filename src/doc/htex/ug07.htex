@@ -1226,37 +1226,37 @@ stream of \axiom{x}- and \axiom{y}-values. For example,
 \end{verbatim}
 
 \begin{xmpLines}
-\xmpLine{drawPoints(lp:List Point DoubleFloat):VIEW2D ==}{}
-\xmpLine{  g := graphImage()\$GRIMAGE}{}
-\xmpLine{  for p in lp repeat}{}
-\xmpLine{    component(g,p,pointColorDefault(),lineColorDefault(),}{}
-\xmpLine{      pointSizeDefault())}{}
-\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}{}
-\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}{}
-\xmpLine{}{}
-\xmpLine{drawLines(lp:List Point DoubleFloat):VIEW2D ==}{}
-\xmpLine{  g := graphImage()\$GRIMAGE}{}
-\xmpLine{  component(g, lp, pointColorDefault(), lineColorDefault(),}{}
-\xmpLine{    pointSizeDefault())\$GRIMAGE}{}
-\xmpLine{  gi := makeGraphImage(g)\$GRIMAGE}{}
-\xmpLine{  makeViewport2D(gi,[title("Points")])\$VIEW2D}{}
-\xmpLine{}{}
-\xmpLine{plotData2D(name, title) ==}{}
-\xmpLine{  f:File(DFLOAT) := open(name,"input")}{}
-\xmpLine{  lp:LIST(Point DFLOAT) := empty()}{}
-\xmpLine{  while ((x := readIfCan!(f)) case DFLOAT) repeat}{}
-\xmpLine{    y : DFLOAT := read!(f)}{}
-\xmpLine{    lp := cons(point [x,y]\$(Point DFLOAT), lp)}{}
-\xmpLine{    lp}{}
-\xmpLine{  close!(f)}{}
-\xmpLine{  drawPoints(lp)}{}
-\xmpLine{  drawLines(lp)}{}
+drawPoints(lp:List Point DoubleFloat):VIEW2D ==
+  g := graphImage()$GRIMAGE
+  for p in lp repeat
+    component(g,p,pointColorDefault(),lineColorDefault(),
+      pointSizeDefault())
+  gi := makeGraphImage(g)$GRIMAGE
+  makeViewport2D(gi,[title("Points")])$VIEW2D
+
+drawLines(lp:List Point DoubleFloat):VIEW2D ==
+  g := graphImage()$GRIMAGE
+  component(g, lp, pointColorDefault(), lineColorDefault(),
+    pointSizeDefault())$GRIMAGE
+  gi := makeGraphImage(g)$GRIMAGE
+  makeViewport2D(gi,[title("Points")])$VIEW2D
+
+plotData2D(name, title) ==
+  f:File(DFLOAT) := open(name,"input")
+  lp:LIST(Point DFLOAT) := empty()
+  while ((x := readIfCan!(f)) case DFLOAT) repeat
+    y : DFLOAT := read!(f)
+    lp := cons(point [x,y]$(Point DFLOAT), lp)
+    lp
+  close!(f)
+  drawPoints(lp)
+  drawLines(lp)
 \end{xmpLines}
 %
 This command will actually create the viewport and the graph if
 the point data is in the file \axiom{"file.data"}.
 \begin{xmpLines}
-\xmpLine{plotData2D("file.data", "2D Data Plot")}{}
+plotData2D("file.data", "2D Data Plot")
 \end{xmpLines}
 
 % *********************************************************************

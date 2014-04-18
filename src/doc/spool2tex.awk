@@ -76,8 +76,6 @@ inxtc==0 {
         if ($2 != "Void") {
             gsub(/%/,"\\%")
             gsub(/,/,", ")
-            gsub(/"/,"\\\"")
-            gsub(/->/,"$\\rightarrow$")
             $1=""
             gsub(/^ */,"")
             print "\\formatResultType{" $0 "}"

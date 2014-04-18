@@ -241,23 +241,22 @@ Here is the \userfun{drawRibbons} program.
 Invoke your favorite editor and create a file called {\bf ribbon.input}
 containing the following program.
 
-\begin{figXmpLines}
-\xmpLine{drawRibbons(flist, xrange) ==}{}
-\xmpLine{  sp := createThreeSpace()}{Create empty space \spad{sp}.}{}
-\xmpLine{  y0 := 0}{The initial ribbon position.}
-\xmpLine{  for f in flist repeat}{For each function \spad{f},}
-\xmpLine{    makeObject(f, xrange, y=y0..y0+1, }{\quad{}create and add a ribbon}
-\xmpLine{       space==sp, var2Steps == 1)}{\quad{}for \spad{f} to the space \spad{sp}.}
-\xmpLine{    y0 := y0 + 1}{The next ribbon position.}
-\xmpLine{  vp := makeViewport3D(sp, "Ribbons")}{Create viewport.}
-\xmpLine{  drawStyle(vp, "shade")}{Select shading style.}
-\xmpLine{  outlineRender(vp, "on")}{Show polygon outlines.}
-\xmpLine{  showRegion(vp,"on")}{Enclose in a box.}
-\xmpLine{  n := \# flist}{The number of ribbons}
-\xmpLine{  zoom(vp,n,1,n)}{Zoom in x- and z-directions.}
-\xmpLine{  rotate(vp,0,75)}{Change the angle of view.}
-\xmpLine{  vp}{Return the viewport.}
-\caption{The first \protect\pspadfun{drawRibbons} function.}\label{fig-ribdraw1}
+\begin{figXmpLines}[caption={The first \protect\pspadfun{drawRibbons} function.}]
+drawRibbons(flist, xrange) ==
+  sp := createThreeSpace()               -- Create empty space \spad{sp}.
+  y0 := 0                                -- The initial ribbon position.
+  for f in flist repeat                  -- For each function \spad{f},
+    makeObject(f, xrange, y=y0..y0+1,    -- \quad{}create and add a ribbon
+       space==sp, var2Steps == 1)        -- \quad{}for \spad{f} to the space \spad{sp}.
+    y0 := y0 + 1                         -- The next ribbon position.
+  vp := makeViewport3D(sp, "Ribbons")    -- Create viewport.
+  drawStyle(vp, "shade")                 -- Select shading style.
+  outlineRender(vp, "on")                -- Show polygon outlines.
+  showRegion(vp,"on")                    -- Enclose in a box.
+  n := # flist                           -- The number of ribbons
+  zoom(vp,n,1,n)                         -- Zoom in x- and z-directions.
+  rotate(vp,0,75)                        -- Change the angle of view.
+  vp                                     -- Return the viewport.
 \end{figXmpLines}
 
 Here are some remarks on the syntax used in the \pspadfun{drawRibbons} function
@@ -352,24 +351,24 @@ The result is assigned to the variable \spad{width}.
 Note that in the for-loop in line 7, we are iterating in parallel; it is
 not a nested loop.
 
-\begin{figXmpLines}
-\xmpLine{drawRibbons(flist, xrange, yrange) ==}{}
-\xmpLine{  sp := createThreeSpace()}{Create empty space \spad{sp}.}
-\xmpLine{  num := \# flist}{The number of ribbons.}
-\xmpLine{  yVar := variable yrange}{The ribbon variable.}
-\xmpLine{  y0:Float    := lo segment yrange}{The first ribbon coordinate.}
-\xmpLine{  width:Float := (hi segment yrange - y0)/num}{The width of a ribbon.}
-\xmpLine{  for f in flist for color in 1..num repeat}{For each function \spad{f},}
-\xmpLine{    makeObject(f, xrange, yVar = y0..y0+width,}{\quad{}create and add ribbon to}
-\xmpLine{      var2Steps == 1, colorFunction == (x,y) +-> color, \_}{\quad{}\spad{sp} of a different color.}
-\xmpLine{      space == sp)}{}
-\xmpLine{    y0 := y0 + width}{The next ribbon coordinate.}
-\xmpLine{  vp := makeViewport3D(sp, "Ribbons")}{Create viewport.}
-\xmpLine{  drawStyle(vp, "shade")}{Select shading style.}
-\xmpLine{  outlineRender(vp, "on")}{Show polygon outlines.}
-\xmpLine{  showRegion(vp, "on")}{Enclose in a box.}
-\xmpLine{  vp}{Return the viewport.}
-\caption{The final \protect\pspadfun{drawRibbons} function.}\label{fig-ribdraw2}
+\begin{figXmpLines}[caption={The final \protect\pspadfun{drawRibbons} function.}]
+drawRibbons(flist, xrange, yrange) ==
+  sp := createThreeSpace()                     -- Create empty space \spad{sp}.
+  num := # flist                               -- The number of ribbons.
+  yVar := variable yrange                      -- The ribbon variable.
+  y0:Float    := lo segment yrange             -- The first ribbon coordinate.
+  width:Float := (hi segment yrange - y0)/num  -- The width of a ribbon.
+  for f in flist for color in 1..num repeat    -- For each function \spad{f},
+    makeObject(f, xrange, yVar = y0..y0+width, -- \quad{}create and add ribbon to
+      var2Steps == 1, _                        -- \quad{}\spad{sp} of a different color.
+      colorFunction == (x,y) +-> color, _
+      space == sp)
+    y0 := y0 + width                           -- The next ribbon coordinate.
+  vp := makeViewport3D(sp, "Ribbons")          -- Create viewport.
+  drawStyle(vp, "shade")                       -- Select shading style.
+  outlineRender(vp, "on")                      -- Show polygon outlines.
+  showRegion(vp, "on")                         -- Enclose -- in a box.
+  vp                                           -- Return the viewport.
 \end{figXmpLines}
 
 
@@ -439,25 +438,25 @@ This input file first defines the values of
 defines the function \userfun{makeArrow}\texht{$(p_1, p_2)$}{(p1, p2)} to
 draw an arrow from point \texht{$p_1$}{p1} to \texht{$p_2$}{p2}.
 
-\begin{xmpLines}
-%\xmpLine{origin := point [0.0@DFLOAT,0.0@DFLOAT,0.0@DFLOAT,0.0@DFLOAT]}{The point 0 with color 0.}
-%\xmpLine{unit := point [1.0@DFLOAT,1.0@DFLOAT,1.0@DFLOAT,0.0@DFLOAT]}{A second point with color 0.}
+%origin := point [0.0@DFLOAT,0.0@DFLOAT,0.0@DFLOAT,0.0@DFLOAT]       -- The point 0 with color 0.
+%unit := point [1.0@DFLOAT,1.0@DFLOAT,1.0@DFLOAT,0.0@DFLOAT]         -- A second point with color 0.
 %\xmpLine{}{}
-\xmpLine{arrowAngle := \%pi-\%pi/10.0@DFLOAT}{The angle of the arrowhead.}
-\xmpLine{arrowScale := 0.2@DFLOAT}{The size of the arrowhead}
-\xmpLine{}{\quad{}relative to the stem.}
-\xmpLine{makeArrow(p1, p2) ==}{}
-\xmpLine{  delta := p2 - p1}{The arrow.}
-\xmpLine{  len := arrowScale * length delta}{The length of the arrowhead.}
-\xmpLine{  theta := atan(delta.1, delta.2)}{The angle from the x-axis}
-\xmpLine{  c1 := len*cos(theta + arrowAngle)}{The x-coord of left endpoint.}
-\xmpLine{  s1 := len*sin(theta + arrowAngle)}{The y-coord of left endpoint.}
-\xmpLine{  c2 := len*cos(theta - arrowAngle)}{The x-coord of right endpoint.}
-\xmpLine{  s2 := len*sin(theta - arrowAngle)}{The y-coord of right endpoint.}
-\xmpLine{  z  := p2.3*(1 - arrowScale)}{The z-coord of both endpoints.}
-\xmpLine{  p3 := point [p2.1 + c1, p2.2 + s1, z, p2.4]}{The left endpoint of head.}
-\xmpLine{  p4 := point [p2.1 + c2, p2.2 + s2, z, p2.4]}{The right endpoint of head.}
-\xmpLine{  [[p1, p2, p3], [p2, p4]]}{The arrow as a list of curves.}
+\begin{xmpLines}
+arrowAngle := %pi-%pi/10.0@DFLOAT              -- The angle of the arrowhead.
+arrowScale := 0.2@DFLOAT                       -- The size of the arrowhead
+                                               -- \quad{}relative to the stem.
+makeArrow(p1, p2) ==
+  delta := p2 - p1                             -- The arrow.
+  len := arrowScale * length delta             -- The length of the arrowhead.
+  theta := atan(delta.1, delta.2)              -- The angle from the x-axis
+  c1 := len*cos(theta + arrowAngle)            -- The x-coord of left endpoint.
+  s1 := len*sin(theta + arrowAngle)            -- The y-coord of left endpoint.
+  c2 := len*cos(theta - arrowAngle)            -- The x-coord of right endpoint.
+  s2 := len*sin(theta - arrowAngle)            -- The y-coord of right endpoint.
+  z  := p2.3*(1 - arrowScale)                  -- The z-coord of both endpoints.
+  p3 := point [p2.1 + c1, p2.2 + s1, z, p2.4]  -- The left endpoint of head.
+  p4 := point [p2.1 + c2, p2.2 + s2, z, p2.4]  -- The right endpoint of head.
+  [[p1, p2, p3], [p2, p4]]                     -- The arrow as a list of curves.
 \end{xmpLines}
 
 Read the file and then create
@@ -529,17 +528,19 @@ In this way, the color of arrows ranges from red to green to violet.
 Here is a program to draw a bouquet of \smath{n} arrows.
 
 \begin{xmpLines}
-\xmpLine{drawBouquet(n,title) ==}{}
-\xmpLine{  angle := 0.0@DFLOAT}{The initial angle.}
-\xmpLine{  sp := createThreeSpace()}{Create empty space \spad{sp}.}
-\xmpLine{  for i in 0..n-1 repeat}{For each index i, create:}
-\xmpLine{    start := point [0.0@DFLOAT,0.0@DFLOAT,0.0@DFLOAT,angle] }{\quad{}---the point at base of arrow;}
-\xmpLine{    end   := point [cos angle, sin angle, 1.0@DFLOAT, angle]}{\quad{}---the point at tip of arrow;}
-\xmpLine{    arrow := makeArrow(start,end)}{\quad{}---the \spad{i}th arrow.}
-\xmpLine{    for a in makeArrow(start,end) repeat }{For each arrow component,}
-\xmpLine{      curve(sp,a)}{\quad{}add the component to \spad{sp}.}
-\xmpLine{    angle := angle + 2*\%pi/n}{The next angle.}
-\xmpLine{  makeViewport3D(sp,title)}{Create the viewport from \spad{sp}.}
+drawBouquet(n,title) ==
+  z := 0.0@DFLOAT
+  e := 1.0@DFLOAT
+  angle := z                                        -- The initial angle.
+  sp := createThreeSpace()                          -- Create empty space \spad{sp}.
+  for i in 0..n-1 repeat                            -- For each index i, create:
+    start := point [z,z,z,angle]                    -- point at base of arrow;
+    end   := point [cos angle, sin angle, e, angle] -- point at tip of arrow;
+    arrow := makeArrow(start,end)                   -- \spad{i}th arrow.
+    for a in makeArrow(start,end) repeat            -- For each arrow component,
+      curve(sp,a)                                   -- \quad{}add the component to \spad{sp}.
+    angle := angle + 2*%pi/n                        -- The next angle.
+  makeViewport3D(sp,title)                          -- Create the viewport from \spad{sp}.
 \end{xmpLines}
 
 \xtc{
@@ -638,8 +639,8 @@ For convenience, we define a function \spad{clipFun(x)} which uses
 
 %
 \begin{xmpLines}
-\xmpLine{clipValue : DFLOAT := 6}{Maximum value allowed.}
-\xmpLine{clipFun(x) == min(max(x,-clipValue),clipValue)}{}
+clipValue : DFLOAT := 6                              -- Maximum value allowed.
+clipFun(x) == min(max(x,-clipValue),clipValue)
 \end{xmpLines}
 
 Notice that we identify \spad{clipValue} as a small float but do
@@ -666,9 +667,9 @@ To avoid a pole at the origin, the number of points is taken
 to be odd.
 
 \begin{xmpLinesNoReset}
-\xmpLine{realSteps: INT := 25}{Number of real steps.}{}
-\xmpLine{imagSteps: INT := 25}{Number of imaginary steps.}{}
-\xmpLine{)read arrows}{}
+realSteps: INT := 25                                 -- Number of real steps.
+imagSteps: INT := 25                                 -- Number of imaginary steps.
+)read arrows
 \end{xmpLinesNoReset}
 
 Now define the function \userfun{drawComplexVectorField} to draw the arrows.
@@ -678,9 +679,9 @@ This one declaration is usually sufficient to ensure that other
 lower-level functions are compiled with the correct types.
 
 \begin{xmpLinesNoReset}
-\xmpLine{C := Complex DoubleFloat}{}
-\xmpLine{S := Segment DoubleFloat}{}
-\xmpLine{drawComplexVectorField: (C -> C, S, S) -> VIEW3D}{}
+C := Complex DoubleFloat
+S := Segment DoubleFloat
+drawComplexVectorField: (C -> C, S, S) -> VIEW3D
 \end{xmpLinesNoReset}
 
 The first argument is a function mapping complex small floats into
@@ -691,26 +692,26 @@ The result is a \threedim{} viewport.
 Here is the full function definition:
 
 \begin{xmpLinesNoReset}
-\xmpLine{drawComplexVectorField(f, realRange,imagRange) ==}{}
-\xmpLine{  delReal := (hi(realRange)-lo(realRange))/realSteps}{The real step size.}
-\xmpLine{  delImag := (hi(imagRange)-lo(imagRange))/imagSteps}{The imaginary step size.}
-\xmpLine{  sp := createThreeSpace()}{Create empty space \spad{sp}.}
-\xmpLine{  real := lo(realRange)}{The initial real value.}
-\xmpLine{  for i in 1..realSteps+1 repeat}{Begin real iteration.}
-\xmpLine{    imag := lo(imagRange)}{The initial imaginary value.}
-\xmpLine{    for j in 1..imagSteps+1 repeat}{Begin imaginary iteration.}
-\xmpLine{      z := f complex(real,imag)}{The value of \spad{f} at the point.}
-\xmpLine{      arg := argument z}{The direction of the arrow.}
-\xmpLine{      len := clipFun sqrt norm z}{The length of the arrow.}
-\xmpLine{      p1 :=  point [real, imag, 0.0@DFLOAT, arg]}{The base point of the arrow.}
-\xmpLine{      scaleLen := delReal * len}{The scaled length of the arrow.}
-\xmpLine{      p2 := point [p1.1 + scaleLen*cos(arg),}{The tip point of the arrow.}
-\xmpLine{                   p1.2 + scaleLen*sin(arg),0.0@DFLOAT, arg]}{}
-\xmpLine{      arrow := makeArrow(p1, p2)}{Create the arrow.}
-\xmpLine{      for a in arrow repeat curve(sp, a)}{Add arrow to the space \spad{sp}.}
-\xmpLine{      imag := imag + delImag}{The next imaginary value.}
-\xmpLine{    real := real + delReal}{The next real value.}
-\xmpLine{  makeViewport3D(sp, "Complex Vector Field")}{Draw it!}
+drawComplexVectorField(f, realRange,imagRange) ==
+  delReal := (hi(realRange)-lo(realRange))/realSteps -- The real step size.
+  delImag := (hi(imagRange)-lo(imagRange))/imagSteps -- The imaginary step size.
+  sp := createThreeSpace()                           -- Create empty space \spad{sp}.
+  real := lo(realRange)                              -- The initial real value.
+  for i in 1..realSteps+1 repeat                     -- Begin real iteration.
+    imag := lo(imagRange)                            -- The initial imaginary value.
+    for j in 1..imagSteps+1 repeat                   -- Begin imaginary iteration.
+      z := f complex(real,imag)                      -- The value of \spad{f} at the point.
+      arg := argument z                              -- The direction of the arrow.
+      len := clipFun sqrt norm z                     -- The length of the arrow.
+      p1 :=  point [real, imag, 0.0@DFLOAT, arg]     -- The base point of the arrow.
+      scaleLen := delReal * len                      -- The scaled length of the arrow.
+      p2 := point [p1.1 + scaleLen*cos(arg),         -- The tip point of the arrow.
+                   p1.2 + scaleLen*sin(arg),0.0@DFLOAT, arg]
+      arrow := makeArrow(p1, p2)                     -- Create the arrow.
+      for a in arrow repeat curve(sp, a)             -- Add arrow to the space \spad{sp}.
+      imag := imag + delImag                         -- The next imaginary value.
+    real := real + delReal                           -- The next real value.
+  makeViewport3D(sp, "Complex Vector Field")         -- Draw it!
 \end{xmpLinesNoReset}
 
 As a first example, let us draw \spad{f(z) == sin(z)}.
@@ -750,11 +751,11 @@ It displays the points using the ``mesh'' of points.
 The function definition is in three parts.
 
 \begin{xmpLines}
-\xmpLine{drawComplex: (C -> C, S, S) -> VIEW3D}{}
-\xmpLine{drawComplex(f, realRange, imagRange) ==}{The first part.}
-\xmpLine{  delReal := (hi(realRange)-lo(realRange))/realSteps}{The real step size.}
-\xmpLine{  delImag := (hi(imagRange)-lo(imagRange))/imagSteps}{The imaginary step size.}
-\xmpLine{  llp:List List Point DFLOAT := []}{Initial list of list of points \spad{llp}.}
+drawComplex: (C -> C, S, S) -> VIEW3D
+drawComplex(f, realRange, imagRange) ==              -- The first part.
+  delReal := (hi(realRange)-lo(realRange))/realSteps -- The real step size.
+  delImag := (hi(imagRange)-lo(imagRange))/imagSteps -- The imaginary step size.
+  llp:List List Point DFLOAT := []                   -- Initial list of list of points \spad{llp}.
 \end{xmpLines}
 
 Variables \spad{delReal} and \spad{delImag} give the step
@@ -768,18 +769,18 @@ you have to tell \Language{} what type of empty list it is.
 Next comes the loop which builds \spad{llp}.
 
 \begin{xmpLinesNoReset}
-\xmpLine{  real := lo(realRange)}{The initial real value.}
-\xmpLine{  for i in 1..realSteps+1 repeat}{Begin real iteration.}
-\xmpLine{    imag := lo(imagRange)}{The initial imaginary value.}
-\xmpLine{    lp := []\$(List Point DFLOAT)}{The initial list of points \spad{lp}.}
-\xmpLine{    for j in 1..imagSteps+1 repeat}{Begin imaginary iteration.}
-\xmpLine{      z := f complex(real,imag)}{The value of \spad{f} at the point.}
-\xmpLine{      pt := point [real,imag, clipFun sqrt norm z, }{Create a point.}
-\xmpLine{                   argument z]}{}
-\xmpLine{      lp := cons(pt,lp)}{Add the point to \spad{lp}.}
-\xmpLine{      imag := imag + delImag}{The next imaginary value.}
-\xmpLine{    real := real + delReal}{The next real value.}
-\xmpLine{    llp := cons(lp, llp)}{Add \spad{lp} to \spad{llp}.}
+  real := lo(realRange)                              -- The initial real value.
+  for i in 1..realSteps+1 repeat                     -- Begin real iteration.
+    imag := lo(imagRange)                            -- The initial imaginary value.
+    lp := []$(List Point DFLOAT)                     -- The initial list of points \spad{lp}.
+    for j in 1..imagSteps+1 repeat                   -- Begin imaginary iteration.
+      z := f complex(real,imag)                      -- The value of \spad{f} at the point.
+      pt := point [real,imag, clipFun sqrt norm z,   -- Create a point.
+                   argument z]
+      lp := cons(pt,lp)                              -- Add the point to \spad{lp}.
+      imag := imag + delImag                         -- The next imaginary value.
+    real := real + delReal                           -- The next real value.
+    llp := cons(lp, llp)                             -- Add \spad{lp} to \spad{llp}.
 \end{xmpLinesNoReset}
 
 The code consists of both an inner and outer loop.
@@ -788,7 +789,7 @@ to the list of lists of points \spad{llp}.
 The elements of \spad{lp} are collected in reverse order.
 
 \begin{xmpLinesNoReset}
-\xmpLine{  makeViewport3D(mesh(llp), "Complex Function")}{Create a mesh and display.}
+  makeViewport3D(mesh(llp), "Complex Function")      -- Create a mesh and display.
 \end{xmpLinesNoReset}
 
 The operation \spadfun{mesh} then creates an object of type
@@ -905,30 +906,31 @@ the function \spad{newtonStep} which references it.
 Here is the function \spad{newtonStep}:
 
 \begin{xmpLines}
-\xmpLine{C := Complex DoubleFloat}{The complex numbers.}
-\xmpLine{complexFunPack:=MakeUnaryCompiledFunction(EXPR INT,C,C)}{Package for making functions.}
-\xmpLine{}{}
-\xmpLine{newtonStep(f) ==}{Newton's iteration function.}
-\xmpLine{  fun  := complexNumericFunction f}{Function for $f$.}
-\xmpLine{  deriv := complexDerivativeFunction(f,1)}{Function for $f'$.}
-\xmpLine{  (x:C):C +->}{Return the iterator function.}
-\xmpLine{    x - fun(x)/deriv(x)}{}
-\xmpLine{}{}
-\xmpLine{complexNumericFunction f ==}{Turn an expression \spad{f} into a}
-\xmpLine{  v := theVariableIn f}{\quad{}function.}
-\xmpLine{  compiledFunction(f, v)\$complexFunPack}{}
-\xmpLine{}{}
-\xmpLine{complexDerivativeFunction(f,n) ==}{Create an nth derivative}
-\xmpLine{  v := theVariableIn f}{\quad{}function.}
-\xmpLine{  df := D(f,v,n)}{}
-\xmpLine{  compiledFunction(df, v)\$complexFunPack}{}
-\xmpLine{}{}
-\xmpLine{theVariableIn f ==  }{Returns the variable in $f$.}
-\xmpLine{  vl := variables f}{The list of variables.}
-\xmpLine{  nv := \# vl}{The number of variables.}
-\xmpLine{  nv > 1 => error "Expression is not univariate."}{}
-\xmpLine{  nv = 0 => 'x}{Return a dummy variable.}
-\xmpLine{  first vl}{}
+C := Complex DoubleFloat                             -- The complex numbers.
+E := Expression Integer                              -- The expression domain.
+complexFunPack:=MakeUnaryCompiledFunction(E,C,C)     -- Package for making functions.
+
+newtonStep(f) ==                                     -- Newton's iteration function.
+  fun  := complexNumericFunction f                   -- Function for $f$.
+  deriv := complexDerivativeFunction(f,1)            -- Function for $f'$.
+  (x:C):C +->                                        -- Return the iterator function.
+    x - fun(x)/deriv(x)
+
+complexNumericFunction f ==                          -- Turn an expression \spad{f} into a
+  v := theVariableIn f                               -- \quad{}function.
+  compiledFunction(f, v)$complexFunPack
+
+complexDerivativeFunction(f,n) ==                    -- Create an nth derivative
+  v := theVariableIn f                               -- \quad{}function.
+  df := D(f,v,n)
+  compiledFunction(df, v)$complexFunPack
+
+theVariableIn f ==                                   -- Returns the variable in $f$.
+  vl := variables f                                  -- The list of variables.
+  nv := # vl                                         -- The number of variables.
+  nv > 1 => error "Expression is not univariate."
+  nv = 0 => 'x                                       -- Return a dummy variable.
+  first vl
 \end{xmpLines}
 
 Do you see what is going on here?
