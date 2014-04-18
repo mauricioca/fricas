@@ -4,7 +4,9 @@
 \usepackage{amsmath}
 \usepackage{flexisym}
 \usepackage{breqn}
+\setkeys{breqn}{breakdepth={9}}
 \usepackage{verbatim} % Needed for the discard environment.
+\usepackage{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RH: The following code is mainly from Manuel Kauers. I'm not sure
@@ -40,6 +42,7 @@
 \usepackage{color}
 \definecolor{spadinputcolor}{rgb}{0.95,1,0.95}
 \definecolor{messagecolor}{rgb}{1,0.95,0.95}
+\definecolor{bgcode}{rgb}{1,1,0.7}
 \usepackage{listings}
 
 % Markup for a TeX command sequence.
@@ -55,7 +58,9 @@
 \def\tomkfrac#1{\mkfrac}
 \newenvironment{LaTeXOutput}%
   {\def\stepNumber##1{}\begin{ColoredBackground}{mathoutput}\small%
-      \@ifnextchar\frac{\def\endXMATH{}\tomkfrac}{\def\endXMATH{\end{dmath}}\begin{dmath}[]}}%
+      \@ifnextchar\frac%
+        {\def\endXMATH{}\tomkfrac}%
+        {\def\endXMATH{\end{dmath}}\begin{dmath}[]}}%
   {\endXMATH\end{ColoredBackground}}
 
 
@@ -89,6 +94,7 @@
 \setlength{\oddsidemargin}{\z@}
 \setlength{\evensidemargin}{\z@}
 \addtolength{\textwidth}{35mm}
+
 \parskip .5\baselineskip \parindent \z@
 \def\baselinestretch{1.0}
 \raggedbottom
@@ -106,6 +112,7 @@
 \def\Language{{FriCAS}}
 \def\Lisp{{Common LISP}}
 \def\Fortran{Fortran}
+\def\aldor{Aldor}
 
 \def\beginImportant{\vspace{.2in}\noindent\begin{boxedminipage}{\textwidth}}%
 \def\endImportant{\end{boxedminipage}\vspace{.2in}}
@@ -122,18 +129,24 @@
 \def\showBlurb#1{Issue the system command \spadcmd{)show #1} to display the full list of operations defined by \spadtype{#1}.}
 % \def\showBlurbAbb#1#2{Issue the system command \spadcmd{)show #2} to display the full list of operations defined by \spadtype{#1}.}
 
-\def\axiom#1{{\frenchspacing\tt #1}}
-\def\spad{\axiom}
+\def\@spad#1{{\frenchspacing\tt #1}}
+\def\spad{\prolitex@other\@spad}
+\let\axiom\spad
 
+\def\@spadtype#1{{#1}}
+\def\spadtype{\prolitex@other\@spad}
+\let\axiomType\spadtype
 
-\def\axiomType#1{{#1}}
-\def\spadtype{\axiomType}
 \def\nonLibAxiomType{\axiomType}          % things that browse can't handle
 \def\pspadtype{\axiomType}
 
-\def\spadcmd#1{{\tt #1}}
-\def\spadcommand{\rhxspecials{}\rhxspadcommand}
-\def\rhxspadcommand#1{\begin{flushleft}{#1}\end{flushleft}\vspace{-9pt}\endrhxspecials}
+\def\@spadcmd#1{{\tt #1}}
+\def\spadcmd#1{\prolitex@other\@spadcmd{#1}}
+\let\spadsys\spadcmd
+
+\def\@spadcommand#1{\begin{flushleft}#1\end{flushleft}\vspace{-9pt}}
+\def\spadcommand{\prolitex@other\@spadcommand}
+
 \def\spadgloss#1{\index{#1}{\it #1}}
 \def\spadglossSee#1#2{\index{#2}{\it #1}}
 \def\spadgraph{\spadcommand}
@@ -191,13 +204,16 @@
 \def\axiomSyntax#1{\indexAxiomSyntax{#1}``{\tt #1}''}
 \def\spadSyntax{\axiomSyntax}
 
-\def\axiomOp{\rhxspecials\rhxaxiomOp}
-\def\rhxaxiomOp#1{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1\endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
-\def\spadop{\axiomOp}
 
-\def\axiomOpFrom{\rhxspecials\rhxaxiomOpFrom}
-\def\rhxaxiomOpFrom#1#2{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1 \endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
-\def\spadopFrom{\axiomOpFrom}
+%\def\@spadop#1{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1\endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
+\def\@spadop#1{``\texttt{#1}''}
+\def\spadop{\prolitex@other\@spadop}
+\let\axiomOp\spadop
+
+
+%\def\rhxaxiomOpFrom#1#2{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1 \endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
+\def\spadopFrom#1{\spadop{#1}\@gobble}
+\let\axiomOpFrom\spadopFrom
 
 \def\userfun#1{\index{example functions!#1 @\begingroup \string\bf{} #1 \endgroup}{\bf #1}}
 
@@ -206,7 +222,6 @@
 
 % Some macros for Jenks' glossary
 \newenvironment{items}{\begin{itemize}}{\end{itemize}}
-\def\spadsys{\spadcmd}
 
 % Environments
 \newenvironment{discard}{\comment}{\endcomment}
@@ -225,40 +240,6 @@
 % the code, comments, line numbers environment
 % ------------------------------------------------------------------------
 
-%% This one does not reset the line numbers. Does have horizontal rules.
-\def\xmpLinesNoReset{\par\noindent\vskip .5\baselineskip\horizontalline%
-\vskip .25\baselineskip\bgroup\obeyspaces\parskip\z@ \baselineskip=10pt}
-\def\endxmpLinesNoReset{\egroup\vskip .25\baselineskip\horizontalline\vskip .5\baselineskip}
-
-%% This one does reset the line numbers. Does have horizontal rules.
-\def\xmpLines{\global\xmpLineCount=0\xmpLinesNoReset}
-\let\endxmpLines=\endxmpLinesNoReset
-
-%% This one does not reset the line numbers. Does not have horizontal rules.
-\def\xmpLinesNoResetPlain{\par\noindent\bgroup\obeyspaces\parskip\z@ \baselineskip=10pt}
-\def\endxmpLinesNoResetPlain{\egroup\par}
-
-%% This one does reset the line numbers. Does not have horizontal rules.
-\def\xmpLinesPlain{\global\xmpLineCount=0\xmpLinesNoResetPlain}
-\let\endxmpLinesPlain=\endxmpLinesNoResetPlain
-
-\long\def\xmpLine#1#2{%
-% #1 = line with special characters escaped, #2 = comment
-\par%\vskip -.5\baselineskip
-\global\advance\xmpLineCount by 1%
-\begin{minipage}[t]{\textwidth}\raggedright\hspace*{0pt}{#2}\end{minipage}%
-\hspace{1mm}%
-\hbox{\noHyphens\frenchspacing{#1}}\hfill%
-\hbox{\small$\number\xmpLineCount$}%
-\par}%
-
-\def\figXmpLines{%
-\begin{figure}[tbh]
-\xmpLineCount=0 \vskip .5\baselineskip%\horizontalline%
-\vskip .25\baselineskip\bgroup\obeyspaces\baselineskip=10pt}
-\def\endfigXmpLines{\egroup\vskip .25\baselineskip
-%\horizontalline
-\vskip .5\baselineskip\end{figure}}
 % ------------------------------------------------------------------------
 % the two-column comment and \spadcommand macros
 % ------------------------------------------------------------------------
@@ -267,32 +248,62 @@
 {\hsize=\textwidth\centerline{$\displaystyle{#1}$}}%
 \par\vskip -\parskip\vskip\belowdisplayskip}
 
-\newbox\spadOutput      % box to contain spad output
-\newbox\spadStepNum     % box to contain spad step number
-\newbox\spadResult      % box to contain spad output result type
-\newbox\spadTypeBox     % box that contains Type: - for measurement
+% for some reason morekeywords swallows a space, so we reintroduce it here
+\def\toarrowstyle#1{$\to$}
+\def\formatResultType#1{\begingroup
+  \begin{ColoredBackground}{resulttype}
+    \hfill
+    \lstinline[%
+      basicstyle=\footnotesize\sffamily\color{blue},%
+      alsoletter={-,>},morekeywords={->},keywordstyle=\toarrowstyle,%
+      breaklines=true,]`#1`%
+  \end{ColoredBackground}\endgroup}
 
-\def\formatStepNum#1{\setbox\spadStepNum=\vbox{\hbox{\normalsize\textrm{(#1)}}}}
+\def\mapstoarrowstyle#1{$\mapsto$}
+\lstdefinelanguage{spad}{basicstyle=\footnotesize\ttfamily,%
+%  alsoletter={+,-,>},morekeywords={+->},keywordstyle=\mapstoarrowstyle,%
+  comment=[l]--,commentstyle=\footnotesize\color{blue},texcl,%
+  escapebegin=\rmfamily}
 
-\def\formatResultType{\rhxspecials\rhxformatResultType}
-\def\rhxformatResultType#1{\endrhxspecials
-  \setbox\spadResult=\hbox{Type: \textcolor{blue}{#1}}
-  \ifdim\wd\spadResult > \hsize% type is too big to fit on a line
-  \setbox\spadResult=\hbox{%
-    \begin{minipage}[t]{\textwidth}%
-      \raggedright\hangafter=1\hangindent=\wd\spadTypeBox
-      \advance\hangindent by 2pt Type: \textcolor{blue}{#1}\end{minipage}}\fi}
+\lstset{language={},basicstyle=\footnotesize\ttfamily}
 
-\lstset{language={}}
 \lstnewenvironment{spadsrc}%
-  {\lstset{backgroundcolor=\color{spadinputcolor},breaklines=true,breakatwhitespace=true,prebreak={\_}}\small\ttfamily}%
+  {\lstset{language=spad,backgroundcolor=\color{spadinputcolor},breaklines=true,breakatwhitespace=true,prebreak={\_}}}%
   {}
 \lstnewenvironment{SysCmdOutput}%
-  {\lstset{backgroundcolor=\color{messagecolor}}\small\ttfamily}%
+  {\lstset{backgroundcolor=\color{messagecolor}}}%
   {}
 \lstnewenvironment{MessageOutput}%
-  {\lstset{backgroundcolor=\color{messagecolor}}\small\ttfamily}%
+  {\lstset{backgroundcolor=\color{messagecolor}}}%
   {}
+
+%% This one does not reset the line numbers. Does have horizontal rules.
+\lstnewenvironment{xmpLinesNoReset}%
+  {\lstset{backgroundcolor=\color{bgcode},frame=tb,numbers=left,firstnumber=last}}%
+  {}
+
+%% This one does reset the line numbers. Does have horizontal rules.
+\lstnewenvironment{xmpLines}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,numbers=left}}%
+  {}
+
+%% This one does not reset the line numbers. Does not have horizontal rules.
+\lstnewenvironment{xmpLinesNoResetPlain}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},numbers=left,numbers=left,firstnumber=last}}%
+  {}
+
+%% This one does reset the line numbers. Does not have horizontal rules.
+\lstnewenvironment{xmpLinesPlain}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},numbers=left}}%
+  {}
+
+%% xmpLines with caption
+\lstnewenvironment{figXmpLines}[1][]%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,numbers=left,#1}}%
+  {}
+
+
+
 
 \newenvironment{xtccomment}{}{}%
 %  {\begin{minipage}[t]{\textwidth}}%
@@ -316,27 +327,21 @@
   \expandafter\gdef\csname background#1\endcsname{\@backgroundColor{#1}#2{#3}}}
 \def\@backgroundColor#1{\colorbox}%
 \backgroundColor{mathoutput}[rgb]{0.95,0.95,1}
+\backgroundColor{resulttype}[rgb]{0.98,0.98,1}
 \renewcommand{\theequation}{\arabic{equation}}
 
-\newenvironment{xtc}
-  {\setbox\spadResult=\hbox{}}
-  {\vbox{\hbox to \textwidth{\hbox{}\hfill\box\spadResult}}}
-
-
+%--rhx: TODO: The xtc stuff should be simplified.
+\newenvironment{xtc}{}{}
 % This is meant for things (usually system commands) that produce
 % absolutely no output. It is renamed because \xtc forms get changed
 % to \xtcLong forms to display the output.
+% See htex2input.awk.
 \newenvironment{noOutputXtc}{}{}
-
 % This is for things that should appear as if they are two-column
 % input/output but we are reaaly only showing the input.
-\newenvironment{nullXtc}%
-  {\begin{xtc}}{\end{xtc}}
+\newenvironment{nullXtc}{}{}
+\newenvironment{psXtc}{}{}
 
-\newenvironment{psXtc}%
-  {\begin{xtc}}{\end{xtc}}
-
-\def\aldor{Aldor}
 \hyphenation{AXIOM}
 \hyphenation{Integer}
 \hyphenation{Single-Integer}

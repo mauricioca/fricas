@@ -91,6 +91,7 @@ BEGIN           {
 # handle various xmpLines and figXmpLines environments
 
 /^\\begin{xmpLinesNoReset}/ {
+        inXmpLines = 1
         print "\\beginImportant"
         print "  "
         print "\\noindent"
@@ -98,35 +99,53 @@ BEGIN           {
 }
 /^\\end{xmpLinesNoReset}/ {
         print "\\endImportant"
+        inXmpLines = 0
         next
 }
 /^\\begin{xmpLinesNoResetPlain}/ || /^\\end{xmpLinesNoResetPlain}/{
+        if(/^\\begin/) {inXmpLines=1} else {inXmpLines=0}
         print "  "
         print "\\noindent"
         next
 }
 /^\\begin{xmpLinesPlain}/ || /^\\end{xmpLinesPlain}/{
+        if(/^\\begin/) {inXmpLines=1} else {inXmpLines=0}
         xmpStepCounter = 0
         print "  "
         print "\\noindent"
         next
 }
 /^\\begin{xmpLines}/ || /^\\begin{figXmpLines}/ {
+        inXmpLines = 1
         print "\\beginImportant"
         print "  "
         print "\\noindent"
         xmpStepCounter = 0
+        # We can have an optional argument of the form
+        # [caption={...}, label={...}]
+        # which must all appear on one line.
+        # We'll remove [ and ] and change "caption=" into "\caption"
+        # and ", *label=" into "\label".
+        if(/\\begin{figXmpLines}\[/){
+            opts=substr($0,21)
+            sub(/] *$/, "",opts)
+            sub(/caption=/, "\\caption", opts)
+            sub(/, *label=/, "\\label", opts)
+        } else {
+            opts=""
+        }
         next
 }
 /^\\end{xmpLines}/ || /^\\end{figXmpLines}/ {
+        if(opts != "") {print opts}
         print "\\endImportant"
         xmpStepCounter = 0
+        inXmpLines = 0
         next
 }
 
-/^\\xmpLine\{/  {
-        code = extractArg($0,1) # throw away comments
-        gsub(/ /,"\\ ",code)
+inXmpLines==1 {
+        if(/^%%%/){print substr($0,4);  next}
         xmpStepCounter++
         sc = xmpStepCounter"."
         scl = length(sc)
@@ -134,7 +153,19 @@ BEGIN           {
           sc = sc"\\ "    # adding two characters
           scl++
         }
-        printf "{\\tt %s\\ %s}\\newline\n",sc,code
+        sub(/ *--.*/, "") # throw away comments
+        gsub(/\\/, "\\bs{}")
+        gsub(/{/, "\\{")
+        gsub(/}/, "\\}")
+        gsub(/\\bs\\{\\}/, "\\bs{}")
+        gsub(/ /, "\\ ")
+        gsub(/&/, "\\\\&")
+        gsub(/\#/, "\\#")
+        gsub(/\$/, "\\$")
+        gsub(/%/, "\\%")
+        gsub(/_/, "\\_")
+        gsub(/~=/, "\\notequal{}")
+        printf "{\\tt %s\\ %s}\\newline\n",sc,$0
         next
 }
 
