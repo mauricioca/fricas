@@ -20,11 +20,44 @@
 %
 \pagenumbering{roman}
 \setcounter{page}{0}
-\input{dedicate}
-\input{foreword}
+
+\begin{quote}
+\color{red}\Large
+  This is an attempt to make the content of the Axiom book (by Jenks
+  and Sutor) available again in order to describe the FriCAS project
+  (which is a fork of the original Axiom code). The following
+  material is mainly taken from the original Axiom book, but is partly
+  tailored to new developments in FriCAS.
+
+  \vspace{1cm}
+
+  \textbf{WARNING: This is work-in-progress! There might be errors and
+    even false statements.}
+
+  Plan is as follows:
+  \begin{enumerate}
+  \item Make LaTeX compilation work and include (generated) pictures
+    and generated output of algebra commands.
+  \item Simplify and remove redundant \LaTeX{} commands.
+  \item Build on modern advanced latex packages.
+  \item Generate indices and hyperrefs.
+  \end{enumerate}
+
+  All of the above will be done by taking care of still generating the
+  same \texttt{.ht} files although the technicalities might look
+  different. The contents of the files (no matter how wrong it
+  actually is) will only be changed marginally. Rewriting of the
+  contents will only happen after the technical part of producing the
+  PDF file has been finished.
+
+  \hspace*{\fill}Ralf Hemmecke
+\end{quote}
+
+%\input{dedicate}
+%\input{foreword}
 \clearpage
 \tableofcontents
-\input{bios}
+%\input{bios}
 %
 \pagenumbering{arabic}
 \input{ug00}
