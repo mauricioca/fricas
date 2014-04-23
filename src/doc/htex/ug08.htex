@@ -4054,7 +4054,7 @@ or with degree between two given bounds.
 \spadcommand{random(3,9)\$FFPOLY(GF16) \free{GF16}}
 }
 
-\axiomType{\axiom{FiniteFieldPolynomialPackage2}} (abbreviation
+\axiomType{FiniteFieldPolynomialPackage2} (abbreviation
 \axiomType{FFPOLY2})
 exports an operation \axiomFun{rootOfIrreduciblePoly}
 for finding one root of an irreducible polynomial \axiom{f}

@@ -312,7 +312,7 @@ NewSparseUnivariatePolynomialFunctions2(R : Ring, S : Ring) : with
 ++ Description:
 ++ A category for general multi-variate polynomials with coefficients
 ++ in a ring, variables in an ordered set, and exponents from an
-++ ordered abelian monoid, with a \axiomOp{sup} operation.
+++ ordered abelian monoid, with a \spadfun{sup} operation.
 ++ When not constant, such a polynomial is viewed as a univariate polynomial in its
 ++ main variable w. r. t. to the total ordering on the elements in the ordered set, so that some
 ++ operations usually defined for univariate polynomials make sense here.

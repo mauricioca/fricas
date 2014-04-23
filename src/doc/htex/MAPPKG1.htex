@@ -118,7 +118,7 @@ constructs composed functions.
 \spadcommand{square2  3 \free{square2}}
 }
 \xtc{
-Use the \spadopFrom{\^{}}{MappingPackage1} operation to create
+Use the \spadopFrom{^}{MappingPackage1} operation to create
 functions that are \spad{n}-fold iterations of other functions.
 }{
 \spadcommand{sc(x: FRAC INT): FRAC INT == x + 1 \bound{sc}}

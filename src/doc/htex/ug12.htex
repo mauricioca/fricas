@@ -433,7 +433,7 @@ define its own \spadop{^} operation.
 If it does not, a default definition that is closest (in a ``tree-distance''
 sense of the hierarchy) to the domain is chosen.
 
-The part of the category definition following an \spadop{add} operation
+The part of the category definition following an \spadSyntax{add} operation
 is a \spadgloss{capsule}, as discussed in
 \texht{the previous chapter.}{\chapref{ugPackages}.}
 The line
@@ -751,7 +751,7 @@ an operation
 Conditionals can also appear in the default definitions for the
 operations of a category.
 For example, a default definition for \spadfunFrom{ceiling}{Field}
-within the part following the \spadop{add} reads:
+within the part following the \spadSyntax{add} reads:
 
 \begin{verbatim}
 if R has IntegerNumberSystem then
