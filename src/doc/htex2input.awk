@@ -42,11 +42,10 @@ END {
     next
 }
 
-xtc==2 && (/^\\spadcommand{/ || /^\\spadgraph{/ || /^\\spadpaste{/) {
+xtc==2 && (/^\\spadcommand{/ || /^\\spadgraph{/) {
     print "-- \\begin{spadsrc}"
     gsub(/^\\spadcommand{/, "")
     gsub(/^\\spadgraph{/, "")
-    gsub(/^\\spadpaste{/, "")
     gsub(/}$/, "")
     gsub(/\\\$/, "$")
     gsub(/\\\%/, "%")
