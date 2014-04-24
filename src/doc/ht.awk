@@ -198,11 +198,6 @@ inXmpLines==1 {
         print "\\spadpaste"substr($0,13)
         next
 }
-/^\\spadpaste/          {
-        gsub(/\\_/,"_")
-        print
-        next
-}
 /^\\spadgraph/          {
         gsub(/\\_/,"_")
         print "\\graphpaste"substr($0,11)
