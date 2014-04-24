@@ -85,7 +85,7 @@
   \expandafter#1\expandafter{\prolitex@value}}
 %    \end{macrocode}
 
-\def\aliascon#1{\prolitex@other\axiomType{#1}\@gobble}
+\def\aliascon#1{\prolitex@other\spadtype{#1}\@gobble}
 
 % ------------------------------------------------------------------------
 % Page Parameters
@@ -131,14 +131,12 @@
 
 \def\@spad#1{{\frenchspacing\tt #1}}
 \def\spad{\prolitex@other\@spad}
-\let\axiom\spad
 
-\def\@spadtype#1{{#1}}
+\def\@spadtype#1{#1}
 \def\spadtype{\prolitex@other\@spad}
-\let\axiomType\spadtype
 
-\def\nonLibAxiomType{\axiomType}          % things that browse can't handle
-\def\pspadtype{\axiomType}
+\def\nonLibAxiomType{\spadtype}          % things that browse can't handle
+\def\pspadtype{\spadtype}
 
 \def\@spadcmd#1{{\tt #1}}
 \def\spadcmd#1{\prolitex@other\@spadcmd{#1}}
@@ -188,31 +186,25 @@
 \def\fakeAxiomFun#1{{\bf #1}}              % not really in library
 \def\pspadfun{\fakeAxiomFun}
 
-\def\axiomFun#1{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
-\def\spadfun{\axiomFun}
+\def\spadfun#1{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
 
-\def\axiomFunFrom#1#2{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
-\def\spadfunFrom{\axiomFunFrom}
+\def\spadfunFrom#1#2{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
 
-\def\axiomFunX#1{{\bf #1!}\index{library!operations!#1"! @\begingroup \string\bf{} #1"! \endgroup}}
-\def\spadfunX{\axiomFunX}
+\def\spadfunX#1{{\bf #1!}\index{library!operations!#1"! @\begingroup \string\bf{} #1"! \endgroup}}
 
 \def\spadfunFromX#1#2{{\bf #1!}\index{library!operations!#1"! @\begingroup \string\bf{} #1"! \endgroup}}
 
-\def\indexAxiomSyntax#1{\index{#1 @\begingroup \string\tt{} #1 \endgroup}}
-\def\axiomSyntax#1{\indexAxiomSyntax{#1}``{\tt #1}''}
-\def\spadSyntax{\axiomSyntax}
+\def\indexSpadSyntax#1{\index{#1 @\begingroup \string\tt{} #1 \endgroup}}
+\def\spadSyntax#1{\indexSpadSyntax{#1}``{\tt #1}''}
 
 
 %\def\@spadop#1{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1\endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
 \def\@spadop#1{``\texttt{#1}''}
 \def\spadop{\prolitex@other\@spadop}
-\let\axiomOp\spadop
 
 
 %\def\rhxaxiomOpFrom#1#2{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1 \endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
 \def\spadopFrom#1{\spadop{#1}\@gobble}
-\let\axiomOpFrom\spadopFrom
 
 \def\userfun#1{\index{example functions!#1 @\begingroup \string\bf{} #1 \endgroup}{\bf #1}}
 

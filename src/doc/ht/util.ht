@@ -348,7 +348,6 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\spadkey}[1]{}
 \newcommand{\spadref} [1]{{\it #1}}
 \newcommand{\spadsig}[2]{\spadtype{#1} {\tt ->} \spadtype{#2}}
-\newcommand{\axiomSig}[2]{\axiomType{#1} {\tt ->} \axiomType{#2}}
 \newcommand{\subscriptIt}[2]{{\it {#1}\_{#2}}}
 \newcommand{\subscriptText}[2]{{\it {#1}\_{\it #2}}}
 \newcommand{\subsubsection}[1]{\newline\indent{0}{\bf #1}\newline\newline}

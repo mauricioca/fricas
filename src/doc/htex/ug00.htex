@@ -187,7 +187,7 @@ to one that is iterative (one that consists of a simple loop).
 
 %
 \xtc{
-What is the coefficient of \smath{x^{90}} in \axiom{p(90)}?
+What is the coefficient of \smath{x^{90}} in \spad{p(90)}?
 }{
 \spadcommand{coefficient(p(90),x,90)}
 }

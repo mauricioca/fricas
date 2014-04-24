@@ -686,7 +686,7 @@ to the edge of the larger ring and rotate it around the edge to
 a point corresponding to its count (there are 10 positions around
 the edge of the larger ring). For each of these new rings we
 recursively perform the operations, each ring becoming 10 smaller
-rings. Notice how the \axiomType{DHMATRIX} operations are used to build up
+rings. Notice how the \spadtype{DHMATRIX} operations are used to build up
 the proper matrix composing all these transformations.
 
 \begin{xmpLinesNoResetPlain}
@@ -728,7 +728,7 @@ torus(u ,v) ==                                           -- Parameterization of 
 
 Scherk's minimal surface, defined by:
 \index{Scherk's minimal surface}
-\texht{$e^z \cos(x) = \cos(y)$}{\axiom{exp(z) * cos(x) = cos(y)}}.
+\texht{$e^z \cos(x) = \cos(y)$}{\spad{exp(z) * cos(x) = cos(y)}}.
 See: {\it A Comprehensive Introduction to Differential Geometry,} Vol. 3,
 by Michael Spivak, Publish Or Perish, Berkeley, 1979, pp. 249-252.
 

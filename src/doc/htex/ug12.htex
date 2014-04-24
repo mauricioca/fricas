@@ -230,23 +230,23 @@ Here is its definition, complete with documentation.
 
 \begin{xmpLines}
 ++ Description:
-++ \axiomType{SetCategory} is the basic category
+++ \spadtype{SetCategory} is the basic category
 ++ for describing a collection of elements with
-++ \axiomOp{=} (equality) and a \axiomFun{coerce}
-++ to \axiomType{OutputForm}.
+++ \spadop{=} (equality) and a \spadfun{coerce}
+++ to \spadtype{OutputForm}.
 
 SetCategory(): Category ==
   Join(Type, CoercibleTo OutputForm) with
     "=": (%, %) -> Boolean
-      ++ \axiom{x = y} tests if \axiom{x} and
-      ++ \axiom{y} are equal.
+      ++ \spad{x = y} tests if \spad{x} and
+      ++ \spad{y} are equal.
 \end{xmpLines}
 
 Documentary comments are an important part of constructor definitions.
 Documentation is given both for the category itself and for
 each export.
 A description for the category precedes the code.
-Each line of the description begins in column one with \axiomSyntax{++}.
+Each line of the description begins in column one with \spadSyntax{++}.
 The description starts with the word {\tt Description:}.\footnote{Other
 information such as the author's name, date of creation, and so on,
 can go in this
@@ -276,9 +276,9 @@ The above documentation appears in hard-copy as:
 %
 \texht{\begin{quotation}}{\indent{3}}
 %
-\axiomType{SetCategory} is the basic category
-for describing a collection of elements with \axiomOp{=}
-(equality) and a \spadfun{coerce} to \axiomType{OutputForm}.
+\spadtype{SetCategory} is the basic category
+for describing a collection of elements with \spadop{=}
+(equality) and a \spadfun{coerce} to \spadtype{OutputForm}.
 %
 \texht{\end{quotation}}{\indent{0}}
 %
@@ -286,7 +286,7 @@ and
 %
 \texht{\begin{quotation}}{\indent{3}}
 %
-\axiom{x = y} tests if \axiom{x} and \axiom{y} are equal.
+\spad{x = y} tests if \spad{x} and \spad{y} are equal.
 %
 \texht{\end{quotation}}{\indent{0}}
 %
