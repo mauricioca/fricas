@@ -532,7 +532,7 @@ Consider the following sequence of \Language{} statements:\begin{items}
 \item \spad{y := x}
 \item \spad{swap!(x,2,3)}
 \end{items}
-The function \spadfunFrom{swap!}{Vector} is used to interchange the
+The function \spadfunFromX{swap}{Vector} is used to interchange the
 2nd and 3rd value in the list x producing the value \spad{[1,7,4]}.
 What value does y have after evaluation of the third statement?
 The answer is different in \Language{} than it is in a language
@@ -543,7 +543,7 @@ x set to \spadglossSee{point}{pointer} to this object. Let's call this object V.
 Now V refers to its \spadgloss{immutable} components 1,2, and 3.
 Next, the variable y is made to point to V just as x does.
 Now the third statement interchanges the last 2 elements of V
-(the {\em !} at the end of the name \spadfunFrom{swap!}{Vector} tells
+(the {\em !} at the end of the name \spadfunFromX{swap}{Vector} tells
 you that this operation is destructive, that is, it changes
 the elements {\em in place}). Both x and y perceive this change to V.
 Thus both x and y then have the value \spad{[1,7,4]}.
@@ -622,7 +622,7 @@ For example, domain \spadtype{List} has two operations to reverse
 the elements of a list, one named \spadfunFrom{reverse}{List}
 which returns a copy of the original list with the elements
 reversed, another named
-\spadfunFrom{reverse!}{List} which reverses the elements {\em in place}
+\spadfunFromX{reverse}{List} which reverses the elements {\em in place}
 thus destructively changing the original list.
 
 signature`{\em (syntax)} an expression describing an \spadgloss{operation}.
