@@ -486,5 +486,8 @@ pics: pics.mk
 book.dvi: ug09.tex tex-files
 	TEXINPUTS=$$TEXINPUTS:${srcdir}:tmp:. latex book.tex
 
+index: book.dvi
+	makeindex book
+
 
 ###################################################################
