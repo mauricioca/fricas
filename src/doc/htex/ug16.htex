@@ -30,18 +30,9 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{0}}{} % Appendix A
-
-\newcommand{\lanb}{{\tt [}}
-\newcommand{\ranb}{{\tt ]}}
-\newcommand{\vertline}{\texht{$|$}{{\tt |}}}
-
 % *********************************************************************
 \head{chapter}{\Language{} System Commands}{ugSysCmd}
 % *********************************************************************
-
-\texht{\bgroup\baselineskip 10pt}{}
 
 This chapter describes system commands, the command-line
 facilities used to control the \Language{} environment.
@@ -1178,18 +1169,18 @@ will discontinue the recording of information.
 \syscmdindex{history )off}
 
 Whether the facility is disabled or not,
-the value of \spadSyntax{\%} in \Language{} always
+the value of \spadSyntax{%} in \Language{} always
 refers to the result of the last computation.
 If you have not yet entered anything,
-\spadSyntax{\%} evaluates to an object of type
-\spadtype{Variable('\%)}.
-The function \spadSyntax{\%\%} may be  used to refer
+\spadSyntax{%} evaluates to an object of type
+\spadtype{Variable('%)}.
+The function \spadSyntax{%%} may be  used to refer
 to other previous results if the history facility is enabled.
 In that case,
-{\tt \%\%(n)} is  the output from step {\tt n} if {\tt n > 0}.
-If {\tt n < 0}, the step is computed relative to the current step.
-Thus {\tt \%\%(-1)} is also the previous step,
-{\tt \%\%(-2)}, is the  step before that, and so on.
+\spad{%%(n)} is  the output from step \spad{n} if \spad{n > 0}.
+If \spad{n < 0}, the step is computed relative to the current step.
+Thus \spad{%%(-1)} is also the previous step,
+\spad{%%(-2)}, is the  step before that, and so on.
 If an invalid step number is given, \Language{} will signal an error.
 
 The {\it environment} information can either be saved in a file or entirely in
@@ -1776,7 +1767,7 @@ listing of operations.
 Since \spadtype{Polynomial} requires a \spadtype{Ring} (for example,
 \spadtype{Integer}) as argument, the above commands all refer
 to a unspecified ring {\tt R}.
-In the list of operations, \spadSyntax{\$} means
+In the list of operations, \spadSyntax{$} means
 \spadtype{Polynomial(R)}.
 
 The basic information displayed includes the {\it signature}
@@ -2207,7 +2198,7 @@ and packages.
 causes local functions of the constructor to be traced.  Note that
 to untrace an individual local function, you must use the fully
 qualified internal name, using the escape character
-\spadSyntax{\_} before the semicolon.
+\spadSyntax{_} before the semicolon.
 \begin{verbatim}
 )trace FRAC )local
 )trace FRAC_;cancelGcd )off
@@ -2406,5 +2397,3 @@ The command synonym  {\tt )apropos} is equivalent to
 \titledspadref{{\tt )display}}{ugSysCmddisplay},
 \titledspadref{{\tt )set}}{ugSysCmdset}, and
 \titledspadref{{\tt )show}}{ugSysCmdshow}.
-
-\texht{\egroup}{}

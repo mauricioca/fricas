@@ -31,12 +31,9 @@
 
 
 
-\texht{\setcounter{chapter}{14}}{} % Chapter 15
-
 % *********************************************************************
 \head{chapter}{What's New in Fricas}{ugWhatsNew}
 % *********************************************************************
-
 
 %------------------------------------------------------------------
 \head{section}{ReleaseNotes}{releaseNotes}
@@ -70,7 +67,7 @@
 \item In Spad \spad{error} did only minimal checking of its argument.
   Now argument to \spad{error} must be a \spad{String} or \spad{OutputForm}
   or a literal list of \spad{OutputForm}-s.
- 
+
 \end{itemize}
 
 Bug fixes, in particular:
@@ -81,7 +78,7 @@ Bug fixes, in particular:
 
 \item Types like "failed" now consistently use string quotes in output form.
 
-\item Fixed pattern matching using \spad{\%i} in patterns. 
+\item Fixed pattern matching using \spad{%i} in patterns.
 
 \item Fixed ')display op coerce'.
 
@@ -380,7 +377,7 @@ Bug fixes, in particular:
 \item Fixed 'possible wild ramifcation' problem with algebraic
   integrals.
 
-\item 'has' in interpreter now correctly handles \spad{\%}.
+\item 'has' in interpreter now correctly handles \spad{%}.
 
 \item Spad compiler can now handle single \spad{=>} at top level of a
   function.
@@ -402,7 +399,7 @@ Bug fixes, in particular:
 
 \item Updated framework for theory of computations.
 
-\item In Spad parser \spad{**, \^'} and \spad{->} are now
+\item In Spad parser \spad{**, ^'} and \spad{->} are now
   right-associative.
 
 \item Spad parser no longer transforms relational operators.
@@ -883,8 +880,8 @@ that modifying FriCAS algebra is now much easier.
 \head{section}{Changes to Spad language}{ugSpadChanges}
 %------------------------------------------------------------------------
 \begin{enumerate}
-\item \spad{\$} as name of current domain is no longer supported, use
-  \spad{\%} instead.
+\item \spad{$} as name of current domain is no longer supported, use
+  \spad{%} instead.
 
 \item Attributes are no longer supported, use niladic categories with
   no exports instead.
@@ -892,12 +889,12 @@ that modifying FriCAS algebra is now much easier.
 \item Floating point numbers without leading zero are no longer
   supported, so instead of \spad{.01} use \spad{0.01}
 
-\item Anonymous functions using \spad{\#1}, \spad{\#2}, etc. are no
-  longer supported, to define anonymous functions use \spad{+->}.
+\item Anonymous functions using \spad{#1}, \spad{#2}, etc. are no
+  longer supported, to define anonymous functions use \textspadexpr{+->}.
 
 \item Braces no longer construct sets. So instead of
-  \spad{\{'sin, 'cos\}::Set(Symbol)} use
-  \spad{set(['sin, 'cos])\$Set(Symbol)}.
+  \textspadexpr{\{'sin, 'cos\}::Set(Symbol)} use
+  \spad{set(['sin, 'cos])$Set(Symbol)}. %$
 
 \item Old Spad used colon (\spad{:}) to denote convertion, like
   \spad{pretend} but performing even less checking. This is no longer
@@ -926,7 +923,7 @@ that modifying FriCAS algebra is now much easier.
   (with arguments if needed) as request to import the constructor.
   FriCAS requires \spad{import} keyword.
 
-\item In FriCAS \spad{**, \^, ->} are right associative. Also, right
+\item In FriCAS \spad{**, ^, ->} are right associative. Also, right
   binding power of \textspadexpr{+->} is increased, which allows more natural
   writing of code.
 
@@ -963,7 +960,7 @@ There are also library changes that affect user code:
 
 \item \spadop{^} is no longer used as negation (it means exponentiation
   now) and \spadop{^=} no longer means inequality, use \spad{not} and
-  \spad{\~=} instead.
+  \spad{~=} instead.
 
 \item \spad{setelt} is renamed to \spad{setelt!}.
 
@@ -1182,11 +1179,11 @@ into the main Browser input box.
 %------------------------------------------------------------------------
 \head{subsection}{Documentation}{ugWhatsNewDocumentation}
 %------------------------------------------------------------------------
-\texht{
+\begin{texonly}
 We describe here a few additions to the on-line
 version of the AXIOM book which you can read with
 HyperDoc.
-}{}
+\end{texonly}
 
 A section has been added to the graphics chapter, describing
 how to build \twodim{} graphs from lists of points. An example is

@@ -118,8 +118,8 @@ want a copy of the original.
 Use \spadfunFrom{subMatrix}{Matrix} to extract part of an
 \index{matrix!submatrix of}
 existing matrix.
-The syntax is \spad{subMatrix({\it m, firstrow, lastrow, firstcol,
-lastcol})}.
+The syntax is
+\spadfun{subMatrix}({\it m, firstrow, lastrow, firstcol, lastcol}).
 }{
 \spadcommand{subMatrix(dm,2,3,2,4) \free{setdm}}
 }

@@ -60,8 +60,7 @@ Expose \spad{Operator}.
 %
 To attach an evaluation function (from \spad{R} to \spad{R}) to an
 operator over \spad{R}, use \spad{evaluate(op, f)} where \spad{op}
-is an operator over \spad{R} and \spad{f} is a function \spad{R ->
-R}.
+is an operator over \spad{R} and \spad{f} is a function \spad{R -> R}.
 This needs to be done only once when the operator is defined.
 Note that \spad{f} must be \spadtype{Integer}-linear (that is,
 \spad{f(ax+y) = a f(x) + f(y)} for any integer \spad{a}, and any
@@ -97,7 +96,7 @@ Can you guess what is the action of the following operator?
 %
 \xtc{
 Hint: applying \spad{rho} four times gives the identity, so
-\spad{rho\^4-1} should return 0 when applied to any two by two matrix.
+\spad{rho^4-1} should return 0 when applied to any two by two matrix.
 }{
 \spadcommand{z := rho^4 - 1\free{rho}\bound{z}}
 }

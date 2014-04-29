@@ -265,7 +265,7 @@ This resets the output printing to the default behavior.
 Consider the problem of computing the determinant of a \spad{10} by \spad{10}
 \index{Hilbert matrix}
 Hilbert matrix.
-The \eth{\spad{(i,j)}} entry of a Hilbert matrix is given by
+The \eth{(i,j)} entry of a Hilbert matrix is given by
 \spad{1/(i+j+1)}.
 
 \labelSpace{2pc}

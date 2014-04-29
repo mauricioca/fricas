@@ -6,7 +6,6 @@
 \usepackage{breqn}
 \setkeys{breqn}{breakdepth={9}}
 \usepackage{verbatim} % Needed for the discard environment.
-\usepackage{makeidx}
 \usepackage{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,8 +85,6 @@
   \expandafter#1\expandafter{\prolitex@value}}
 %    \end{macrocode}
 
-\def\aliascon#1{\prolitex@other\spadtype{#1}\@gobble}
-
 % ------------------------------------------------------------------------
 % Page Parameters
 % ------------------------------------------------------------------------
@@ -118,23 +115,14 @@
 \def\beginImportant{\vspace{.2in}\noindent\begin{boxedminipage}{\textwidth}}%
 \def\endImportant{\end{boxedminipage}\vspace{.2in}}
 % following handles things like "i-th" but uses superscripts for "th"
-\def\eth#1{${\hbox{#1}\:}^{\hbox{\small\rm th}}$}
+\def\eth#1{\ensuremath{{#1}^{\textrm{\small th}}}}
 \long\def\head#1#2#3{\@nameuse{#1}{#2}\label{#3}\setcounter{equation}{0}\par}
 \let\mathOrSpad\ensuremath
 \let\smath\ensuremath
 \def\twodim{two-di\-men\-sion\-al}
 \def\threedim{three-di\-men\-sion\-al}
-\long\def\labelSpace#1{\par\vskip #1}
+\long\def\labelSpace#1{}
 \def\titledspadref#1#2{`#1' in \spadref{#2}}
-
-\def\showBlurb#1{Issue the system command \spadcmd{)show #1} to display the full list of operations defined by \spadtype{#1}.}
-% \def\showBlurbAbb#1#2{Issue the system command \spadcmd{)show #2} to display the full list of operations defined by \spadtype{#1}.}
-
-\def\@spad#1{{\frenchspacing\tt #1}}
-\def\spad{\prolitex@other\@spad}
-
-\def\@spadtype#1{#1}
-\def\spadtype{\prolitex@other\@spad}
 
 \def\nonLibAxiomType{\spadtype}          % things that browse can't handle
 \def\pspadtype{\spadtype}
@@ -153,15 +141,12 @@
 \def\spadref#1{Section \ref{#1} on page \pageref{#1}}
 \def\chapref#1{Chapter~\ref{#1}}
 \def\appxref#1{Appendix~\ref{#1}}
-\def\spadsig#1#2{{\sf #1 $\rightarrow$ #2}}
 \def\subscriptIt#1#2{$\hbox{\it #1}_{#2}$}
 \def\subscriptText#1#2{$\hbox{\it #1}_{\hbox{\small\rm #2}}$}
 % \def\tab#1{}
 \long\def\texht#1#2{#1}
-\def\void{the unique value of \exptypeindex{Void}\protect\spadtype{Void}}
 \def\windowlink#1#2{{\bf #1}}
-\def\xmpref#1{`\spadtype{#1}' on page \pageref{#1Xmp}}
-% \def\extxmpref#1{`\spadtype{#1}' in Section \ref{#1Xmp} of the on-line version of the AXIOM book}
+\def\xmpref#1{`\texttt{#1}' on page \pageref{#1Xmp}}
 
 % quick versions of following
 \def\spadatt#1{{\tt #1}} % spad attribute (not in FriCAS anymore)
@@ -183,32 +168,113 @@
 % Macros for function names. We need the X versions because the indexing
 % software uses ! for level separators.
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{makeidx}
+\makeindex
+\usepackage{xparse}
+\NewDocumentCommand{\verbspadop}{v}{\textcolor{magenta}{\texttt{#1}}}
+\NewDocumentCommand{\verbspadfun}{v}{\textcolor{red}{\texttt{#1}}}
+\NewDocumentCommand{\verbspadtype}{v}{\textcolor{blue}{\textsf{#1}}}
+\NewDocumentCommand{\verbspadsyntax}{v}{\textcolor[rgb]{0,0.5,0.5}{\texttt{#1}}}
+
+\NewDocumentCommand{\textspadop}{m}{\textcolor{magenta}{\texttt{#1}}}
+\NewDocumentCommand{\textspadfun}{m}{\textcolor{red}{\textsf{#1}}}
+\NewDocumentCommand{\textspadtype}{m}{\textcolor{blue}{\textbf{#1}}}
+\NewDocumentCommand{\textspadexpr}{m}{\textcolor[rgb]{0,0.5,0}{\texttt{#1}}}
+\NewDocumentCommand{\textspadsyntax}{m}{``\textcolor[rgb]{0,0.5,0.5}{\texttt{#1}}''}
+
+\NewDocumentCommand{\spadindex}{m >{\EscapeMakeindexSpecial} m}{%
+  \index{#1`#2`}}
+\def\EscapeMakeindexSpecial#1{%
+   \def\ProcessedArgument{\ProcessList{#1}{\EscapeMakeindexSpecialOne}}}
+\def\EscapeMakeindexSpecialOne#1{%
+  \if#1!"\fi
+  \if#1@"\fi
+  \if#1|"\fi
+  #1}
+
+\catcode`\$=12\relax % other
+\NewDocumentCommand{\spadname}{m >{\SplitArgument{1}{$}} v}{%$
+  \csname format#1\endcsname#2}
+\catcode`\$=3\relax % math shift
+
+\def\formatop#1#2{%
+  \textspadop{#1}%
+%  \IfNoValueTF{#2}{}{\textspadop{(#2)}}%
+  \spadindex{library!operations!\verbspadop}{#1}}
+
+\def\formatfun#1#2{%
+  \textspadfun{#1}%
+%  \IfNoValueTF{#2}{}{\textspadfun{(#2)}}%
+  \spadindex{library!operations!\verbspadfun}{#1}}
+
+\def\formattype#1#2{%
+  \textspadtype{#1}%
+%  \IfNoValueTF{#2}{}{\textspadtype{(#2)}}%
+  \spadindex{library!constructors!\verbspadtype}{#1}}
+
+\def\spadop{\spadname{op}}
+\def\spadfun{\spadname{fun}}
+\def\spadtype{\spadname{type}}
+
+\NewDocumentCommand{\spadSyntax}{v}{%
+  \textspadsyntax{#1}%
+  \spadindex{\verbspadsyntax}{#1}}
+
+\def\spadreplace#1#2{\textcolor[rgb]{0,0.5,0.5}{#1}}
+% Terrible hack, but without a box, breqn.sty seems to have changed
+% something, so that an underscore does not work in #1 in \spadreplace.
+\newbox\spadboxsigmak \setbox\spadboxsigmak=%
+  \hbox{\textcolor[rgb]{0,0.5,0.5}{$\sigma_k$}}
+\def\spadsigmak#1{\copy\spadboxsigmak}
+\def\spad{\lstinline[%
+  basicstyle={\ttfamily\color[rgb]{0,0.5,0}},
+  breaklines=true,
+  literate={->}{$\to$}{2},
+  classoffset=0,keywords={sigma_k},keywordstyle=\spadsigmak,
+  classoffset=1,keywords={sigma},  keywordstyle=\spadreplace{$\sigma$},
+  classoffset=2,keywords={mu},     keywordstyle=\spadreplace{$\mu$},
+  classoffset=3,keywords={phi},    keywordstyle=\spadreplace{$\varphi$},
+]}
+
+% We cannot have verbose-type commands inside other commands.
+\let\spadfootnotesave\footnote
+\def\footnote#1{\begingroup
+  \def\spad{\textspadexpr}%
+  \def\spadop{\textspadop}%
+  \def\spadfunFrom##1{\textspadfun{##1}\@gobble}%
+  \def\spadtype{\textspadtype}%
+  \def\spadSyntax{\textspadsyntax}%
+  \spadfootnotesave{#1}\endgroup}
+
+\let\spadcaptionsave\caption
+\def\caption#1{\begingroup
+  \def\spadfunFrom##1{\textspadfun{##1}\@gobble}
+  \def\spadfun{\textspadfun}
+  \def\spadtype{\textspadtype}%
+  \spadcaptionsave{#1}\endgroup}
+
+\NewDocumentCommand{\spadfunX}{v}{\spadfun`#1!`}
+\NewDocumentCommand{\spadfunFrom}{v v}{\spadfun`#1`}
+\NewDocumentCommand{\spadfunFromX}{v v}{\formatfun{#1!}{#2}}%$
+\NewDocumentCommand{\spadopFrom}{v v}{\formatop{#1}{#2}}
+\NewDocumentCommand{\aliascon}{v v}{\spadtype`#1`}
+
+
+
+\def\void{the unique value of \formattype{Void}{}}
+\def\showBlurb#1{Issue the system command \spadcmd{)show #1} %(
+  to display the full list of operations defined by \formattype{#1}{}.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \def\fakeAxiomFun#1{{\bf #1}}              % not really in library
 \def\pspadfun{\fakeAxiomFun}
 
-\def\spadfun#1{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
-
-\def\spadfunFrom#1#2{{\bf #1}\index{library!operations!#1 @\begingroup \string\bf{} #1 \endgroup}}
-
-\def\spadfunX#1{{\bf #1!}\index{library!operations!#1"! @\begingroup \string\bf{} #1"! \endgroup}}
-
-\def\spadfunFromX#1#2{{\bf #1!}\index{library!operations!#1"! @\begingroup \string\bf{} #1"! \endgroup}}
-
-\def\indexSpadSyntax#1{\index{#1 @\begingroup \string\tt{} #1 \endgroup}}
-\def\spadSyntax#1{\indexSpadSyntax{#1}``{\tt #1}''}
-
-
-%\def\@spadop#1{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1\endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
-\def\@spadop#1{``\texttt{#1}''}
-\def\spadop{\prolitex@other\@spadop}
-
-
-%\def\rhxaxiomOpFrom#1#2{\index{\string\rhxspecials library!operations!#1 @\begingroup \string\tt{} #1 \endgroup\string\endrhxspecials}``{\tt #1}''\endrhxspecials}
-\def\spadopFrom#1{\spadop{#1}\@gobble}
 
 \def\userfun#1{\index{example functions!#1 @\begingroup \string\bf{} #1 \endgroup}{\bf #1}}
 
- \def\exptypeindex#1{\index{library!constructors!#1 @\begingroup \string\sf{} #1 \endgroup}}
+\def\exptypeindex#1{\index{library!constructors!#1 @\begingroup \string\sf{} #1 \endgroup}}
 \def\syscmdindex#1{\index{system commands!#1 @\begingroup \string\tt{} )#1 \endgroup}}
 
 % Some macros for Jenks' glossary
@@ -216,6 +282,9 @@
 
 % Environments
 \newenvironment{discard}{\comment}{\endcomment}
+% TODO: should get rid of the following
+\newenvironment{htonly}{\comment}{\endcomment}
+\newenvironment{texonly}{}{}
 
 
 
@@ -235,24 +304,17 @@
 % the two-column comment and \spadcommand macros
 % ------------------------------------------------------------------------
 
-\def\narrowDisplay#1{\par\vskip -\parskip\vskip\abovedisplayskip\noindent%
-{\hsize=\textwidth\centerline{$\displaystyle{#1}$}}%
-\par\vskip -\parskip\vskip\belowdisplayskip}
-
 % for some reason morekeywords swallows a space, so we reintroduce it here
-\def\toarrowstyle#1{$\to$}
 \def\formatResultType#1{\begingroup
   \begin{ColoredBackground}{resulttype}
     \hfill
     \lstinline[%
       basicstyle=\footnotesize\sffamily\color{blue},%
-      alsoletter={-,>},morekeywords={->},keywordstyle=\toarrowstyle,%
+      literate={->}{$\to$}{2},%
       breaklines=true,]`#1`%
   \end{ColoredBackground}\endgroup}
 
-\def\mapstoarrowstyle#1{$\mapsto$}
 \lstdefinelanguage{spad}{basicstyle=\footnotesize\ttfamily,%
-%  alsoletter={+,-,>},morekeywords={+->},keywordstyle=\mapstoarrowstyle,%
   comment=[l]--,commentstyle=\footnotesize\color{blue},texcl,%
   escapebegin=\rmfamily}
 
@@ -275,22 +337,28 @@
 
 %% This one does reset the line numbers. Does have horizontal rules.
 \lstnewenvironment{xmpLines}%
-  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,numbers=left}}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,numbers=left}%
+    \def\spad{\textspadexpr}}
   {}
 
 %% This one does not reset the line numbers. Does not have horizontal rules.
 \lstnewenvironment{xmpLinesNoResetPlain}%
-  {\lstset{language=spad,backgroundcolor=\color{bgcode},numbers=left,numbers=left,firstnumber=last}}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},
+      numbers=left,numbers=left,firstnumber=last}%
+    \def\spad{\textspadexpr}}
   {}
 
 %% This one does reset the line numbers. Does not have horizontal rules.
 \lstnewenvironment{xmpLinesPlain}%
-  {\lstset{language=spad,backgroundcolor=\color{bgcode},numbers=left}}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},numbers=left}%
+    \def\spad{\textspadexpr}}
   {}
 
 %% xmpLines with caption
 \lstnewenvironment{figXmpLines}[1][]%
-  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,numbers=left,#1}}%
+  {\lstset{language=spad,backgroundcolor=\color{bgcode},frame=tb,%
+      numbers=left,#1}%
+    \def\spad{\textspadexpr}}
   {}
 
 
@@ -359,7 +427,28 @@ draw-Vector-Field
 set-Real-Steps
 set-Imag-Steps
 set-Clip-Value
+Uni-var-iate-Poly-nomial
+Mul-ti-var-iate-Poly-nomial
+Distributed-Mul-ti-var-iate-Poly-nomial
+Homo-gen-eous-Distributed-Mul-ti-var-iate-Poly-nomial
+New-Distributed-Mul-ti-var-iate-Poly-nomial
+General-Distributed-Mul-ti-var-iate-Poly-nomial
 }
 
 \pagestyle{headings}
 \makeindex
+
+% For chapter 6 (User-Defined Functions, Macros and Rules)
+\newcommand{\pred}[1]{\subscriptIt{pred}{#1}}
+\newcommand{\expr}[1]{\subscriptIt{expression}{#1}}
+
+% For chapter 7 (Graphics)
+\newcommand{\optArg}[1]{{{\tt [}{#1}{\tt ]}}}
+\newcommand{\argDef}[1]{{\tt ({#1})}}
+\newcommand{\funSyntax}[2]{\spadfun{#1}{\tt ({\small\it{#2}})}}
+\newcommand{\funArgs}[1]{{\tt ({\small\it {#1}})}\newline}
+
+% For chapter 16 (\Language{} System Commands)
+\newcommand{\lanb}{{\tt [}}
+\newcommand{\ranb}{{\tt ]}}
+\newcommand{\vertline}{\texht{$|$}{{\tt |}}}

@@ -129,7 +129,7 @@ If an entry exists under the key, then it is returned.  Otherwise
 
 \xtc{
 The number of key-entry pairs can be found using the
-\spadfunFrom{\#}{Table} operation.
+\spadopFrom{#}{Table} operation.
 }{
 \spadcommand{\#t \free{p5}}
 }
