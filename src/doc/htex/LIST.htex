@@ -130,7 +130,7 @@ respectively, where
 and
 \spad{n} equals the length of \spad{k}.
 \xtc{
-This length is calculated by \spadopFrom{\#}{List}.
+This length is calculated by \spadopFrom{#}{List}.
 }{
 \spadcommand{n := \#k \free{k}}
 }

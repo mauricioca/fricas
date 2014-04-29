@@ -24,7 +24,7 @@ The {\tt \\graphpaste} command should be used only when
 the result of the associated \Language{} operation is
 to {\it create} an interactive viewport. It is {\it not} necessarily
 appropriate for all commands whose result
-is a \spadtype{Two{}Dimensional{}Viewport} or \spadtype{Three{}Dimensional{}Viewport}.
+is a \spadtype{TwoDimensionalViewport} or \spadtype{ThreeDimensionalViewport}.
 The {\tt \\spadpaste} and {\tt \\graphpaste}
 are  macros defined in {\bf util.ht}.
 

@@ -332,8 +332,8 @@ relationship among them and the arguments to our original expression
 \xtc{
 If the \spadopFrom{/}{Fraction} operator is used with polynomials, a
 fraction object is created.
-In this example, the result is an object of type \spadtype{Fraction
-Polynomial Integer}.
+In this example, the result is an object of type
+\spadtype{Fraction Polynomial Integer}.
 }{
 \spadcommand{p/q \free{p}\free{q}}
 }

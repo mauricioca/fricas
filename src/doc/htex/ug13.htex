@@ -30,9 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{12}}{} % Chapter 13
-
 % *********************************************************************
 \head{chapter}{Domains}{ugDomains}
 % *********************************************************************
@@ -56,15 +53,17 @@ What is the difference between a package and a domain that is not a
 package?  Internally, \Language{} makes no distinction.  However,
 humans think differently about them, so we make the
 following definition: a domain that is not a package
-has the symbol \spadSyntax{\%} appearing
+has the symbol \spadSyntax{%}
+appearing
 somewhere among the types of its exported operations.
-The \spadSyntax{\%} denotes ``this domain.'' If the \spadSyntax{\%}
+The \spadSyntax{%}
+denotes ``this domain.'' If the \spadSyntax{%}
 appears before the \spadSyntax{->} in the type of a signature, it means
 the operation takes an element from the domain as an argument.
 If it appears after the \spadSyntax{->}, then the operation returns an
 element of the domain.
 
-If no exported operations mention \spadSyntax{\%}, then
+If no exported operations mention \spadSyntax{%}, then
 evidently there is nothing of interest to do with the objects of the
 domain.
 You might then say that a package is a ``boring'' domain!
@@ -118,7 +117,7 @@ A complete domain constructor definition for
 Interestingly, this little domain illustrates all the new
 concepts you need to learn.
 
-\begin{figXmpLines}[caption={The \protect\spadtype{QuadraticForm} domain.},label={fig-quadform}]
+\begin{figXmpLines}[caption={The \textspadtype{QuadraticForm} domain.},label={fig-quadform}]
 )abbrev domain QFORM QuadraticForm
 
 ++ Description:
@@ -255,7 +254,7 @@ a quadratic form.
 }
 \xtc{
 Construct the quadratic form.
-A package call {\tt \$QF} is necessary since there
+A package call \spad{$QF} is necessary since there
 are other \spadtype{QuadraticForm} domains.
 }{
 \spadcommand{q : QF := quadraticForm(A)\bound{x4}\free{x3}}
@@ -349,12 +348,12 @@ This means that all objects of the domain are required to be
 The code for \spadfun{quadraticForm} in Figure \ref{fig-quadform}
 on page \pageref{fig-quadform}
 checks that the matrix is symmetric and then converts it to
-\spadSyntax{\%}, which means, as usual, ``this domain.'' Such explicit
+\spadSyntax{%}, which means, as usual, ``this domain.'' Such explicit
 conversions \index{conversion} are generally required by the
 compiler.
 Aside from checking that the matrix is symmetric, the code for
 this function essentially does nothing.
-The {\frenchspacing\tt m :: \%} on line 28 coerces \spad{m} to a
+The \spad{m :: %} on line 28 coerces \spad{m} to a
 quadratic form.
 In fact, the quadratic form you created in step (3) of
 \spadref{ugDomainsDemo} is just the matrix you passed it in
@@ -372,13 +371,13 @@ it just returns its argument after explicitly
 \spadglossSee{coercing}{coerce} its argument to a matrix.
 Since the argument is already a matrix, this coercion does no computation.
 
-Within the context of a capsule, an object of \spadSyntax{\%} is
+Within the context of a capsule, an object of \spadSyntax{%} is
 regarded both as a quadratic form {\it and} as a
-matrix.\footnote{In case each of \spadSyntax{\%} and \spad{Rep}
+matrix.\footnote{In case each of \textspadsyntax{\%} and \spad{Rep}
 have the same named operation available,
-the one from \spad{\%} takes precedence.
-Thus, if you want the one from \spadSyntax{Rep}, you must
-package call it using a \spadSyntax{\$Rep} suffix.}
+the one from \textspadsyntax{\%} takes precedence.
+Thus, if you want the one from \textspadsyntax{Rep}, you must
+package call it using a \textspadsyntax{\$Rep} suffix.}
 This makes the definition of \spad{q.v} easy---it
 just calls the \spadfunFrom{dot}{DirectProduct} product from
 \spadtype{DirectProduct} to perform the indicated operation.
@@ -394,7 +393,7 @@ data structure to represent the elements of your domain.
 
 A classic problem in computer algebra is the optimal choice for an
 internal representation of polynomials.
-If you create a polynomial, say \texht{$3x^2+ 5$}{\spad{3*x^2 + 5}}, how
+If you create a polynomial, say \mathOrSpad{3x^2+ 5}, how
 does \Language{} hold this value internally?
 There are many ways.
 \Language{} has nearly a dozen different representations of
@@ -405,7 +404,7 @@ factoring polynomials are most efficient using another.
 One often-used representation is  a list of terms, each term
 consisting of exponent-coefficient records written in the order
 of decreasing exponents.
-For example, the polynomial \texht{$3x^2+5$}{3*x^2+5} is
+For example, the polynomial \mathOrSpad{3x^2+5} is
 %>> I changed the k's in next line to e's as I thought that was
 %>> clearer.
 represented by the list \spad{[[e:2, c:3], [e:0, c:5]]}.
@@ -415,7 +414,7 @@ It depends on the application.
 For large sparse matrices, a linked-list structure of records
 holding only the non-zero elements may be optimal.
 If the elements can be defined by a simple formula
-\texht{$f(i,j)$}{\spad{f(i,j)}}, then a compiled function for
+\mathOrSpad{f(i,j)}, then a compiled function for
 \spad{f} may be optimal.
 Some programmers prefer to represent ordinary matrices as vectors
 of vectors.
@@ -480,8 +479,9 @@ and \spadopFrom{-}{QuadraticForm} come from
 In \chapref{ugPackages}, we saw that categories can provide
 default implementations for their operations.
 How and when are they used?
-When \Language{} finds that \spadtype{QuadraticForm(2, Fraction
-Integer)} does not implement the operations \spadop{*},
+When \Language{} finds that
+\spadtype{QuadraticForm(2, Fraction Integer)}
+does not implement the operations \spadop{*},
 \spadop{+}, and \spadop{-}, it goes to
 \spadtype{SquareMatrix(2,Fraction Integer)} to find it.
 As it turns out, \spadtype{SquareMatrix(2, Fraction Integer)} does
@@ -512,12 +512,12 @@ To find out the actual order of constructors searched for
 Let's apply this search strategy for our example \spad{3*q-q+q}.
 The scalar multiplication comes first.
 \Language{} finds a default implementation in
-\spadtype{AbelianGroup\&}.
+\spadtype{AbelianGroup&}.
 Remember from \spadref{ugCategoriesDefaults} that
 \spadtype{SemiGroup} provides a default definition for
-\texht{$x^n$}{x^n} by repeated squaring?
+\mathOrSpad{x^n} by repeated squaring?
 \spadtype{AbelianGroup} similarly provides a definition for
-\texht{$n x$}{n*x} by repeated doubling.
+\mathOrSpad{n*x} by repeated doubling.
 
 But the search of the defaults for \spadtype{QuadraticForm} fails
 to find any \spadop{+} or \spadop{*} in the default packages for
@@ -528,9 +528,9 @@ for all matrix domains,
 is a grandparent of \spadtype{SquareMatrix} and
 has a capsule defining many functions for matrices, including
 matrix addition, subtraction, and scalar multiplication.
-The default package \spadtype{MatrixCategory\&} is where the
+The default package \spadtype{MatrixCategory&} is where the
 functions for \spadopFrom{+}{QuadraticForm} and
-\spadfunFrom{-}{QuadraticForm} come from.
+\spadopFrom{-}{QuadraticForm} come from.
 
 You can use \Browse{} to discover where the operations for
 \spadtype{QuadraticForm} are implemented.
@@ -631,7 +631,7 @@ let's put it to use.
 Given some quadratic form \smath{Q} described by an
 \smath{n} by \smath{n} matrix over a field \smath{K}, the domain
 \spadtype{CliffordAlgebra(n, K, Q)} defines a vector space of
-dimension \texht{$2^n$}{2^n} over \smath{K}.
+dimension \mathOrSpad{2^n} over \smath{K}.
 This is an interesting domain since complex numbers, quaternions,
 exterior algebras and spin algebras are all examples of Clifford
 algebras.
@@ -639,12 +639,12 @@ algebras.
 The basic idea is this:
 the quadratic form \spad{Q} defines a basis
 \texht{$e_1,e_2\ldots,e_n$}{e1,e2,...,en} for the
-vector space \texht{$K^n$}{K^n}---the direct product of \spad{K}
+vector space \mathOrSpad{K^n}---the direct product of \spad{K}
 with itself \spad{n} times.
 From this, the Clifford algebra generates a basis of
-\texht{$2^n$}{2^n} elements given by all the possible products
+\mathOrSpad{2^n} elements given by all the possible products
 of the \texht{$e_i$}{\spad{ei}} in order without duplicates, that is,
-\texht{
+\begin{texonly}
 1,
 $e_1$,
 $e_2$,
@@ -652,7 +652,11 @@ $e_1e_2$,
 $e_3$,
 $e_1e_3$,
 $e_2e_3$,
-$e_1e_2,e_3$}{1, e1, e2, e1*e2, e3, e1*e3, e2*e3, e1*e2*e3},
+$e_1e_2,e_3$,
+\end{texonly}
+\begin{htonly}
+1, e1, e2, e1*e2, e3, e1*e3, e2*e3, e1*e2*e3,
+\end{htonly}
 and so on.
 
 The algebra is defined by the relations
@@ -677,9 +681,9 @@ Lines 9-10 show part of the definitions of the {\tt Exports}.
 A Clifford algebra over a field \spad{K} is asserted to be a ring,
 an algebra over \spad{K}, and a vector space over \spad{K}.
 Its explicit exports include
-\spad{e(n),} which returns the \eth{\spad{n}} unit element.
+\spad{e(n),} which returns the \eth{n} unit element.
 
-\begin{figXmpLines}[caption={Part of the \protect\spadtype{CliffordAlgebra} domain.},label={fig-clifalg}]
+\begin{figXmpLines}[caption={Part of the \textspadtype{CliffordAlgebra} domain.},label={fig-clifalg}]
 NNI ==> NonNegativeInteger
 PI  ==> PositiveInteger
 
@@ -717,14 +721,14 @@ CliffordAlgebra(n,K,q): Exports == Implementation where
 The {\tt Implementation} part begins by defining a local variable
 \spad{Qeelist} to hold the list of all \spad{q.v} where \spad{v}
 runs over the unit vectors from 1 to the dimension \spad{n}.
-Another local variable \spad{dim} is set to \texht{$2^n$}{2^n},
+Another local variable \spad{dim} is set to \mathOrSpad{2^n},
 computed once and for all.
 The representation for the domain is
 \spadtype{PrimitiveArray(K)},
 which is a basic array of elements from domain \spad{K}.
 Line 18 defines \spad{New} as shorthand for the more lengthy
-expression \spad{new(dim, 0\$K)\$Rep}, which computes a primitive
-array of length \texht{$2^n$}{2^n} filled with \spad{0}'s from
+expression \spad{new(dim, 0$K)$Rep}, which computes a primitive
+array of length \mathOrSpad{2^n} filled with \spad{0}'s from
 domain \spad{K}.
 
 Lines 19-22 define the sum of two elements \spad{x} and \spad{y}
@@ -761,9 +765,9 @@ o`determinant`$->R`1`x`d`Matrix(R)`has(R,commutative("*"))
 \end{verbatim}
 
 In English, the entry means:
-\texht{\begin{quotation}}{\newline}
-\texht{\raggedright}{}
-The operation \spadfun{determinant}: \spadsig{\%}{R} with {\it 1} argument, is
+\texht{\begin{quotation}\raggedright}{\newline}
+The operation \spadfun{determinant}: \spad{% -> R}
+with {\it 1} argument, is
 {\it exposed} and is exported by {\it domain} \spadtype{Matrix(R)}
 if {\tt R has commutative("*")}.
 \texht{\end{quotation}}{\newline}
@@ -990,7 +994,7 @@ QueryEquation(): Exports == Implementation where
 \end{xmpLines}
 
 \Language{} converts an input expression of the form
-\spad{{\it a} = {\it b}} to \spad{equation({\it a, b})}.
+\spad{a = b} to \spad{equation(a, b)}.
 Our equations always have a symbol on the left and a string
 on the right.
 The {\tt Exports} part thus specifies an operation

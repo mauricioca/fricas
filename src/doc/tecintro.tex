@@ -30,9 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{-1}}{}
-
 % *********************************************************************
 \head{schapter}{A Technical Introduction to \Language{}}{ugTechIntro}
 % *********************************************************************
@@ -267,7 +264,7 @@ Likewise, fields and integral domains are rings and algebraic sets.
 However fields and integral domains are not ordered sets.
 
 \vfill
-\texht{
+\begin{texonly}
 \vskip .5\baselineskip
 %\horizontalline
 \begin{figure}[htbp]
@@ -287,8 +284,8 @@ $\downarrow$      &    \\
 \end{figure}
 %\horizontalline
 \vskip .5\baselineskip
-}
-{
+\end{texonly}
+\begin{htonly}
 \beginImportant
 \begin{verbatim}
 SetCategory +---- Ring       ---- IntegralDomain ---- Field
@@ -301,7 +298,7 @@ SetCategory +---- Ring       ---- IntegralDomain ---- Field
 Figure 1.  A  simplified category hierarchy.
 \end{center}
 \endImportant
-}
+\end{htonly}
 
 
 \newpage
@@ -310,7 +307,6 @@ Figure 1.  A  simplified category hierarchy.
 \pseudoSection{Domains Belong to Categories by Assertion}
 %------------------------------------------------------------------------------
 
-\texht{\typeout{After figure.}}{}
 \par %\noindent
 A category designates a class of domains.
 Which domains?
@@ -403,10 +399,12 @@ rational functions, and power series, to name a few.
 The \Language{} interpreter reads user input then builds whatever types
 it needs to perform the indicated computations.
 For example, to create the matrix
-%
-\texht{\[M = \begin{pmatrix}x^2+1&0\\0&x / 2\end{pmatrix}\]}
-{\spad{M = [[x**2+1,0],[0,x / 2]]}}
-%
+\begin{texonly}
+\[M = \begin{pmatrix}x^2+1&0\\0&x / 2\end{pmatrix}\]
+\end{texonly}
+\begin{htonly}
+\spad{M = [[x^2+1,0],[0,x / 2]]}
+\end{htonly}
 the interpreter first loads the
 modules \spadtype{Matrix}, \spadtype{Polynomial}, \spadtype{Fraction},
 and \spadtype{Integer} from the library, then builds the {\it domain tower}

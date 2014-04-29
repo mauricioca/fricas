@@ -30,15 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
-\texht{\setcounter{chapter}{6}}{} % Chapter 7
-
-\newcommand{\optArg}[1]{{{\tt [}{#1}{\tt ]}}}
-\newcommand{\argDef}[1]{{\tt ({#1})}}
-\newcommand{\funSyntax}[2]{\spadfun{#1}{\tt ({\small\it{#2}})}}
-\newcommand{\funArgs}[1]{{\tt ({\small\it {#1}})}\newline}
-
 % *********************************************************************
 \head{chapter}{Graphics}{ugGraph}
 % *********************************************************************
@@ -283,9 +274,13 @@ Non-singular means that the curve is ``smooth'' in that it does not
 cross itself or come to a point (cusp).
 Algebraically, this means that for any point \spad{(x,y)} on the curve,
 that is, a point such that \spad{p(x,y) = 0}, the partial derivatives
-\texht{${{\partial p}\over{\partial x}}(x,y)$ and
-${{\partial p}\over{\partial y}}(x,y)$}{\spad{dp/dx(x,y)}
-and \spad{dp/dy(a,b)}}
+\begin{texonly}
+  ${{\partial p}\over{\partial x}}(x,y)$ and
+  ${{\partial p}\over{\partial y}}(x,y)$
+\end{texonly}
+\begin{htonly}
+\spad{dp/dx(x,y)} and \spad{dp/dy(a,b)}
+\end{htonly}
 are not both zero.
 \index{curve!smooth}
 \index{curve!non-singular}

@@ -1,5 +1,6 @@
 BEGIN {
     print ")set message autoload off"
+    print "-- \\begin{inputonly}"
     print ")set break resume"
     print ")lisp (setf |$ioHook| (lambda (x &optional args) (cond ((eq x '|startLaTeXOutput|) (SAY \"-- \\\\begin{LaTeXOutput}\")) ((eq x '|endOfLaTeXOutput|) (SAY \"-- \\\\end{LaTeXOutput}\")) ((eq x '|startKeyedMsg|) (SAY \"-- \\\\begin{MessageOutput}\")) ((eq x '|endOfKeyedMsg|) (SAY \"-- \\\\end{MessageOutput}\")) ((eq x '|startSysCmd|) (SAY \"-- \\\\begin{SysCmdOutput}\")) ((eq x '|endSysCmd|) (SAY \"-- \\\\end{SysCmdOutput}\")) ((eq x '|startPatternMsg|) (SAY \"-- \\\\begin{MessageOutput}\")) ((eq x '|endPatternMsg|) (SAY \"-- \\\\end{MessageOutput}\")))))"
     print ")set output latex on"
@@ -7,7 +8,6 @@ BEGIN {
     print ")set output length 62"
     print ")set message time off"
     print ")set streams calculate 7"
-    print "-- \\begin{inputonly}"
     print "outputSpacing(0)"
     print "-- \\end{inputonly}"
 }

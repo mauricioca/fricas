@@ -19,7 +19,6 @@
 \newcommand{\Clef}{Clef}
 \newcommand{\Lisp}{Common LISP}
 
-
 % ----------------------------------------------------------------------
 % 2. Special pages used by HyperDoc.
 % ----------------------------------------------------------------------
@@ -322,7 +321,7 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\endImportant}{\horizontalline}
 %
 % following handles things like "i-th" but uses "-th"
-\newcommand{\eth}[1]{{#1}-th}}
+\newcommand{\eth}[1]{\spad{#1}-th}}
 %
 \newcommand{\texnewline}{}
 \newcommand{\texbreak}{}
@@ -347,7 +346,6 @@ The page you requested was not found in the \HyperName{} database.
 \newcommand{\spadFileExt}{.spad}
 \newcommand{\spadkey}[1]{}
 \newcommand{\spadref} [1]{{\it #1}}
-\newcommand{\spadsig}[2]{\spadtype{#1} {\tt ->} \spadtype{#2}}
 \newcommand{\subscriptIt}[2]{{\it {#1}\_{#2}}}
 \newcommand{\subscriptText}[2]{{\it {#1}\_{\it #2}}}
 \newcommand{\subsubsection}[1]{\newline\indent{0}{\bf #1}\newline\newline}
@@ -471,3 +469,18 @@ gs
 % ----------------------------------------------------------------------
 
 \newcommand{\localinfo}{}
+
+% For chapter 6 (User-Defined Functions, Macros and Rules)
+\newcommand{\pred}[1]{\subscriptIt{pred}{#1}}
+\newcommand{\expr}[1]{\subscriptIt{expression}{#1}}
+
+% For chapter 7 (Graphics)
+\newcommand{\optArg}[1]{{{\tt [}{#1}{\tt ]}}}
+\newcommand{\argDef}[1]{{\tt ({#1})}}
+\newcommand{\funSyntax}[2]{\spadfun{#1}{\tt ({\small\it{#2}})}}
+\newcommand{\funArgs}[1]{{\tt ({\small\it {#1}})}\newline}
+
+% For chapter 16 (\Language{} System Commands)
+\newcommand{\lanb}{{\tt [}}
+\newcommand{\ranb}{{\tt ]}}
+\newcommand{\vertline}{\texht{$|$}{{\tt |}}}

@@ -30,8 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\setcounter{chapter}{5} % Appendix F
 %% use \begin{xmpLines} etc, not \begin{figXmpLines}
 %% see use of \labelSpace below when heading crashes into text
 %% you've repeat one of the section labels (ugFknot)
@@ -372,13 +370,13 @@ cartesian2Complex(r:DFLOAT, i:DFLOAT):C ==               -- Convert Cartesian co
 polar2Complex(r:DFLOAT, th:DFLOAT):C ==                  -- Convert polar coordinates to
   complex(r*cos(th), r*sin(th))                          -- \quad{}complex Cartesian form.
 
-makeConformalMap(f, transformC) ==                       -- Convert complex function \spad{f}
-  (u:DFLOAT,v:DFLOAT):R3 +->                             -- \quad{}to a mapping: (\spadtype{DFLOAT},\spadtype{DFLOAT}) $\mapsto$ \pspadtype{R3}
+makeConformalMap(f, transformC) ==                       -- Convert complex function \spad{f} to a
+  (u:DFLOAT,v:DFLOAT):R3 +->                             -- \quad{}mapping: (\spadtype{DFLOAT},\spadtype{DFLOAT}) $\to$ \pspadtype{R3}
     z := f transformC(u, v)                              -- \quad{}in the complex plane.
     point [real z, imag z, 0.0@DFLOAT]
 
-makeRiemannConformalMap(f, transformC) ==                -- Convert a complex function \spad{f}
-  (u:DFLOAT, v:DFLOAT):R3 +->                            -- \quad{}to a mapping: (\spadtype{DFLOAT},\spadtype{DFLOAT}) $\mapsto$ \spadtype{R3}
+makeRiemannConformalMap(f, transformC) ==                -- Convert a complex function \spad{f} to a
+  (u:DFLOAT, v:DFLOAT):R3 +->                            -- \quad{}mapping: (\spadtype{DFLOAT},\spadtype{DFLOAT}) $\to$ \spadtype{R3}
     riemannTransform f transformC(u, v)                  -- \quad{}on the Riemann sphere.
 
 riemannSphereDraw: (S, S, PI, PI, String) -> VIEW3D      -- Draw a picture of the mapping
@@ -497,7 +495,7 @@ ntubeDrawOpt: (ThreeCurve,TwoCurve,S,S,List DROPT)
 ntubeDrawOpt(spaceCurve,planeCurve,uRange,tRange,l) ==   -- This function is similar
                                                          -- \quad{}to \userfun{ntubeDraw}, but takes
   delT:DFLOAT := (hi(tRange) - lo(tRange))/10000         -- \quad{}optional parameters that it
-  oldT:DFLOAT := lo(tRange) - 1                          -- \quad{}passes to the axiomFun{draw} command.
+  oldT:DFLOAT := lo(tRange) - 1                          -- \quad{}passes to the \spadfun{draw} command.
   fun := ngeneralTube(spaceCurve,planeCurve,delT,oldT)
   draw(fun, uRange, tRange, l)
 

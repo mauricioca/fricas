@@ -30,13 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{9}}{} % Chapter 10
-
-\begin{discard}
-% This setting is needed to get Newton's iterations to converge.
-\spadcommand{)set streams calculate 10}
-\end{discard}
 % *********************************************************************
 \head{chapter}{Interactive Programming}{ugIntProg}
 % *********************************************************************
@@ -67,8 +60,9 @@ We begin our discussion of interactive graphics with the creation
 of a useful facility: plotting ribbons of two-graphs in
 three-space.
 Suppose you want to draw the \twodim{} graphs of \smath{n}
-functions \texht{$f_i(x), 1 \leq i \leq n,$}{\spad{f_i(x), 1 <= i
-<= 5,}} all over some fixed range of \smath{x}.
+functions
+\texht{$f_i(x), 1 \leq i \leq n,$}{\spad{f_i(x), 1 <= i <= 5,}}
+all over some fixed range of \smath{x}.
 One approach is to create a \twodim{} graph for each one, then
 superpose one on top of the other.
 What you will more than likely get is a jumbled mess.
@@ -87,7 +81,7 @@ We illustrate this for \smath{f_i(x)} defined as simple powers of
 \smath{x} for \smath{x} ranging between \smath{-1} and \smath{1}.
 
 \psXtc{
-Draw the ribbon for \texht{$z = x^2$}{\spad{z=x ^ 2}}.
+Draw the ribbon for \mathOrSpad{z=x ^ 2}.
 }{
 \spadgraph{draw(x^2,x=-1..1,y=0..1)}
 }{
@@ -153,7 +147,7 @@ picture to its original position and settings.
 
 
 Let's add another ribbon to our picture---one
-for \texht{$x^3$}{\spad{x^3}}.
+for \mathOrSpad{x^3}.
 Since \smath{y} ranges from \smath{0} to \smath{1} for the
 first ribbon, now let \smath{y} range from \smath{1} to
 \smath{2.}
@@ -178,8 +172,8 @@ Extract the space component of \spad{vp}.
 
 \psXtc{
 Add the ribbon for
-\texht{$x^3$}{\spad{x^3}} alongside that for
-\texht{$x^2$}{\spad{x^2}}.
+\mathOrSpad{x^3} alongside that for
+\mathOrSpad{x^2}.
 }{
 \spadgraph{vp := draw(x^3,x=-1..1,y=1..2,var2Steps==1, space==sp)\bound{d6}\free{d5}}
 }{
@@ -324,13 +318,13 @@ The points at the bottom of the
 box are red, those at the top are purple.
 
 To change the normal coloring, you can give
-an option \spad{colorFunction == {\it function}}.
+an option \textspadexpr{colorFunction == {\it function}}.
 When \Language{} goes about displaying the data, it
 determines the range of colors used for all points within the box.
 \Language{} then distributes these numbers uniformly over the number of hues.
 Here we use the simple color function
 \texht{$(x,y) \mapsto i$}{(x,y) +-> i} for the
-\eth{\smath{i}} ribbon.
+\eth{i} ribbon.
 
 Also, we add an argument \spad{yrange} so you can give the range of
 \spad{y} occupied by the ribbons.
@@ -612,8 +606,8 @@ functions of complex variables.
 Consider a Cartesian coordinate grid of points \smath{(x, y)} in
 the plane, and some complex-valued function \smath{f} defined on
 this grid.
-At every point on this grid, compute the value of \texht{$f(x +
-iy)$}{f(x + y*\%i)} and call it \smath{z}.
+At every point on this grid, compute the value of
+\texht{$f(x + iy)$}{f(x + y*\%i)} and call it \smath{z}.
 Since \smath{z} has both a real and imaginary value for a given
 \smath{(x,y)} grid point, there are four dimensions to plot.
 What do we do?
@@ -843,7 +837,7 @@ The \spad{E} tells where the symbolic data comes from;
 the \spad{S} and \spad{T} give \Language{} the
 source and target type of the function, respectively.
 The compiled function produced  has type
-\spadsig{\spad{S}}{\spad{T}}.
+\spad{S -> T}.
 To produce a compiled function with definition \spad{p(x) == expr}, call
 \spad{compiledFunction(expr, x)} from this package.
 The function you get has no name.
@@ -872,6 +866,10 @@ For a more sophisticated application, read on.
 \head{section}{Automatic Newton Iteration Formulas}{ugIntProgNewton}
 % *********************************************************************
 
+%--rhx: TODO: Check this carefully.
+% This setting is needed to get Newton's iterations to converge.
+% \spadcommand{)set streams calculate 10}
+
 We resume
 our continuing saga of arrows and complex functions.
 Suppose we want to investigate the behavior of Newton's iteration function
@@ -882,14 +880,19 @@ Given a function \smath{f}, we want to find the complex values
 
 The first step is to produce a Newton iteration formula for
 a given \smath{f}:
-\texht{$x_{n+1} = x_n - {{f(x_n)}\over{f'(x_n)}}.$}{%
-\spad{x(n+1) = x(n) - f(x(n))/f'(x(n))}.}
+\begin{texonly}
+$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.$
+\end{texonly}
+\begin{htonly}
+\spad{x(n+1) = x(n) - f(x(n))/f'(x(n))}.
+\end{htonly}
 We represent this formula by a function \smath{g}
 that performs the computation on the right-hand side, that is,
 \texht{$x_{n+1} = {g}(x_n)$}{\spad{x(n+1) = g(x(n))}}.
 
-The type \spadtype{Expression Integer} (abbreviated \spadtype{EXPR
-INT}) is used to represent general symbolic expressions in
+The type \spadtype{Expression Integer}
+(abbreviated \spadtype{EXPR INT})
+is used to represent general symbolic expressions in
 \Language{}.
 \exptypeindex{Expression}
 To make our facility as general as possible, we assume
@@ -974,7 +977,7 @@ Get Newton's iteration formula.
 }
 \xtc{
 Let \spad{a} denote the result of
-applying Newton's iteration once to the complex number \spad{1 + \%i}.
+applying Newton's iteration once to the complex number \spad{1 + %i}.
 }{
 \spadcommand{a := g(1.0 + \%i)\bound{n4}\free{n3}}
 }
@@ -995,12 +998,12 @@ A useful operation to consider here is \spadop{*}, which means
 composition.
 For example \spad{g*g} causes the Newton iteration formula
 to be applied twice.
-Correspondingly, \spad{g\^n} means to apply the iteration formula
+Correspondingly, \spad{g^n} means to apply the iteration formula
 \spad{n} times.
 
 %
 \xtc{
-Apply \spad{g} twice to the point \spad{1 + \%i}.
+Apply \spad{g} twice to the point \spad{1 + %i}.
 }{
 \spadcommand{(g*g) (1.0 + \%i)\bound{n10}\free{n3}}
 }

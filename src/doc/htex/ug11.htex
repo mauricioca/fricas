@@ -30,9 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{10}}{} % Chapter 11
-
 % Here and throughout the book we should use the terminology
 % "type of a function", rather than talking about source and target.
 % This is how the brave new world of SMWATT regards them. A function
@@ -455,7 +452,7 @@ bubbleSort(m) ==
 
 What properties of ``lists of integers'' are assumed by the sorting
 algorithm?
-In the first line, the operation \spadfun{\#} computes the maximum index of
+In the first line, the operation \spadop{#} computes the maximum index of
 the list.
 The first obvious property is that \spad{m} must have a finite number of
 elements.
@@ -788,8 +785,8 @@ An applicable operation has been found!
 Now \Language{} builds the package
 \spadtype{SortPackage(List(Integer), Integer)}.
 According to its definition, this package exports the required
-operation: \fakeAxiomFun{bubbleSort!}: \spadsig{List Integer}{List
-Integer}.
+operation:
+\fakeAxiomFun{bubbleSort!}: \spad{List Integer->List Integer}.
 The interpreter then asks the package for a function implementing
 this operation.
 The package gets all the functions it needs (for example,

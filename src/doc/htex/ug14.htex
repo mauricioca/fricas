@@ -30,10 +30,6 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-\texht{\setcounter{chapter}{13}}{} % Chapter 14
-%
-
 % *********************************************************************
 \head{chapter}{Browse}{ugBrowse}
 % *********************************************************************
@@ -355,7 +351,7 @@ For a detailed description of these pages, skip to
 Click here to get a table of the two attributes exported by
 \spadtype{Matrix}:
 \index{attribute}
-\spadatt{\texht{fi\-nite\-Ag\-gre\-gate}{finiteAggregate}} and \spadatt{shallowlyMutable}.
+\spadatt{finiteAggregate} and \spadatt{shallowlyMutable}.
 These are two computational properties that result from
 \spadtype{Matrix} being regarded as a data structure.
 
@@ -402,9 +398,11 @@ If you want to see \Language{} execute the command, then click on it!
 A new \Language{} window appears on your screen and the command is
 executed.
 
-\texht{}{At the end of the page is generally a menu of buttons that lead
+\begin{htonly}
+At the end of the page is generally a menu of buttons that lead
 you to further sections.
-Select one of these topics to explore its contents.}
+Select one of these topics to explore its contents.
+\end{htonly}
 
 \subsubsection{Exports}
 
@@ -598,7 +596,7 @@ Associated with the matrix domain are eight other search path domains.
 Their order is important.
 \Language{} first searches the first one,
 \spadtype{InnerIndexedTwoDimensionalArray}.
-If not there, it searches the second \aliascon{MatrixCategory\&}{MATCAT-}.
+If not there, it searches the second \aliascon{MatrixCategory&}{MATCAT-}.
 And so on.
 
 Where do these {\it search path constructors} come from?
@@ -622,7 +620,7 @@ In English, this means:
 defined in `{\tt ...}','' where the latter take precedence.
 
 This explains \spadtype{InnerIndexedTwoDimensionalArray}.
-The other names, those with names ending with an ampersand \spadSyntax{\&} are
+The other names, those with names ending with an ampersand \spadSyntax{&} are
 \spadglossSee{default packages}{default package}
 for categories to which \spadtype{Matrix} belongs.
 Default packages are ordered by the notion of ``closest ancestor.''
@@ -837,7 +835,7 @@ Here is the significance of the headings you see.
 
 This lists each of the arguments of the operation in turn, paraphrasing
 the \spadgloss{signature} of the operation.
-As for signatures, a \spadSyntax{\%} is used to designate {\em this domain},
+As for signatures, a \spadSyntax{%} is used to designate {\em this domain},
 that is, \spadtype{Matrix(R)}.
 
 \subsubsection{Returns}
@@ -1074,7 +1072,7 @@ For default packages, the abbreviation is the same as the
 abbreviation for the corresponding category with the ``\&''
 replaced by ``-''.
 For example, for the category default package
-\aliascon{MatrixCategory\&}{MATCAT-} the abbreviation is
+\aliascon{MatrixCategory&}{MATCAT-} the abbreviation is
 \spadtype{MATCAT-} since the corresponding category
 \spadtype{MatrixCategory} has abbreviation \spadtype{MATCAT}.
 

@@ -64,13 +64,13 @@ it is necessary to indicate the desired type.
 \spadcommand{gasp: String := new(32, char "x") \bound{gasp}}
 }
 \xtc{
-The length of a string is given by \spadopFrom{\#}{List}.
+The length of a string is given by \spadopFrom{#}{List}.
 }{
 \spadcommand{\#gasp \free{gasp}}
 }
 \xtc{
 Indexing operations allow characters to be extracted or replaced in strings.
-For any string \spad{s}, indices lie in the range \spad{1..\#s}.
+For any string \spad{s}, indices lie in the range \spad{1..#s}.
 }{
 \spadcommand{hello.2 \free{hello}}
 }

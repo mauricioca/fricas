@@ -1,5 +1,3 @@
-\texht{\setcounter{chapter}{-1}}{} % Chapter 0
-
 \head{chapter}{Introduction to \Language{}}{ugNewIntro}
 
 Welcome to the world of \Language{}.
@@ -63,7 +61,7 @@ with an arbitrary base.
 %
 \xtc{
 What is \spad{10} to
-the \eth{\spad{100}} power in base \spad{32}?
+the \eth{100} power in base \spad{32}?
 }{
 \spadcommand{radix(10^100,32)}
 }
@@ -146,7 +144,7 @@ The second Legendre polynomial.
 }
 %
 \xtc{
-The \eth{\spad{n}} Legendre polynomial for \texht{$(n > 1)$}{\spad{n > 1}}.
+The \eth{n} Legendre polynomial for \texht{$(n > 1)$}{\spad{n > 1}}.
 }{
 \spadcommand{p(n) == ((2*n-1)*x*p(n-1) - (n-1) * p(n-2))/n}
 }
@@ -240,7 +238,7 @@ Rather, they stand ready to deliver elements on demand.
 
 %
 \xtc{
-What is the coefficient of the \eth{\spad{50}}
+What is the coefficient of the \eth{50}
 term of this series?
 }{
 \spadcommand{coefficient(\%,50)}

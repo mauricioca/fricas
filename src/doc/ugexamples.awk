@@ -5,7 +5,6 @@
 BEGIN   {
         print "% !! DO NOT MODIFY THIS FILE BY HAND !! Created by ugexamples.awk"
         print "% ====================================================================="
-        print "\\setcounter{chapter}{8} % Chapter 9"
         print "%"
         print "\\chapter{Some Examples of Domains and Packages}\\label{ExamplesExposed}"
         print "%"
