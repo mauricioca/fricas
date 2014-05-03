@@ -927,7 +927,7 @@ that modifying FriCAS algebra is now much easier.
   FriCAS requires \spad{import} keyword.
 
 \item In FriCAS \spad{**, \^, ->} are right associative. Also, right
-  binding power of \spad{+->} is increased, which allows more natural
+  binding power of \textspadexpr{+->} is increased, which allows more natural
   writing of code.
 
 \item Few non-working experimental features are removed, in particular

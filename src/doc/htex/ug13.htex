@@ -328,7 +328,7 @@ for {\bf Parents}, {\bf Ancestors}, and others.
 Clicking on {\bf Parents}, you see that \spadtype{QuadraticForm}
 has \spadtype{AbelianGroup} and \spadtype{ConvertibleTo} as
 parents (note that \spadtype{QuadraticForm} distributed
-with \Language() is richer then the demo version presented
+with \Language{} is richer then the demo version presented
 before).
 
 % *********************************************************************

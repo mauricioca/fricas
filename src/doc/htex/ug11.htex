@@ -137,8 +137,7 @@ the abbreviation.
 Once you have named the package and its abbreviation, you can choose any new
 filename you like with extension ``{\bf \spadFileExt{}}'' to hold the
 definition of your package.
-We choose the name {\bf
-drawpak\spadFileExt{}}.
+We choose the name {\bf drawpak\spadFileExt{}}.
 If your application involves more than one package, you
 can put them all in the same file.
 \Language{} assumes no relationship between the name of a library file, and
@@ -651,8 +650,8 @@ Another equivalent way to write the capsule is to use an
 \head{section}{Testing}{ugPackagesCompiling}
 % *********************************************************************
 %
-Once you have written the package, embed it in a file, for example, {\bf
-sortpak\spadFileExt{}}.
+Once you have written the package, embed it in a file, for example,
+{\bf sortpak\spadFileExt{}}.
 \index{testing}
 Be sure to include an \spad{)abbrev} command at the top of the file:
 \begin{verbatim}

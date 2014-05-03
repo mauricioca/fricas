@@ -22,7 +22,7 @@ If so, just ask \Language{} to do it.
 
 %
 \xtc{
-Integrate \texht{${{1\over{(x^3 \  {(a+b x)}^{1/3})}}}$}{} with
+Integrate \texht{$\frac{1}{(x^3 \  {(a+b x)}^{1/3})}$}{} with
 respect to \smath{x}.
 }{
 \spadcommand{integrate(1/(x^3 * (a+b*x)^(1/3)),x)}

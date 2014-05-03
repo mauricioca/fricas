@@ -303,8 +303,8 @@ given by a polynomial of the form \spad{p(x,y) = 0} is:
 where the second and third arguments name the first and second
 independent variables of \spad{p}.
 A {\tt range} option is always given to designate a bounding
-rectangular region of the plane \texht{$a \leq x \leq b, c \leq y
-\leq d$}{a <= x <= b, c <= y <= d}.
+rectangular region of the plane
+\texht{$a \leq x \leq b, c \leq y\leq d$}{a <= x <= b, c <= y <= d}.
 Zero or more additional options as described in
 \spadref{ugGraphTwoDOptions} may be given.
 \endImportant
@@ -479,8 +479,11 @@ in which the graph
 is plotted.
 The default is to use the Cartesian coordinate system.
 \index{Cartesian!coordinate system}
-For more details, see \spadref{ugGraphCoord} \texht{.}{or
-\spadtype{CoordinateSystems}.}
+For more details, see \spadref{ugGraphCoord}%
+\begin{htonly}
+{ }or \spadtype{CoordinateSystems}%
+\end{htonly}
+.
 \index{coordinate system!Cartesian}
 }{
 \spadgraph{draw(curve(sin(5*t),t),t=0..2*\%pi, coordinates == polar)}
@@ -2037,8 +2040,12 @@ input of the form \spad{(w,u,v)}, interprets it in the order
 \index{cylindrical coordinate system}
 \texht{($r$,$\theta$,$z$)}{(\spad{r}, \spad{theta}, \spad{z})}
 and maps it to the Cartesian coordinates
-\texht{$x=r\cos(\theta)$, $y=r\sin(\theta)$, $z=z$}
-{\spad{x = r * cos(theta)}, \spad{y = r * sin(theta)}, \spad{z = z}}
+\begin{texonly}
+$x=r\cos(\theta)$, $y=r\sin(\theta)$, $z=z$
+\end{texonly}
+\begin{htonly}
+\spad{x = r * cos(theta)}, \spad{y = r * sin(theta)}, \spad{z = z}
+\end{htonly}
 in which
 \texht{$r$}{\spad{r}} is the radius,
 \texht{$\theta$}{\spad{theta}} is the angle and
@@ -2211,7 +2218,7 @@ horizontal mouse position to increment or decrement the value of
 the longitudinal angle \texht{$\theta$}{\spad{theta}} within the
 range of 0 to \texht{2$\pi$}{2*pi} and the vertical mouse position
 to increment or decrement the value of the latitudinal angle
-\texht{$\phi$}{\spad{phi}} within the range of \texht{-$\pi$}{pi}
+\spad{phi} within the range of \texht{-$\pi$}{pi}
 to \texht{$\pi$}{pi}.
 The active mode of rotation is displayed in green on a color
 monitor or in clear text on a black and white monitor, while the
@@ -2662,10 +2669,10 @@ values for a viewport.
 %
 \item[\spadfun{rotate}]\funArgs{viewport,
 \subscriptText{number}{\texht{$\theta$}{\spad{theta}}}\argDef{viewThetaDefault},
-\subscriptText{number}{\texht{$\phi$}{\spad{phi}}}\argDef{viewPhiDefault}}
+\subscriptText{number}{\texht{$\varphi$}{\spad{phi}}}\argDef{viewPhiDefault}}
 rotates the viewport by rotation angles for longitude
 ({\it \texht{$\theta$}{\spad{theta}}}) and
-latitude ({\it \texht{$\phi$}{\spad{phi}}}).
+latitude ({\it \texht{$\varphi$}{\spad{phi}}}).
 Angles designate radians if given as floats, or degrees if given
 \index{graphics!3D commands!rotate}
 as integers.
@@ -2787,7 +2794,7 @@ from the center of the viewport, or returns the current default offset if no arg
 resets the default latitudinal view angle,
 or returns the current default angle if no argument is given.
 \index{graphics!3D commands!phi default}
-\texht{$\phi$}{{\it phi}} is set to this value.
+\texht{$\varphi$}{{\it phi}} is set to this value.
 
 %
 \item[\spadfun{viewpoint}]\funArgs{viewport, \subscriptText{float}{x},
@@ -2797,20 +2804,20 @@ sets the viewing position in Cartesian coordinates.
 %
 \item[\spadfun{viewpoint}]\funArgs{viewport,
 \subscriptText{float}{\texht{$\theta$}{\spad{theta}}},
-\subscriptText{Float}{\texht{$\phi$}{\spad{phi}}}}
+\subscriptText{Float}{\texht{$\varphi$}{\spad{phi}}}}
 sets the viewing position in spherical coordinates.
 
 %
 \item[\spadfun{viewpoint}]\funArgs{viewport,
 \subscriptText{Float}{\texht{$\theta$}{\spad{theta}}},
-\subscriptText{Float}{\texht{$\phi$}{\spad{phi}}},
+\subscriptText{Float}{\texht{$\varphi$}{\spad{phi}}},
 \subscriptText{Float}{scaleFactor},
 \subscriptText{Float}{xOffset}, \subscriptText{Float}{yOffset}}
 sets the viewing position in spherical coordinates,
 the scale factor, and offsets.
 \index{graphics!3D commands!viewpoint}
 \texht{$\theta$}{{\it theta}} (longitude) and
-\texht{$\phi$}{{\it phi}} (latitude) are in radians.
+\texht{$\varphi$}{{\it phi}} (latitude) are in radians.
 
 %
 \item[\spadfun{viewPosDefault}]\funArgs{\optArg{list\argDef{[0,0]}}}
