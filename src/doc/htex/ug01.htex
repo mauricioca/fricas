@@ -1242,8 +1242,7 @@ Sets are always finite and have no corresponding
 structure like streams for infinite collections.
 
 \xtc{
-%Create sets using braces (\spadSyntax{\{} and \spadSyntax{\}})
-%rather than brackets.
+Create sets by using the \spadfun{set} function.
 }{
 \spadcommand{fs := set[1/3,4/5,-1/3,4/5] \bound{fs}}
 }

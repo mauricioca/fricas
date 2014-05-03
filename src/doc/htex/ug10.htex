@@ -91,7 +91,7 @@ Draw the ribbon for \texht{$z = x^2$}{\spad{z=x ^ 2}}.
 }{
 \spadgraph{draw(x^2,x=-1..1,y=0..1)}
 }{
-\epsffile[0 0 295 295]{../ps/ribbon1.ps}
+\epsffile[0 0 295 295]{ps/ribbon1.ps}
 }
 
 Now that was easy!
@@ -112,7 +112,7 @@ so that only \spad{1} step is computed in the
 }{
 \spadgraph{vp := draw(x^2,x=-1..1,y=0..1,var2Steps==1) \bound{d1}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbon2.ps}
+\epsffile[0 0 295 295]{ps/ribbon2.ps}
 }
 
 The operation has created a viewport, that is, a graphics window
@@ -139,7 +139,7 @@ This turns the graph so you can view it along the \smath{y}-axis.
 }{
 \spadcommand{rotate(vp, 0, -90)\bound{d3}\free{d1}}
 }{
-\epsffile[0 0 295 295]{../ps/ribbon2r.ps}
+\epsffile[0 0 295 295]{ps/ribbon2r.ps}
 }
 
 There are many other things you can do.
