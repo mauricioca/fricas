@@ -57,13 +57,13 @@ converts its fractional argument to a continued fraction.
 This display is a compact form of the bulkier
 \begin{texonly}
 \begin{displaymath}
-3 + {\displaystyle 1 \over {\displaystyle
-7 + {1 \over {\displaystyle
-15 + {1 \over {\displaystyle
-1 + {1 \over {\displaystyle
-25 + {1 \over {\displaystyle
-1 + {1 \over {\displaystyle
-7 + {1 \over 4}}}}}}}}}}}}}
+3 + \cfrac{1}{
+7 + \cfrac{1}{
+15 + \cfrac{1}{
+1 + \cfrac{1}{
+25 + \cfrac{1}{
+1 + \cfrac{1}{
+7 + \cfrac{1}{4}}}}}}}
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -92,10 +92,10 @@ That is, any rational number can be written as a simple, finite continued
 fraction of the form
 \begin{texonly}
 \begin{displaymath}
-a_1 + {\displaystyle 1 \over {\displaystyle
-a_2 + {1 \over {\displaystyle
-a_3 + {1 \over {\displaystyle \ddots
-a_{n-1} + {1 \over a_n}}}}}}}
+a_1 + \cfrac{1}{
+a_2 + \cfrac{1}{
+a_3 + \cfrac{1}{\ddots
+a_{n-1} + \cfrac{1}{a_n}}}}
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -171,12 +171,12 @@ See the end of this section for the answer.
 In 1737 Euler discovered the infinite continued fraction expansion
 \begin{texonly}
 \begin{displaymath}
-{{e - 1} \over 2} =
-{1 \over {\displaystyle
-1 + {1 \over {\displaystyle
-6 + {1 \over {\displaystyle
-10 + {1 \over {\displaystyle
-14 + \cdots}}}}}}}}
+\frac{e - 1}{2} =
+\cfrac{1}{
+1 + \cfrac{1}{
+6 + \cfrac{1}{
+10 + \cfrac{1}{
+14 + \dotsb}}}}
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -239,13 +239,12 @@ In about 1658, Lord Brouncker established the following expansion
 for \texht{$4 / \pi$}{\spad{4/pi}}.
 \begin{texonly}
 \begin{displaymath}
-1 + {\displaystyle
-1 \over {\displaystyle
-2 + {9 \over {\displaystyle
-2 + {25 \over {\displaystyle
-2 + {49 \over {\displaystyle
-2 + {81 \over {\displaystyle
-2 + \cdots}}}}}}}}}}
+1 + \cfrac{1}{
+2 + \cfrac{9}{
+2 + \cfrac{25}{
+2 + \cfrac{49}{
+2 + \cfrac{81}{
+2 + \dotsb}}}}}
 \end{displaymath}
 \end{texonly}
 \begin{htonly}

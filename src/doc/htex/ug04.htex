@@ -391,12 +391,7 @@ are all standard except for the following definitions:
 
 \def\erf{\mathop{\rm erf}\nolimits}
 
-\def\zag#1#2{
-  {{\hfill \left. {#1} \right|}
-   \over
-   {\left| {#2} \right. \hfill}
-  }
-}
+\def\zag#1#2{\frac{\left.{#1}\right|}{\left|{#2}\right.}}
 \end{verbatim}
 
 % *********************************************************************

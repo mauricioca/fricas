@@ -131,7 +131,7 @@ Then the values of \spad{f(n)} can be recovered from the values of
 \spad{F(n)}:
 \begin{texonly}
 \begin{displaymath}
-f(n) = \sum_{d \mid n} \mu(n) F({{n}\over {d}})
+f(n) = \sum_{d \mid n} \mu(n) F(\frac{n}{d})
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -244,17 +244,17 @@ Quadratic symbols can be computed with the operations
 \spadfunFrom{jacobi}{IntegerNumberTheoryFunctions}.
 The Legendre symbol
 \index{Legendre!symbol}
-\texht{$\left({a \over p}\right)$}{\spad{(a/p)}}
+\texht{$\left(\frac{a}{p}\right)$}{\spad{(a/p)}}
 is defined for integers \spad{a} and
 \spad{p} with \spad{p} an odd prime number.
-By definition, \texht{$\left({a \over p}\right)$}{\spad{(a/p) = +1}},
+By definition, \texht{$\left(\frac{a}{p}\right)$}{\spad{(a/p) = +1}},
 when \spad{a} is a square \spad{(mod p)},
-\texht{$\left({a \over p}\right)$}{\spad{(a/p) = -1}},
+\texht{$\left(\frac{a}{p}\right)$}{\spad{(a/p) = -1}},
 when \spad{a} is not a square \spad{(mod p)}, and
-\texht{$\left({a \over p}\right)$}{\spad{(a/p) = 0}},
+\texht{$\left(\frac{a}{p}\right)$}{\spad{(a/p) = 0}},
 when \spad{a} is divisible by \spad{p}.
 \xtc{
-You compute \texht{$\left({a \over p}\right)$}{\spad{(a/p)}}
+You compute \texht{$\left(\frac{a}{p}\right)$}{\spad{(a/p)}}
 via the command \spad{legendre(a,p)}.
 }{
 \spadcommand{legendre(3,5)}
@@ -263,7 +263,7 @@ via the command \spad{legendre(a,p)}.
 }{
 \spadcommand{legendre(23,691)}
 }
-The Jacobi symbol \texht{$\left({a \over n}\right)$}{\spad{(a/n)}}
+The Jacobi symbol \texht{$\left(\frac{a}{p}\right)$}{\spad{(a/n)}}
 is the usual extension of the Legendre
 symbol, where \spad{n} is an arbitrary integer.
 The most important property of the Jacobi symbol is the following:
