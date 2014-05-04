@@ -23,6 +23,29 @@ END {
 # delete \begin{texonly} and \end{texonly} lines (leaving what is in between)
 /^\\begin{texonly}/ || /^\\end{texonly}/  {next}
 
+# LaTeX should never see stuff that is not intended for it, i.e. we
+# translate \texht{T}{H} into T. We assume that \texht with arguments
+# appears on a single line.
+/\\texht{/ {
+        cmd = "\\texht{"
+        line = $0
+        p = index(line,cmd)
+        while (p > 0) {
+            pref = (p == 1) ? "" : substr(line,1,p-1)
+            line = substr(line,p)
+            n = endMacroIndex(line,2)
+            if (n < 0) {
+                print ARGV[1] ":" NR ": ERROR: texht not on ended on the same line"
+                print $0
+                next
+            }
+            line = extractArg(line,1) substr(line,n+1)
+            if (p != 1) {line = pref line}
+            p = index(line,cmd)
+        }
+        $0 = line
+}
+
 # print lines between \begin{inputonly} and \end{inputonly}
 /^\\begin{inputonly}/ {
     print "-- " $0
@@ -99,4 +122,49 @@ xtc==2 && /^\\begin{spadsrc}/ {
         print ")clear all"
         print "-- \\end{inputonly}"
     }
+}
+
+function endMacroIndex(line,parms,    pp,x,bc,cc,len,found) {
+# assumes start of line is a macro call and returns position of final "}"
+        x = 0
+        found = -1
+        pp = index(line,"{")
+        len = length(line)
+        if (pp != 0) {
+          bc = 1
+          for (x = pp+1; x<=len; x++) {
+            cc = substr(line,x,1)
+            if (cc == "{")
+              bc++
+            else if (cc == "}") {
+              bc--
+              if (bc == 0) {
+                parms--
+                if (parms == 0) {
+                    found = 1
+                    break
+                }
+              }
+            }
+          }
+          x = x * found # negative if not found
+        }
+        return x
+}
+
+function extractArg(line,num,   p,arg) {
+# assumes line is a macro call and extracts the num-th arg
+        arg = ""
+        p = index(line,"{")
+        if (p != 0) {
+          line = substr(line,p)
+
+          if (num > 1) {
+            p = endMacroIndex(line,num-1)
+            line = substr(line,p+1)
+          }
+          p = endMacroIndex(line,1)
+          arg = substr(line,2,p-2)
+        }
+        return arg
 }

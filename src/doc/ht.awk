@@ -79,6 +79,29 @@ BEGIN           {
 # delete lines between \begin{texonly} and \end{texonly}
 /^\\begin{texonly}/,/^\\end{texonly}/ {next}
 
+# HyperDoc should never see stuff that is not intended for it, i.e. we
+# translate \texht{T}{H} into H. We assume that \texht with arguments
+# appears on a single line.
+/\\texht{/ {
+        cmd = "\\texht{"
+        line = $0
+        p = index(line,cmd)
+        while (p > 0) {
+            pref = (p == 1) ? "" : substr(line,1,p-1)
+            line = substr(line,p)
+            n = endMacroIndex(line,2)
+            if (n < 0) {
+                print ARGV[1] ":" NR ": ERROR: texht not on ended on the same line"
+                print $0
+                next
+            }
+            line = extractArg(line,2) substr(line,n+1)
+            if (p != 1) {line = pref line}
+            p = index(line,cmd)
+        }
+        $0 = line
+}
+
 # delete lines between \begin{inputonly} and \end{inputonly}
 /^\\begin{inputonly}/,/^\\end{inputonly}/ {next}
 
@@ -87,6 +110,7 @@ BEGIN           {
 
 # delete \begin{htonly} and \end{htonly} lines (leaving what is in between)
 /^\\begin{htonly}/ || /^\\end{htonly}/  {next}
+
 
 # handle various xmpLines and figXmpLines environments
 
@@ -487,4 +511,49 @@ function unnumber(s) {
         gsub(/9/,"Nine",s)
         gsub(/0/,"Zero",s)
         return s
+}
+
+function endMacroIndex(line,parms,    pp,x,bc,cc,len,found) {
+# assumes start of line is a macro call and returns position of final "}"
+        x = 0
+        found = -1
+        pp = index(line,"{")
+        len = length(line)
+        if (pp != 0) {
+          bc = 1
+          for (x = pp+1; x<=len; x++) {
+            cc = substr(line,x,1)
+            if (cc == "{")
+              bc++
+            else if (cc == "}") {
+              bc--
+              if (bc == 0) {
+                parms--
+                if (parms == 0) {
+                    found = 1
+                    break
+                }
+              }
+            }
+          }
+          x = x * found # negative if not found
+        }
+        return x
+}
+
+function extractArg(line,num,   p,arg) {
+# assumes line is a macro call and extracts the num-th arg
+        arg = ""
+        p = index(line,"{")
+        if (p != 0) {
+          line = substr(line,p)
+
+          if (num > 1) {
+            p = endMacroIndex(line,num-1)
+            line = substr(line,p+1)
+          }
+          p = endMacroIndex(line,1)
+          arg = substr(line,2,p-2)
+        }
+        return arg
 }
