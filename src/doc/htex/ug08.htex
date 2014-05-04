@@ -1486,8 +1486,7 @@ compute a two-sided limit.
 Issue this to compute the limit
 \begin{texonly}
 \begin{displaymath}
-\lim_{x \rightarrow 1}{{\displaystyle x^2 - 3x +
-2}\over{\displaystyle x^2 - 1}}.
+\lim_{x \rightarrow 1}\frac{\displaystyle x^2 - 3x + 2}{\displaystyle x^2 - 1}.
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -2040,7 +2039,12 @@ functions
 \xtc{
 To demonstrate this, we first create the power series
 expansion of the rational function
-\texht{${\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}$}{\spad{x^2/(1 - 6*x + x^2)}}
+\begin{texonly}
+$\frac{\displaystyle x^2}{\displaystyle 1 - 6x + x^2}$
+\end{texonly}
+\begin{htonly}
+\spad{x^2/(1 - 6*x + x^2)}
+\end{htonly}
 about \spad{x = 0}.
 }{
 \spadcommand{x := series 'x \bound{x}}
@@ -2054,7 +2058,12 @@ about \spad{x = 0}.
 %
 \xtc{
 If you want to compute the series expansion of
-\texht{$\sin\left({\displaystyle x^2} \over {\displaystyle 1 - 6x + x^2}\right)$}{\spad{sin(x^2/(1 - 6*x + x^2))}}
+\begin{texonly}
+$\sin\left(\frac{\displaystyle x^2}{\displaystyle 1 - 6x + x^2}\right)$
+\end{texonly}
+\begin{htonly}
+\spad{sin(x^2/(1 - 6*x + x^2))}
+\end{htonly}
 you simply compute the sine of \spad{rat}.
 }{
 \spadcommand{sin(rat) \free{rat}}
@@ -2527,7 +2536,7 @@ in \spad{x}.
 In fact, the \eth{n} coefficient in this series is essentially
 the \eth{n} Bernoulli polynomial:
 the \eth{n} coefficient of the series is
-\texht{${1 \over {n!}} B_n(x)$}{\spad{1/n! * Bn(x)}}, where
+\texht{${\frac{1}{n!}} B_n(x)$}{\spad{1/n! * Bn(x)}}, where
 \texht{$B_n(x)$}{\spad{Bn(x)}}
 is the \eth{n} Bernoulli polynomial.
 Thus, to obtain the \eth{n} Bernoulli polynomial, we multiply
@@ -2575,7 +2584,7 @@ $\frac{1}{(n-1)\:!}\:x^{n-1} = \frac{1}{n!}\:(B_n(x + 1) - B_n(x))$
 \end{htonly}
 and, therefore,
 \begin{texonly}
-$x^{n-1} = {1\over{n}}\:(B_n(x + 1) - B_n(x))$.
+$x^{n-1} = {\frac{1}{n}}\:(B_n(x + 1) - B_n(x))$.
 \end{texonly}
 \begin{htonly}
 \spad{x^(n-1) = 1/n * (Bn(x + 1) - Bn(x))}.
@@ -2586,12 +2595,12 @@ integers \spad{a} and \spad{b}, with \spad{a < b}:
 \begin{texonly}
 \begin{displaymath}
 \begin{array}{lcl}
-  a^{n-1}       & = & {1 \over n}   (B_n(a + 1) - B_n(a))       \\
-  (a + 1)^{n-1} & = & {1 \over n}   (B_n(a + 2) - B_n(a + 1))   \\
-  (a + 2)^{n-1} & = & {1 \over n}   (B_n(a + 3) - B_n(a + 2))   \\
+  a^{n-1}       & = & \frac{1}{n}   (B_n(a + 1) - B_n(a))       \\
+  (a + 1)^{n-1} & = & \frac{1}{n}   (B_n(a + 2) - B_n(a + 1))   \\
+  (a + 2)^{n-1} & = & \frac{1}{n}   (B_n(a + 3) - B_n(a + 2))   \\
   & \vdots &                                                    \\
-  (b - 1)^{n-1} & = & {1 \over n}   (B_n(b) - B_n(b - 1))       \\
-  b^{n-1}       & = & {1 \over n}   (B_n(b + 1) - B_n(b))
+  (b - 1)^{n-1} & = & \frac{1}{n}   (B_n(b) - B_n(b - 1))       \\
+  b^{n-1}       & = & \frac{1}{n}   (B_n(b + 1) - B_n(b))
 \end{array}
 \end{displaymath}
 \end{texonly}%
@@ -2626,7 +2635,7 @@ $\frac{1}{n}\:(B_n(b + 1) - B_n(a))$.
 Replacing \spad{n} by \spad{n + 1}, we have shown that
 \begin{texonly}
 \begin{displaymath}
-\sum_{m = a}^{b} m^n = {1 \over {\displaystyle n + 1}} \:
+\sum_{m = a}^{b} m^n = \frac{1}{\displaystyle n + 1} \:
 (B_{n+1}(b + 1) - B_{n+1}(a)).
 \end{displaymath}
 \end{texonly}%
@@ -4717,7 +4726,7 @@ Technical Report, IBM Heidelberg Scientific Center, 1992.}
 Mendel's genetic laws are often written in a form like
 \begin{texonly}
 \begin{displaymath}
-Aa \times Aa = {1\over 4}AA + {1\over 2}Aa + {1\over 4}aa.
+Aa \times Aa = \frac{1}{4}AA + \frac{1}{2}Aa + \frac{1}{4}aa.
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
@@ -4744,7 +4753,7 @@ Random mating of two gametes \texht{$a_i$}{\spad{ai}}  and
 \texht{$a_ia_j$}{\spad{ai aj}}, which produce new gametes.
 \index{gamete}
 In classical Mendelian segregation we have
-\texht{$a_ia_j = {1 \over 2}a_i+{1 \over 2}a_j$}{\spad{ai aj = (1/2)*ai+(1/2)*aj}}.
+\texht{$a_ia_j = \frac{1}{2}a_i+\frac{1}{2}a_j$}{\spad{ai aj = (1/2)*ai+(1/2)*aj}}.
 In general, we have
 \begin{texonly}
 \begin{displaymath}
@@ -4777,7 +4786,7 @@ with classical Mendelian segregation.
 Zygote \texht{$a_1a_4$}{a1 a4} undergoes transition
 to \texht{$a_2a_3$}{\spad{a2 a3}}
 and vice versa with probability
-\texht{$0 \le \theta \le {1\over 2}$}{0 <= theta <= 1/2}.
+\texht{$0 \le \theta \le \frac{1}{2}$}{0 <= theta <= 1/2}.
 
 \xtc{
 Define a list
@@ -4855,7 +4864,7 @@ The new indeterminates describe a symbolic distribution.
 \spadcommand{q := leftRankPolynomial()\$GCNAALG(FRAC INT, 4, gametes, segregationRates) :: UP(Y, POLY FRAC INT)\bound{q}\free{gametes, segregationRates}}
 }
 \xtc{
-Because the coefficient \texht{${9 \over 20}$}{\spad{9/20}} has absolute
+Because the coefficient \texht{$\frac{9}{20}$}{\spad{9/20}} has absolute
 value less than 1, all distributions do converge,
 by a theorem of this theory.
 }{

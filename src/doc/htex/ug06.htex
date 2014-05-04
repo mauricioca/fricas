@@ -1968,9 +1968,16 @@ What is the 1000th Fibonacci number?
 
 As an exercise, we suggest you write a function in an iterative
 style that computes the value of the recurrence relation
-\texht{$p(n) = p(n-1) - 2 \, p(n-2) + 4 \, p(n-3)$}{\spad{p(n) = p(n-1) - 2*p(n-2) + 4*p(n-3)}}
+\begin{texonly}
+$p(n) = p(n-1) - 2 \, p(n-2) + 4 \, p(n-3)$
+\end{texonly}
+\begin{htonly}
+\spad{p(n) = p(n-1) - 2*p(n-2) + 4*p(n-3)}
+\end{htonly}
 having the initial values
-\texht{$p(1) = 1,\, p(2) = 3 \hbox{ and } p(3) = 9.$}{\spad{p(1) = 1, p(2) = 3 {\rm and} p(3) = 9.}}
+\mathOrSpad{p(1) = 1},
+\mathOrSpad{p(2) = 3}, and
+\mathOrSpad{p(3) = 9},
 How would you write the function using an element
 \spadtype{OneDimensionalArray} or \spadtype{Vector}
 to hold the previously computed values?

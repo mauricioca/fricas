@@ -158,7 +158,7 @@ L n ==
 \end{spadsrc}
 }
 \xtc{
-Create the differential operator \texht{$d \over {dx}$}{\spad{d/dx}} on
+Create the differential operator \texht{$\frac{d}{dx}$}{\spad{d/dx}} on
 polynomials in \spad{x} over the rational numbers.
 }{
 \spadcommand{dx := operator("D") :: OP(POLY FRAC INT) \bound{dx}}

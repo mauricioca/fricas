@@ -275,8 +275,8 @@ cross itself or come to a point (cusp).
 Algebraically, this means that for any point \spad{(x,y)} on the curve,
 that is, a point such that \spad{p(x,y) = 0}, the partial derivatives
 \begin{texonly}
-  ${{\partial p}\over{\partial x}}(x,y)$ and
-  ${{\partial p}\over{\partial y}}(x,y)$
+  $\frac{\partial p}{\partial x}(x,y)$ and
+  $\frac{\partial p}{\partial y}(x,y)$
 \end{texonly}
 \begin{htonly}
 \spad{dp/dx(x,y)} and \spad{dp/dy(a,b)}
