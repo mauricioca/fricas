@@ -14,11 +14,11 @@
     gsub(/}/,"")
     sub(/.*\//,"")
     if (spadgraph==1) {
-        print "pics: ps/" $0
+        print "pics: " $0
     } else {
-        print "no-pics: ps/" $0
+        print "no-pics: " $0
     }
-    print "ps/" $0 ": " view n ".VIEW/image.xpm"
+    print $0 ": " view n ".VIEW/image.xpm"
     print "\tconvert $< $@"
     spadgraph=0
 }

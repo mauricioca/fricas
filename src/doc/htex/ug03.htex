@@ -38,7 +38,7 @@
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,260)%(-54,0)
-\special{psfile=ps/h-root.ps}
+\special{psfile=h-root.ps}
 \end{picture}
 \caption{The \HyperName{} root window page.}
 \end{figure}
