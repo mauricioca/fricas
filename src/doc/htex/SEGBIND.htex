@@ -62,7 +62,7 @@ other \spadfun{draw} options use more than one
 \spadcommand{draw(x^2, x = -2..2)}
 }{
 % window was 256 x 256
-\epsffile[72 72 300 300]{ps/SEGBIND.ps}
+\epsffile[72 72 300 300]{SEGBIND.ps}
 }
 \end{texonly}
 

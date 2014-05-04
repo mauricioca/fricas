@@ -54,7 +54,7 @@ of \HyperName{} to get the {\it front page} of \Browse{}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-brfront.ps}
+\special{psfile=h-brfront.ps}
 \end{picture}
 \caption{The Browse front page.}
 \end{figure}
@@ -97,7 +97,7 @@ the string ``{\tt matrix}.''
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-consearch.ps}
+\special{psfile=h-consearch.ps}
 \end{picture}
 \caption{Table of exposed constructors matching \texttt{*matrix*}.}
 \end{figure}
@@ -145,7 +145,7 @@ matrix} or {\tt Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matrixops.ps}
+\special{psfile=h-matrixops.ps}
 \end{picture}
 \caption{Table of operations matching \texttt{*matrix}.}
 \end{figure}
@@ -173,7 +173,7 @@ Click on \UpBitmap{} to return to the \Browse{} front page.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-atsearch.ps}
+\special{psfile=h-atsearch.ps}
 \end{picture}
 \caption{Table of \Language{} attributes.}
 \end{figure}
@@ -194,7 +194,7 @@ matrix} as a part of their name.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-gensearch.ps}
+\special{psfile=h-gensearch.ps}
 \end{picture}
 \caption{Table of all constructs matching \texttt{*matrix*}.}
 \end{figure}
@@ -219,7 +219,7 @@ matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-docsearch.ps}
+\special{psfile=h-docsearch.ps}
 \end{picture}
 \caption{Table of constructs with documentation matching \texttt{*matrix*}.}
 \end{figure}
@@ -234,7 +234,7 @@ This search combines both {\bf General} and {\bf Documentation}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-comsearch.ps}
+\special{psfile=h-comsearch.ps}
 \end{picture}
 \caption{Table summarizing complete search for pattern \texttt{*matrix*}.}
 \end{figure}
@@ -252,7 +252,7 @@ and click on {\bf Constructors}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matpage.ps}
+\special{psfile=h-matpage.ps}
 \end{picture}
 \caption{Constructor page for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -271,7 +271,7 @@ of {\tt R}, or a table of \spadgloss{rings} in \Language{}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matargs.ps}
+\special{psfile=h-matargs.ps}
 \end{picture}
 \caption{Table of acceptable domain parameters to \protect\spadtype{Matrix}.}
 \end{figure}
@@ -291,7 +291,7 @@ of \spadtype{Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,168)%(-54,0)
-\special{psfile=ps/h-matsource.ps}
+\special{psfile=h-matsource.ps}
 \end{picture}
 \caption{Source code for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -319,7 +319,7 @@ can be found directly over the constructor definition.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matdesc.ps}
+\special{psfile=h-matdesc.ps}
 \end{picture}
 \caption{Description page for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -335,7 +335,7 @@ below.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matops.ps}
+\special{psfile=h-matops.ps}
 \end{picture}
 \caption{Table of operations from \protect\spadtype{Matrix}.}
 \end{figure}
@@ -358,7 +358,7 @@ These are two computational properties that result from
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matats.ps}
+\special{psfile=h-matats.ps}
 \end{picture}
 \caption{Attributes from \protect\spadtype{Matrix}.}
 \end{figure}
@@ -372,7 +372,7 @@ create and manipulate matrices.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matexamp.ps}
+\special{psfile=h-matexamp.ps}
 \end{picture}
 \caption{Example page for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -412,7 +412,7 @@ exactly as described by the source code.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matexports.ps}
+\special{psfile=h-matexports.ps}
 \end{picture}
 \caption{Exports of \protect\spadtype{Matrix}.}
 \end{figure}
@@ -472,7 +472,7 @@ Click here bringing up a table of operations that are exported by
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matrelops.ps}
+\special{psfile=h-matrelops.ps}
 \end{picture}
 \caption{Related operations of \protect\spadtype{Matrix}.}
 \end{figure}
@@ -493,7 +493,7 @@ under the respective buttons.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matxref.ps}
+\special{psfile=h-matxref.ps}
 \end{picture}
 \caption{Cross-reference page for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -823,7 +823,7 @@ This takes you to a page showing the documentation for this operation.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matinv.ps}
+\special{psfile=h-matinv.ps}
 \end{picture}
 \caption{Operation \protect\spadfunFrom{inverse}{Matrix} from \protect\spadtype{Matrix}.}
 \end{figure}
@@ -867,7 +867,7 @@ You find these comments in the source code for \spadtype{Matrix}.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matmap.ps}
+\special{psfile=h-matmap.ps}
 \end{picture}
 \caption{Operations \protect\spadfun{map} from \protect\spadtype{Matrix}.}
 \end{figure}
@@ -980,7 +980,7 @@ the matrix operations, organized by the various domains and packages.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-matimp.ps}
+\special{psfile=h-matimp.ps}
 \end{picture}
 \caption{Implementation domains for \protect\spadtype{Matrix}.}
 \end{figure}
@@ -1010,7 +1010,7 @@ above, select the {\bf description} button.}
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-allrank.ps}
+\special{psfile=h-allrank.ps}
 \end{picture}
 \caption{All operations named \protect\spadfun{rank} in \Language{}.}
 \end{figure}
@@ -1030,7 +1030,7 @@ export a \spadfun{rank} operation.
 \begin{texonly}
 \begin{figure}[htbp]
 \begin{picture}(324,180)%(-54,0)
-\special{psfile=ps/h-alldoms.ps}
+\special{psfile=h-alldoms.ps}
 \end{picture}
 \caption{Table of all domains that export \spadfun{rank}.}
 \end{figure}
@@ -1109,7 +1109,7 @@ For example, for the category default package
 %\begin{texonly}
 %\begin{figure}[htbp]
 %\begin{picture}(324,180)%(-54,0)
-%\hspace*{\baseLeftSkip}\special{psfile=ps/h-consearch2.ps}
+%\hspace*{\baseLeftSkip}\special{psfile=h-consearch2.ps}
 %\end{picture}
 %\caption{Table of all constructors matching {\tt *matrix*} .}
 %\end{figure}

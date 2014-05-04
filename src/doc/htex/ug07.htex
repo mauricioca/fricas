@@ -40,7 +40,7 @@
 \begin{figure}[htbp]
 {\epsfverbosetrue\epsfxsize=12.5pc%
 \def\epsfsize#1#2{\epsfxsize}
-\epsffile[10 0 300 300]{ps/knot3.ps}}
+\epsffile[10 0 300 300]{knot3.ps}}
 \vskip -.5\baselineskip
 \caption{Torus knot of type (15,17).}
 \vskip .5\baselineskip
@@ -132,7 +132,7 @@ quickly and efficiently.
 \spadgraph{draw(sin(tan(x)) - tan(sin(x)),x = 0..6)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2D1VarA.ps}
+\epsffile[0 0 295 295]{2D1VarA.ps}
 }
 
 Notice that \Language{} compiled the function before the graph was put
@@ -145,7 +145,7 @@ This time we give the graph a title.
 \spadgraph{draw(sin(tan(x)) - tan(sin(x)),x = 10..16)}
 }{
 %window was 300 x 300
-\epsffile[0 0 295 295]{ps/2D1VarB.ps}
+\epsffile[0 0 295 295]{2D1VarB.ps}
 }
 %
 Once again the formula is converted to a compiled function before
@@ -165,7 +165,7 @@ and the second is just the range with no independent variable.
 \spadgraph{draw(f, 0..4) \free{f}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2D1VarD.ps}
+\epsffile[0 0 295 295]{2D1VarD.ps}
 }
 
 % *********************************************************************
@@ -206,7 +206,7 @@ functions, one for each of the functions \spad{f} and \spad{g}.
 \spadgraph{draw(curve(sin(t)*sin(2*t)*sin(3*t), sin(4*t)*sin(5*t)*sin(6*t)), t = 0..2*\%pi)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DppcA.ps}
+\epsffile[0 0 295 295]{2DppcA.ps}
 }
 %
 %
@@ -217,7 +217,7 @@ optional argument to the \spadfun{draw} command.
 \spadgraph{draw(curve(cos(t), sin(t)), t = 0..2*\%pi)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DppcB.ps}
+\epsffile[0 0 295 295]{2DppcB.ps}
 }
 %
 If you plan on plotting \spad{x = f(t)}, \spad{y = g(t)} as \spad{t} ranges over
@@ -244,7 +244,7 @@ independent variable.
 \spadgraph{draw(curve(f,g),0..\%pi) \free{f g}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DppcC.ps}
+\epsffile[0 0 295 295]{2DppcC.ps}
 }
 %
 %
@@ -257,7 +257,7 @@ the first function specified in \spadfun{curve}.
 \spadgraph{draw(curve(f,g),-4*\%pi..4*\%pi) \free{f g}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DppcE.ps}
+\epsffile[0 0 295 295]{2DppcE.ps}
 }
 
 % *********************************************************************
@@ -319,7 +319,7 @@ where \spad{p} is a polynomial.
 \spadgraph{draw(p = 0, x, y, range == [-1..11, -7..7]) \free{p}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DpacA.ps}
+\epsffile[0 0 295 295]{2DpacA.ps}
 }
 
 % *********************************************************************
@@ -360,7 +360,7 @@ Here we turn it off.
 \spadgraph{draw(sin(1/x),x=-2*\%pi..2*\%pi, adaptive == false)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptAd.ps}
+\epsffile[0 0 295 295]{2DOptAd.ps}
 }
 %
 %
@@ -373,7 +373,7 @@ If on, large values are cut off according to
 \spadgraph{draw(tan(x),x=-2*\%pi..2*\%pi, clip == true)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptCp.ps}
+\epsffile[0 0 295 295]{2DOptCp.ps}
 }
 %
 %
@@ -387,7 +387,7 @@ The default can be determined using
 \spadgraph{draw(sin(x),x=-\%pi..\%pi, toScale == true, unit == [1.0,1.0])}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptSc.ps}
+\epsffile[0 0 295 295]{2DOptSc.ps}
 }
 %
 %
@@ -401,7 +401,7 @@ If only one range is specified, clipping applies to the y-axis.
 \spadgraph{draw(sec(x),x=-2*\%pi..2*\%pi, clip == [-2*\%pi..2*\%pi,-\%pi..\%pi], unit == [1.0,1.0])}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptCpR.ps}
+\epsffile[0 0 295 295]{2DOptCpR.ps}
 }
 %
 \psXtc{
@@ -415,7 +415,7 @@ indicated palette color
 \spadgraph{draw(sin(x),x=-\%pi..\%pi, curveColor == bright red())}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptCvC.ps}
+\epsffile[0 0 295 295]{2DOptCvC.ps}
 }
 %
 \psXtc{
@@ -429,7 +429,7 @@ palette color
 \spadgraph{draw(sin(x),x=-\%pi..\%pi, pointColor == pastel yellow())}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptPtC.ps}
+\epsffile[0 0 295 295]{2DOptPtC.ps}
 }
 %
 \psXtc{
@@ -440,7 +440,7 @@ according to the indicated steps [\spad{x} interval, \spad{y} interval].
 \spadgraph{draw(curve(9*sin(3*t/4),8*sin(t)), t = -4*\%pi..4*\%pi, unit == [2.0,1.0])}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptUt.ps}
+\epsffile[0 0 295 295]{2DOptUt.ps}
 }
 %
 %
@@ -453,7 +453,7 @@ for solving plane algebraic curve plots.
 \spadgraph{draw(y^2 + y - (x^3 - x) = 0, x, y, range == [-2..2,-2..1], unit==[1.0,1.0])}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptRgA.ps}
+\epsffile[0 0 295 295]{2DOptRgA.ps}
 }
 %
 %
@@ -463,7 +463,7 @@ A second example of a solution plot.
 \spadgraph{draw(x^2 + y^2 = 1, x, y, range == [-3/2..3/2,-3/2..3/2], unit==[0.5,0.5])}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptRgB.ps}
+\epsffile[0 0 295 295]{2DOptRgB.ps}
 }
 %
 %
@@ -484,7 +484,7 @@ For more details, see \spadref{ugGraphCoord}%
 \spadgraph{draw(curve(sin(5*t),t),t=0..2*\%pi, coordinates == polar)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/2DOptPlr.ps}
+\epsffile[0 0 295 295]{2DOptPlr.ps}
 }
 
 % *********************************************************************
@@ -549,7 +549,7 @@ Use the {\tt pointColor} option for points.
 \spadgraph{draw(x^2,x=-1..1,pointColor == green())}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/23DColA.ps}
+\epsffile[0 0 295 295]{23DColA.ps}
 }
 %
 \psXtc{
@@ -558,7 +558,7 @@ Use the {\tt curveColor} option for curves.
 \spadgraph{draw(x^2,x=-1..1,curveColor == color(13) + 2*blue())}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/23DColB.ps}
+\epsffile[0 0 295 295]{23DColB.ps}
 }
 
 % *********************************************************************
@@ -599,7 +599,7 @@ Palettes can be used in specifying colors in \twodim{} graphs.
 \spadgraph{draw(x^2,x=-1..1,curveColor == dark blue())}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/23DPal.ps}
+\epsffile[0 0 295 295]{23DPal.ps}
 }
 
 % *********************************************************************
@@ -617,9 +617,9 @@ current state of the graph.
 \begin{figure}[htbp]
 %{\epsfverbosetrue\epsfxsize=2in%
 %\def\epsfsize#1#2{\epsfxsize}\hspace*{\baseLeftSkip}%
-%\epsffile[0 0 144 289]{ps/2Dctrl.ps}}
+%\epsffile[0 0 144 289]{2Dctrl.ps}}
 \begin{picture}(147,252)%(-143,0)
-\special{psfile=ps/2Dctrl.ps}
+\special{psfile=2Dctrl.ps}
 \end{picture}
 \caption{Two-dimensional control-panel.}
 \end{figure}
@@ -1361,7 +1361,7 @@ the variable name and an \spadSyntax{=} sign.
 \spadgraph{draw(cos(x*y),x=-3..3,y=-3..3)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3D2VarA.ps}
+\epsffile[0 0 295 295]{3D2VarA.ps}
 }
 %
 \xtc{
@@ -1384,7 +1384,7 @@ default title.
 \spadgraph{draw(f,-\%pi..\%pi,-\%pi..\%pi) \free{f}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3D2VarB.ps}
+\epsffile[0 0 295 295]{3D2VarB.ps}
 }
 
 % *********************************************************************
@@ -1423,7 +1423,7 @@ the range specification with the variable name and an
 \spadgraph{draw(curve(5*cos(t), 5*sin(t),t), t=-12..12)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DpscA.ps}
+\epsffile[0 0 295 295]{3DpscA.ps}
 }
 %
 \xtc{
@@ -1451,7 +1451,7 @@ Again, \Language{} supplies a default title.
 \spadgraph{draw(curve(i1,i2,i3),0..15*\%pi) \free{i1 i2 i3}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DpscB.ps}
+\epsffile[0 0 295 295]{3DpscB.ps}
 }
 
 % *********************************************************************
@@ -1496,7 +1496,7 @@ here as parabolic cylindrical coordinates (see
 \spadgraph{draw(surface(u*cos(v), u*sin(v), v*cos(u)), u=-4..4, v=0..\%pi, coordinates== parabolicCylindrical)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DpsA.ps}
+\epsffile[0 0 295 295]{3DpsA.ps}
 }
 %
 Again, you can graph these parametric surfaces using functions,
@@ -1536,7 +1536,7 @@ choosing the toroidal coordinate system.
 \spadgraph{draw(surface(n1,n2,n3), 1..4, 1..2*\%pi, coordinates == toroidal(1\$DFLOAT)) \free{n1 n2 n3}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DpsB.ps}
+\epsffile[0 0 295 295]{3DpsB.ps}
 }
 
 % *********************************************************************
@@ -1569,7 +1569,7 @@ The option \spad{title} gives your graph a title.
 \spadgraph{draw(cos(x*y),x=0..2*\%pi,y=0..\%pi,title == "Title of Graph") }
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptTtl.ps}
+\epsffile[0 0 295 295]{3DOptTtl.ps}
 }
 %
 \psXtc{
@@ -1582,7 +1582,7 @@ The choices are
 \spadgraph{draw(cos(x*y),x=-3..3,y=-3..3, style=="smooth", title=="Smooth Option")}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptSty.ps}
+\epsffile[0 0 295 295]{3DOptSty.ps}
 }
 %
 
@@ -1607,7 +1607,7 @@ value of the parametric variable specified for a tube plot.
 \spadgraph{draw(curve(sin(t), cos(t),0), t=0..2*\%pi, tubeRadius == .3, colorFunction == color1) \free{colorFxn1}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptCf1.ps}
+\epsffile[0 0 295 295]{3DOptCf1.ps}
 }
 %
 \xtc{
@@ -1622,7 +1622,7 @@ Use the option {\tt colorFunction} for special coloring.
 \spadgraph{draw(cos(u*v), u=-3..3, v=-3..3, colorFunction == color2) \free{colorFxn2}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptCf2.ps}
+\epsffile[0 0 295 295]{3DOptCf2.ps}
 }
 %
 \xtc{
@@ -1636,7 +1636,7 @@ color also depends on the value of the function.
 \spadgraph{draw(cos(x*y), x=-3..3, y=-3..3, colorFunction == color3) \free{colorFxn3}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptCf3.ps}
+\epsffile[0 0 295 295]{3DOptCf3.ps}
 }
 %
 Normally the Cartesian coordinate system is used.
@@ -1659,7 +1659,7 @@ coordinate system.
 \spadgraph{draw(m, 0..2*\%pi,0..\%pi, coordinates == spherical, style=="shade") \free{m}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptCrd.ps}
+\epsffile[0 0 295 295]{3DOptCrd.ps}
 }
 %
 Space curves may be displayed as tubes with polygonal cross sections.
@@ -1675,7 +1675,7 @@ encircles the specified space curve.
 \spadgraph{draw(curve(sin(t),cos(t),0),t=0..2*\%pi, style=="shade", tubeRadius == .3)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptRad.ps}
+\epsffile[0 0 295 295]{3DOptRad.ps}
 }
 %
 %
@@ -1689,7 +1689,7 @@ The larger this number is, the more cylindrical the tube becomes.
 \spadgraph{draw(curve(sin(t), cos(t), 0), t=0..2*\%pi, style=="shade", tubeRadius == .25, tubePoints == 3)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptPts.ps}
+\epsffile[0 0 295 295]{3DOptPts.ps}
 }
 %
 \index{graphics!3D options!variable steps}
@@ -1704,7 +1704,7 @@ first and second parameters of the surface function(s).
 \spadgraph{draw(cos(x*y),x=-3..3,y=-3..3, style=="shade", var1Steps == 30, var2Steps == 30)}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DOptvB.ps}
+\epsffile[0 0 295 295]{3DOptvB.ps}
 }
 %
 The {\tt space} option
@@ -1732,7 +1732,7 @@ into \spad{s}.
 \spadgraph{draw(m,0..\%pi,0..2*\%pi, coordinates == spherical, space == s) \free{s m}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3Dmult1A.ps}
+\epsffile[0 0 295 295]{3Dmult1A.ps}
 }
 %
 %
@@ -1742,7 +1742,7 @@ Add a second graph to \spad{s}.
 \spadgraph{v := draw(curve(1.5*sin(t), 1.5*cos(t),0), t=0..2*\%pi, tubeRadius == .25, space == s) \free{s} \bound{v}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3Dmult1B.ps}
+\epsffile[0 0 295 295]{3Dmult1B.ps}
 }
 %
 A three-space object can also be obtained from an existing \threedim{} viewport
@@ -1873,7 +1873,7 @@ enclosed in parentheses.
 \spadgraph{makeViewport3D(space, title == "Letters") \free{space curve1 curve2 curve3 curve4 curve5 curve6 curve7 curve8}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DBuildA.ps}
+\epsffile[0 0 295 295]{3DBuildA.ps}
 }
 
 % *********************************************************************
@@ -1965,7 +1965,7 @@ Create and display the viewport.
 \spadgraph{makeViewport3D(spaceC, title == "Cube") \free{pol1 pol2 pol3 pol4 pol5 pol6}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/3DBuildB.ps}
+\epsffile[0 0 295 295]{3DBuildB.ps}
 }
 
 % *********************************************************************
@@ -1992,7 +1992,7 @@ Graph plotted in default coordinate system.
 \spadgraph{draw(m,0..3,0..5) \free{m}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/defcoord.ps}
+\epsffile[0 0 295 295]{defcoord.ps}
 }
 
 The \spad{z} coordinate comes first since the first argument of
@@ -2016,7 +2016,7 @@ parameter to the \spadfun{draw} command.
 \spadgraph{draw(m,0..3,0..5,coordinates==cartesian) \free{m cart}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/cartcoord.ps}
+\epsffile[0 0 295 295]{cartcoord.ps}
 }
 %
 
@@ -2057,7 +2057,7 @@ Graph plotted in cylindrical coordinates.
 \spadgraph{draw(f,0..\%pi,0..6,coordinates==cylindrical) \free{f}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/cylCoord.ps}
+\epsffile[0 0 295 295]{cylCoord.ps}
 }
 
 Suppose you would like to specify \smath{z} as a function of
@@ -2113,7 +2113,7 @@ Graph the same function \spad{f} using the coordinate mapping of the function
 \spadgraph{draw(f,0..3,0..2*\%pi,coordinates==newmap) \free{f new}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/newmap.ps}
+\epsffile[0 0 295 295]{newmap.ps}
 }
 
 % I think this is good to say here: it shows a lot of depth. RSS
@@ -2168,7 +2168,7 @@ the gamma function in order to eliminate the extreme divergence it creates.
 \spadgraph{draw(gamma,-\%pi..\%pi,-\%pi..\%pi,var1Steps==50,var2Steps==50) \free{g}}
 }{
 % window was 300 x 300
-\epsffile[0 0 295 295]{ps/clipGamma.ps}
+\epsffile[0 0 295 295]{clipGamma.ps}
 }
 
 % *********************************************************************
@@ -2185,9 +2185,9 @@ that is closest to where you clicked.
 \begin{figure}[htbp]
 %{\epsfverbosetrue\epsfxsize=2in%
 %\def\epsfsize#1#2{\epsfxsize}\hspace*{\baseLeftSkip}%
-%\epsffile[0 0 144 289]{ps/3Dctrl.ps}}
+%\epsffile[0 0 144 289]{3Dctrl.ps}}
 \begin{picture}(183,252)%(-125,0)
-\special{psfile=ps/3Dctrl.ps}
+\special{psfile=3Dctrl.ps}
 \end{picture}
 \caption{Three-dimensional control-panel.}
 \end{figure}
@@ -2432,7 +2432,7 @@ session should be terminated.
 %
 %>>>\begin{figure}[htbp]
 %>>>\begin{picture}(183,252)(-125,0)
-%>>>\special{psfile=ps/3Dlight.ps}
+%>>>\special{psfile=3Dlight.ps}
 %>>>\end{picture}
 %>>>\caption{Three-Dimensional Lighting Panel.}
 %>>>\end{figure}
@@ -2489,7 +2489,7 @@ viewing changes to the graph.
 %
 %>>>\begin{figure}[htbp]
 %>>>\begin{picture}(183,252)(-125,0)
-%>>>\special{psfile=ps/3Dvolume.ps}
+%>>>\special{psfile=3Dvolume.ps}
 %>>>\end{picture}
 %>>>\caption{Three-Dimensional Volume Panel.}
 %>>>\end{figure}
