@@ -199,6 +199,7 @@ The names are
 \begin{description}
 \item[fortran]  for FORTRAN output.
 \item[algebra]  for monospace two-dimensional mathematical output.
+\item[latex]    for \LaTeX{} output.
 \item[tex]      for \TeX{} output.
 \item[mathml]   for Math ML output.
 \item[texmacs]  for Texmacs output.

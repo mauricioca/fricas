@@ -36,7 +36,7 @@
 \spadtype{CliffordAlgebra(n,K,Q)} defines a vector space of dimension
 \texht{$2^n$}{\spad{2^n}} over the field \texht{$K$}{\spad{K}} with a
 given bilinar form represented by square matrix \spad{Q}.
-If \texht{$\{e_1, \ldots, e_n\}$}{\spad{\{e(i), 1<=i<=n\}}}
+If \texht{$e_1, \ldots, e_n$}{\spad{e(1),...,e(n)}}
 is a basis for  \texht{$K^n$}{\spad{K^n}} then
 \begin{texonly}
 $$

@@ -2634,7 +2634,7 @@ y \log(x) = \log(x^y)
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
-\spad{y * log(x) == log(x ^ y)
+\spad{y * log(x) == log(x ^ y)}
 \end{htonly}
 only when \spad{y} is an integer.
 %

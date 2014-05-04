@@ -199,7 +199,7 @@ Here's an example:
 
 \psXtc{
 Define a parametric curve using a range involving
-\spad{\%pi}, \Language{}'s way of saying \texht{$\pi$}{``pi''}.
+\spad{%pi}, \Language{}'s way of saying \texht{$\pi$}{``pi''}.
 For parametric curves, \Language{} compiles two
 functions, one for each of the functions \spad{f} and \spad{g}.
 }{

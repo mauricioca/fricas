@@ -196,7 +196,7 @@ to be unconditionally a member of category \spadtype{AbelianGroup}.
 An abelian group is a collection of elements closed under
 addition.
 Every object {\it x} of an abelian group has an additive inverse
-{\it y} such that \texht{$x + y = 0$}{\spad{{\it x} + {\it y} = 0}}.
+{\it y} such that \texht{$x + y = 0$}{\spad{x + y = 0}}.
 The exports of an abelian group include \spad{0},
 \spadop{+}, \spadop{-}, and scalar multiplication by an integer.
 After asserting that \spadtype{QuadraticForm} domains are abelian

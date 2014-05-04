@@ -510,7 +510,7 @@ Each arrow is identical. The arrowheads are
 uniformly placed on a circle parallel to the \smath{xy}-plane.
 Thus the position of each arrow differs only
 by the angle \texht{$\theta$}{theta},
-\texht{$0 \leq \theta < 2\pi$}{\spad{0 <= theta < 2*\%pi}},
+\texht{$0 \leq \theta < 2\pi$}{\spad{0 <= theta < 2*%pi}},
 between the arrow and
 the \smath{x}-axis on the \smath{xy}-plane.
 
@@ -607,7 +607,7 @@ Consider a Cartesian coordinate grid of points \smath{(x, y)} in
 the plane, and some complex-valued function \smath{f} defined on
 this grid.
 At every point on this grid, compute the value of
-\texht{$f(x + iy)$}{f(x + y*\%i)} and call it \smath{z}.
+\texht{$f(x + iy)$}{f(x + y*%i)} and call it \smath{z}.
 Since \smath{z} has both a real and imaginary value for a given
 \smath{(x,y)} grid point, there are four dimensions to plot.
 What do we do?
