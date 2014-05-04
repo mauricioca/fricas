@@ -1,5 +1,7 @@
 \usepackage{epsf}
 \def\epsfsize#1#2{.24\textheight}
+\let\spadepsffilesave\epsffile
+\def\epsffile[#1]#2{\begin{center}\spadepsffilesave[#1]{#2}\end{center}}
 
 \usepackage{amsmath}
 \usepackage{flexisym}
