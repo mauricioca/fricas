@@ -196,8 +196,7 @@ In this book we have followed these typographical conventions:
 %
 \item Prefix operators, infix operators, and punctuation symbols in the \Language{}
 language are displayed in the text like this:
-\spadop{+}, \spadSyntax{$},%$
-\spadSyntax{+->}.
+\spadop{+}, \spadSyntax{$}, \spadSyntax{+->}.
 %
 \item \Language{} expressions or expression fragments are displayed in
 \texht{a mon\-o\-space typeface:}{this font:}
@@ -594,12 +593,12 @@ Macros are names
 \end{texonly}
 \begin{htonly}
 \begin{description}
-\item[\spadSyntax{\%i}]             \tab{17} The square root of -1.
-\item[\spadSyntax{\%e}]             \tab{17} The base of the natural logarithm.
-\item[\spadSyntax{\%pi}]            \tab{17} Pi.
-\item[\spadSyntax{\%infinity}]      \tab{17} Infinity.
-\item[\spadSyntax{\%plusInfinity}]  \tab{17} Plus infinity.
-\item[\spadSyntax{\%minusInfinity}] \tab{17} Minus infinity.
+\item[\spadSyntax{%i}]             \tab{17} The square root of -1.
+\item[\spadSyntax{%e}]             \tab{17} The base of the natural logarithm.
+\item[\spadSyntax{%pi}]            \tab{17} Pi.
+\item[\spadSyntax{%infinity}]      \tab{17} Infinity.
+\item[\spadSyntax{%plusInfinity}]  \tab{17} Plus infinity.
+\item[\spadSyntax{%minusInfinity}] \tab{17} Minus infinity.
 \end{description}
 \end{htonly}
 
@@ -808,7 +807,7 @@ later.
 }
 \xtc{
 To \spad{22} digits of precision, the number
-\texht{$e^{\pi {\sqrt {163.0}}}$}{\spad{exp(\%pi * sqrt 163.0)}}
+\texht{$e^{\pi {\sqrt {163.0}}}$}{\spad{exp(%pi * sqrt 163.0)}}
 appears to be an integer.
 }{
 \spadcommand{exp(\%pi * sqrt 163.0) \free{fewerdigits}}
@@ -2070,8 +2069,8 @@ Integrate \spad{g} using this algebraic relation; this produces:
 \end{displaymath}
 \end{texonly}
 \begin{htonly}
-\centerline{\spad{(24g^2 - 8)log(3g^2 - 1) +
-(81x^2 + 24)g^2 + 72xg - 27x^2 - 16/ (54g^2 - 18)}}
+\centerline{
+  \spad{(24g^2 - 8)log(3g^2 - 1) + (81x^2 + 24)g^2 + 72xg - 27x^2 - 16/ (54g^2 - 18)}}
 \end{htonly}
 \item
 Rationalize the denominator, producing:

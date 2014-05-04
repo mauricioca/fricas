@@ -143,7 +143,7 @@ The real versions of the functions yield an error if the result is not real.
 \begin{htonly}
 \newline
 \begin{center}
-\spad{Gamma(z) = integrate(t^(z-1)*exp(-t), t=0..\%infinity).}
+\spad{Gamma(z) = integrate(t^(z-1)*exp(-t), t=0..%infinity).}
 \end{center}
 \end{htonly}
 
@@ -244,7 +244,7 @@ Y_\nu (z) = \frac{J_\nu (z) \cos(\nu \pi) - J_{-\nu} (z)}{\sin(\nu \pi)}.
 \begin{htonly}
 \newline
 \begin{center}
-      \spad{Y(v,z) = (J(v,z)*cos(v*\%pi) - J(-v,z))/sin(v*\%pi).}
+      \spad{Y(v,z) = (J(v,z)*cos(v*%pi) - J(-v,z))/sin(v*%pi).}
 \end{center}
 
 \end{htonly}
@@ -283,7 +283,7 @@ K_\nu (z) = \pi \frac{I_{-\nu} (z) - I_{\nu} (z)}{2 \sin(\nu \pi)}.
 \begin{htonly}
 \newline
 \begin{center}
-      \spad{K(v,z) = \%pi*(I(v,z) - I(-v,z))/(2*sin(v*\%pi)).}
+      \spad{K(v,z) = %pi*(I(v,z) - I(-v,z))/(2*sin(v*%pi)).}
 \end{center}
 \end{htonly}
 
@@ -974,7 +974,7 @@ radicals.
 }
 \xtc{
 As you see, only two implicit algebraic numbers were created
-(\spad{\%y0,\%y1}), and its defining equations are below.
+(\spad{%y0,%y1}), and its defining equations are below.
 The other two roots are expressed in radicals.
 }{
 \spadcommand{definingPolynomial \%y0 \free{z}}
@@ -2180,7 +2180,7 @@ that is, in power of \spad{x}.
 }
 \xtc{
 Here is the Taylor expansion of \spad{sin x} about
-\texht{$x = \frac{\pi}{6}$}{\spad{x = \%pi/6}}:
+\texht{$x = \frac{\pi}{6}$}{\spad{x = %pi/6}}:
 }{
 \spadcommand{taylor(sin(x),x = \%pi/6)}
 }
@@ -2256,7 +2256,7 @@ Such a series is called a
 \index{series!Puiseux}
 {\it Puiseux series}.
 \index{Puiseux series}
-The expression \spad{laurent(sqrt(sec(x)),x = 3 * \%pi/2)}
+The expression \spad{laurent(sqrt(sec(x)),x = 3 * %pi/2)}
 results in an error message
 because the series expansion about this point has terms of fractional degree.
 \xtc{
@@ -2304,7 +2304,7 @@ be expanded.
 \exptypeindex{GenerateUnivariatePowerSeries}
 See \spadref{ugxProblemSeriesConversions} for more information.
 
-Consider the Taylor expansion of \texht{$e^x$}{\spad{\%e^x}}
+Consider the Taylor expansion of \texht{$e^x$}{\spad{%e^x}}
 \index{series!Taylor}
 about \spad{x = 0}:
 \begin{texonly}

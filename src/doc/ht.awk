@@ -229,9 +229,19 @@ inXmpLines==1 {
 }
 
 # do some translations
-        {
-        gsub(/upclick/,"uparrow")
-}
+
+# Escape TeX special characters inside arguments of
+# \spad, \spadop, \spadopFrom, \spadfun, \spadfunFrom, \spadtype, \spadSyntax.
+# texSpecialChars = "\\{ }$&#^_%~"
+#/\\userfun{/     {$0 = escapeArgs($0, "\\userfun{",     1)}
+#/\\pspadtype{/   {$0 = escapeArgs($0, "\\pspadtype{",   1)}
+/\\spad{/        {$0 = escapeArgs($0, "\\spad{",        1)}
+/\\spadop{/      {$0 = escapeArgs($0, "\\spadop{",      1)}
+/\\spadfun{/     {$0 = escapeArgs($0, "\\spadfun{",     1)}
+/\\spadtype{/    {$0 = escapeArgs($0, "\\spadtype{",    1)}
+/\\spadopFrom{/  {$0 = escapeArgs($0, "\\spadopFrom{",  2)}
+/\\spadfunFrom{/ {$0 = escapeArgs($0, "\\spadfunFrom{", 2)}
+/\\spadSyntax{/  {$0 = escapeArgs($0, "\\spadSyntax{",  1)}
 
 # handle cross references
 /\\spadref/             {
@@ -513,6 +523,48 @@ function unnumber(s) {
         return s
 }
 
+# Escape special characters by a backslash. Replace "\" by "\bs{}"
+function escapeArg(arg) {
+        gsub(/\\/, "\\bs{}", arg)
+        gsub(/{/, "\\{", arg)
+        gsub(/}/, "\\}", arg)
+        gsub(/\\bs\\{\\}/, "\\bs{}", arg)
+        gsub(/\$/, "\\$", arg)
+        gsub(/&/, "\\\\&", arg)
+        gsub(/\#/, "\\#", arg)
+        gsub(/_/, "\\_", arg)
+        gsub(/%/, "\\%", arg)
+#        gsub(/^/, "\\^", arg) # not necessary
+        gsub(/~=/, "\\notequal{}", arg)
+        gsub(/~/, "\\~", arg)
+        return arg
+}
+
+function escapeArgs(line, cmd, params,    p, n, arg, result) {
+        p = index(line,cmd)
+        result = ""
+        while (p > 0) {
+          if (p > 1) {result = result substr(line,1,p-1)}
+          result = result cmd
+          line = substr(line,p)
+          n = endMacroIndex(line,params)
+          if (n < 0) {
+              print ARGV[1] ":" NR ":", cmd "<<no end>>}", $0
+              next
+          }
+          arg = escapeArg(extractArg(line,1))
+          result = result arg "}"
+          for (param = 2; param <= params; param++) {
+              arg = extractArg(line,param)
+              result = result "{" arg "}"
+          }
+          line = substr(line,n+1)
+          p = index(line,cmd)
+        }
+        return result line
+}
+
+
 function endMacroIndex(line,parms,    pp,x,bc,cc,len,found) {
 # assumes start of line is a macro call and returns position of final "}"
         x = 0
@@ -525,6 +577,7 @@ function endMacroIndex(line,parms,    pp,x,bc,cc,len,found) {
             cc = substr(line,x,1)
             if (cc == "{")
               bc++
+
             else if (cc == "}") {
               bc--
               if (bc == 0) {
