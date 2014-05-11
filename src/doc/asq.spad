@@ -1,0 +1,367 @@
+)abbrev package CONINF ConstructorInformation
+++ Provides information about FriCAS constructors.
+EXPORTS ==> Record(cats: List SExpression, sigs: List SExpression)
+TYPEDOC ==> Record(type: String, doc: String)
+OPSIG   ==> Record(name: String, typedocs: List TYPEDOC)
+DOC ==> List OPSIG
+
+ConstructorInformation: with
+    documentation: String -> DOC
+      ++ documentation(c) returns the documentation of the constructor c.
+    constructorArguments: Symbol -> List Symbol
+      ++ constructorArguments(c) yields the names of the arguments of
+      ++ constructor c.
+    constructor: Symbol -> Symbol
+      ++ constructor(x) yields the constructor name for abbreviation x.
+      ++ It returns the unique symbol "unknown-abbreviation" if x is not
+      ++ a known abbreviation.
+    constructor?: Symbol -> Boolean
+      ++ constructor?(c) returns true if c is the name of a constructor,
+      ++  i.e. a category, domain, or package. It returns false othervwise.
+    operationAList: Symbol -> SExpression
+      ++ operationAList(c) returns he exported functions of the
+      ++ constructor c.
+    abbreviation: Symbol -> Symbol
+      ++ abbreviation(c) yields the abbreviation of constructor c.
+      ++ It returns the unique symbol "unknown-constructor" if there is no
+      ++ constructor c.
+    constructorCategory: Symbol -> EXPORTS
+      ++ constructorCategory(c) returns a list of categories that c
+      ++ inherits from.
+    constructorKind: Symbol -> Symbol
+      ++ constructorKind(c) return "category", "domain", or "package"
+      ++ depending on whether c is the name of a category, domain, or package.
+      ++ It returns "unknown-constructor", if the constructor is no know.
+    ancestors: Symbol -> List SExpression
+      ++ ancestors(c) returns the list of all categories that c inherits from.
+
+    constructorForm: Symbol -> SExpression
+    constructorModeMap: Symbol -> SExpression
+    operation: Symbol -> SExpression
+    cosig: Symbol -> SExpression
+    users: Symbol -> SExpression
+    dependents: Symbol -> SExpression
+    modemaps: Symbol -> SExpression
+    hasCategory: Symbol -> SExpression
+  == add
+    getDB ==> GETDATABASE$Lisp
+    syUnknownConstructor  := "unknown-constructor" ::Symbol
+    syUnknownAbbreviation := "unknown-abbreviation"::Symbol
+    syCATEGORY := "CATEGORY"::Symbol
+
+---- auxiliary functions
+    sex2StringList(s: SExpression): List String ==
+        null? s => ["NIL"]
+        symbol? s => [string symbol s]
+        string? s => [string s]
+        integer? s => [convert integer s]
+        -- It must be a list now.
+        l: List SExpression := destruct s
+        empty? l => ["()"]
+        ls : List String :=
+            concat [[concat("  ", str) for str in sex2StringList x] for x in l]
+        cons("(", concat(ls, ")"))
+    stringJoin(sep: String, ls: List String): String ==
+        empty? ls => ""
+        str: String := first ls
+        for x in rest ls repeat str := concat(str, concat(sep, x))
+        str
+    formatName(s: SExpression): String ==
+--        dbgprint("formatName", s)
+        symbol? s => string symbol s
+        list? s and #s = 1 and symbol? car s =>
+            str: String := string symbol car s
+            str = "Zero" => "0"
+            str = "One"  => "1"
+            error "formatName: not a special symbol"
+        error "formatName: not a (special) symbol"
+    sex2String(s: SExpression): String ==
+        symbol? s => string symbol s
+        string? s => string s
+        print(s::OutputForm)
+        error "toString: not a symbol or string"
+
+    toString(s: SExpression): String ==
+        str: String := sex2String s
+        str = "%%" => "%"
+        str = "," => ", "
+        str = "(" or str = ")" => str
+        str = " -> " => str
+        str.1 = char "#" => str
+        concat ["\ :ref:`", str, " <", str, ">`\ "]
+
+    formatSignature(s: SExpression): String ==
+        z: SExpression := formatSignature(s)$Lisp
+        symbol? z => string symbol z
+        ls: List String := [toString t for t in destruct z]
+        concat ls
+
+    formatTypeDoc(s: SExpression): TYPEDOC ==
+        not list? s and #s ~= 2 =>
+            print(s::OutputForm)
+            error "formatTypeDoc: not a list"
+        type: String := formatSignature car s
+        doc: String := stringJoin(" ++ ", sex2StringList car cdr s)
+        [type, doc]
+
+    formatTypeDocs(s: SExpression): List TYPEDOC ==
+        not list? s =>
+            print(s::OutputForm)
+            error "formatTypeDocs: not a list"
+        [formatTypeDoc x for x in destruct s]
+
+    opsig(s: SExpression): OPSIG ==
+        not list? s =>
+             error "opsig: not a list"
+        name: String := formatName car s
+        typedocs: List TYPEDOC := formatTypeDocs cdr s
+        [name, typedocs]
+
+---- end auxiliary functions
+
+    documentation(str: String): DOC ==
+        sex: SExpression := getDB(str::Symbol, 'DOCUMENTATION)
+        not list? sex =>
+            print (sex::OutputForm)
+            error "documentation: not a list"
+        [opsig x for x in destruct sex]
+
+    constructorArguments(c: Symbol): List Symbol ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORARGS)
+        ((destruct sex) pretend List Symbol)
+
+    abbreviation(c: Symbol): Symbol ==
+        sex: SExpression := getDB(c, 'ABBREVIATION)
+        symbol? sex => symbol sex
+        syUnknownConstructor
+    constructor(c: Symbol): Symbol ==
+        sex: SExpression := getDB(c, 'CONSTRUCTOR)
+        symbol? sex => symbol sex
+        syUnknownAbbreviation
+    constructor?(c: Symbol): Boolean ==
+        sex: SExpression := getDB(c, 'CONSTRUCTOR?)
+        not null? sex
+    operationAList(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'OPERATIONALIST)
+
+    constructorCategory(c: Symbol): EXPORTS ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORCATEGORY)
+        null? sex => [empty(), empty()]
+        not list? sex or string symbol car sex ~= "Join" =>
+            print (sex::OutputForm)
+            error "constructorCategory: unknown form"
+        l: List SExpression := rest destruct sex
+        c: List SExpression := [s for s in l | symbol car s ~= syCATEGORY]
+        s: List SExpression := [s for s in l | symbol car s  = syCATEGORY]
+        #s = 0 => [c, s]$EXPORTS
+        #s > 1 =>
+            print (sex::OutputForm)
+            error "unknown signature part"
+        s := rest rest destruct first s
+        -- [c, [formatInfo$Lisp x for x in s]]$EXPORTS
+        [c, s]$EXPORTS
+    ancestors(c: Symbol): List SExpression ==
+        sex: SExpression := getDB(c, 'ANCESTORS)
+        null? sex => empty()
+        destruct sex
+    constructorKind(c: Symbol): Symbol
+        sex: SExpression := getDB(c, 'CONSTRUCTORKIND)
+        null? sex => syUnknownConstructor
+        not symbol? sex =>
+            print (sex::OutputForm)
+            error "constructorKind: unknown form"
+        symbol sex
+    cosig(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'COSIG)
+    constructorForm(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORFORM)
+    constructorModeMap(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORMODMAP)
+    cosig(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'COSIG)
+    operation(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'OPERATION)
+    users(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'USERS)
+    dependents(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'DEPENDENTS)
+    modemaps(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'MODEMAPS)
+    hasCategory(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'HASCATEGORY)
+    modemaps(c: Symbol): SExpression ==
+        sex: SExpression := getDB(c, 'MODEMAPS)
+
+)abbrev package CONDOC ConstructorDocumentation
+ConstructorDocumentation: with
+    reStructuredText: String -> Void
+    documentAll: () -> Void
+  == add
+    OF ==> OutputForm
+    dbgprint(x: String, y: SExpression): Void ==
+        print(brace([x::OF, y::OF]$List(OF)))
+
+    endMacroIndex(line: String, params: Integer): NonNegativeInteger ==
+--        print bracket bracket [line::OutputForm]$List(OutputForm)
+        p: NonNegativeInteger := 0
+        len: NonNegativeInteger := #line
+        bc: Integer := 1 -- brace count
+        while (p := p+1; p<=len) repeat
+            c: Character := line.p
+--            print bracket paren [p::OutputForm, c::OutputForm, line::OutputForm]$List(OutputForm)
+            c = char "{" => bc := bc+1 -- next iteration
+            c = char "}" =>
+                bc := bc-1
+                if zero? bc then
+                    params := params-1
+                    if zero? params then return p
+        0$NonNegativeInteger
+
+    --rhx: TODO: should rather get the raw ++ docstring.
+    -- In the database a comma is seen as ",{}", thus we substitute back.
+    removeCommaBraces(s: String): String ==
+        -- replace ",{}" by ","
+        n: Integer := 1
+        while (n := position(",{}", s, n)) > 0 repeat
+            s := concat(s(1..n), s(n+3..#s))
+        s
+
+    formatDoc1(doc: String, searchString: String, _
+               transformArg: String->String): String ==
+--        print brace [pattern::OutputForm, doc::OutputForm]$List(OutputForm)
+        n: Integer := 0
+        while (n := position(searchString, doc, 1)) > 0 repeat
+--            print bracket [n::OutputForm, doc::OutputForm]
+            prefix: String := doc(1..n-1)
+            doc := doc(n+#searchString..#doc)
+            n := endMacroIndex(doc, 1)
+            n = 0 =>
+                print(doc::OutputForm)
+                error "formatDoc1: no closing brace"
+            arg: String :=
+                --rhx: TODO: In the database there is \spad inside \spad. Brrrr.
+                formatDoc1(doc(1..n-1), searchString, (x: String): String +-> x)
+            suffix: String := doc(n+1..#doc)
+            doc := concat [prefix, transformArg arg, suffix]
+        doc
+
+    formatDoc2(doc: String, searchString: String, _
+               transformArgs: (String,String)->String): String ==
+--        print brace [searchString::OutputForm, doc::OutputForm]$List(OutputForm)
+        n: Integer := 0
+        n := position(searchString, doc, 1)
+--        print bracket bracket [n::OutputForm, doc::OutputForm]
+        while (n := position(searchString, doc, 1)) > 0 repeat
+--            print bracket [n::OutputForm, doc::OutputForm]
+            prefix: String := doc(1..n-1)
+            doc := doc(n+#searchString..#doc)
+            n := endMacroIndex(doc, 1)
+            n = 0 =>
+                print(doc::OutputForm)
+                error "formatDoc2: no first closing brace"
+            arg1: String := doc(1..n-1)
+            n>=#doc or doc(n+1) ~= char "{" =>
+                print(doc::OutputForm)
+                error "formatSpad2: no second opening brace"
+            doc := doc(n+2..#doc)
+            n := endMacroIndex(doc, 1)
+            n = 0 =>
+                print(doc::OutputForm)
+                error "formatDoc2: no second closing brace"
+            arg2: String := doc(1..n-1)
+            suffix: String := doc(n+1..#doc)
+            doc := concat [prefix, transformArgs(arg1, arg2), suffix]
+        doc
+
+    spad(s: String): String == concat ["\ ``", s, "``\ "]
+    spadtype(s: String): String == concat ["\ :ref:`", s, " <", s, ">`\ "]
+    role(r: String): String -> String ==
+        (s: String): String +-> concat ["\ :", r, ":`", s, "`\ "]
+    emph(s: String): String == concat ["\ *", s, "*\ "]
+    boldface(s: String): String == concat ["\ **", s, "**\ "]
+    boldface1(s1: String, s2: String): String == concat ["\ **", s1, "**\ "]
+    id(s: String): String == s
+    id2(s1: String, s2: String): String == s2
+
+    tex2rst(s: String): String ==
+        s := removeCommaBraces s
+        s := formatDoc1(s, "\spad{", spad)
+        s := formatDoc1(s, "\spadop{",   role "spadop")
+        s := formatDoc1(s, "\spadfun{",  role "spadfun")
+        s := formatDoc1(s, "\spadtype{", spadtype)
+        s := formatDoc1(s, "\spadatt{",  spadtype)
+        s := formatDoc1(s, "{\em ", emph)
+        s := formatDoc2(s, "\spadfunFrom{", boldface1)
+        s := formatDoc2(s, "\indented{", id2)
+        s := formatDoc1(s, "\undocumented{", (x:String):String +-> "is undocumented.")
+        s := formatDoc1(s, "\spadignore{", (x:String):String +-> x)
+        s := concat("  ", s)
+
+    reStructuredText(con: String): Void ==
+--        dbgprint("reST", convert c)
+        f: TextFile := open(filename("", con, "rst"), "output")
+        writeLine!(f, concat [".. __", con, ":"])
+        writeLine!(f)
+        writeLine!(f, concat(".. index:: ", con))
+        writeLine!(f)
+        writeLine!(f, con)
+        line: String := copy con
+        fill!(line, char "=")
+        writeLine!(f, line)
+        writeLine! f
+        doc: DOC := documentation(con)$ConstructorInformation
+        for os in doc repeat
+            n: String := os.name
+            tds: List TYPEDOC := os.typedocs
+            for td in tds repeat
+--                 dbgprint("reST e", convert e)
+                writeLine!(f, ".. index::")
+                writeLine!(f, concat ["   pair: ", con, "; ", n])
+                writeLine!(f)
+                write!(f, ":spadfun:`")
+                write!(f, n)
+--                write!(f, "`\ : :spadtype:`")
+                write!(f, "`\ : ")
+                write!(f, td.type)
+--                write!(f, "`")
+                writeLine!(f)
+                writeLine!(f)
+                writeLine!(f, tex2rst(td.doc))
+                writeLine!(f)
+        close! f
+
+    -- We don't need default domains and also not the packages
+    -- defined in THIS file.
+    ok?(x: SExpression): Boolean ==
+        s: String := string symbol x
+        s = "ConstructorDocumentation" => false
+        s = "ConstructorInformation"   => false
+        s.(#s) ~= char "&"
+
+    lt(s1: String, s2: String): Boolean == lowerCase s1 < lowerCase s2
+    documentAll(): Void ==
+        sex: SExpression := allConstructors()$Lisp
+        l: List String := [string symbol x for x in destruct(sex) | ok? x]
+        l := sort!(lt, l)
+        f: TextFile := open(filename("", "index", "rst"), "output")
+        writeLine!(f, "FriCAS Documentation")
+        writeLine!(f, "====================")
+        writeLine!(f)
+        writeLine!(f, "Contents:")
+        writeLine!(f)
+        writeLine!(f, ".. toctree::")
+        for c in l repeat
+--        for c in l for i in 1..20 repeat
+            print(c::OutputForm)
+            reStructuredText c
+            write!(f, "   ")
+            writeLine!(f, c)
+        writeLine!(f)
+        writeLine!(f)
+        writeLine!(f, "Tables")
+        writeLine!(f, "======")
+        writeLine!(f)
+        writeLine!(f, "* :ref:`search`")
+        writeLine!(f)
+        close! f
+        void()

@@ -52,6 +52,7 @@ htsrcdir     = ${srcdir}/ht
 bitmapssrcdir= $(srcdir)/bitmaps
 interpsrcdir = ${fricas_src_srcdir}/interp
 inputsrcdir  = ${fricas_src_srcdir}/input
+sphinxsrcdir = ${srcdir}/sphinx
 pssrcdir     = ${srcdir}/ps
 
 httargetdir        = $(fricas_target_datadir)/hypertex/pages
@@ -505,3 +506,14 @@ index: book.dvi
 
 
 ###################################################################
+
+myhtml: sphinx/stamp
+sphinx/stamp:
+	-rm -rf sphinx
+	cp -r ${sphinxsrcdir} .
+	cd sphinx/source; \
+	  (echo ')compile "$(srcdir)/asq.spad"'; echo "documentAll()") \
+	  | fricas -nosman
+
+mysphinx: myhtml
+	cd sphinx; make html
