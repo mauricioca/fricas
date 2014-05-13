@@ -1,17 +1,89 @@
+rep x ==> (x@%) pretend Rep
+per x ==> (x@Rep) pretend %
+
+)abbrev domain FUNEXP FunctionExport
+++ FunctionExport data for a function signature,
+++ i.e. it stores the information of
+++    if X has Ring then
+++        foo: (A, B) -> C
+++          ++ some docstring
+FunctionExport: with
+    con: (String, String, String, SExpression) -> %
+    name: % -> String
+    type: % -> String
+    documentation: % -> String
+    condition: % -> SExpression
+  == add
+    Rep ==> Record(fname: String, _
+                   ftype: String, _
+                   fdoc: String, _
+                   fcond: SExpression)
+    con(n: String, t: String, d: String, c: SExpression): % ==
+        per [n, t, d, c]
+    name(x: %): String == rep(x).fname;
+    type(x: %): String == rep(x).ftype
+    documentation(x: %): String == rep(x).fdoc
+    condition(x: %): SExpression == rep(x).fcond
+
+)abbrev domain CATEXP CategoryExport
+CategoryExport: with
+    construct: (String, List String, SExpression) -> %
+    name: % -> String
+    arguments: % -> List String
+    condition: % -> SExpression
+  == add
+    Rep ==> Record(cname: String, _
+                   cargs: List String, _
+                   ccond: SExpression)
+    construct(n: String, a: List String, c: SExpression): % ==
+        per [n, a, c]
+    name(x: %): String == rep(x).cname
+    arguments(x: %): List String == rep(x).cargs
+    condition(x: %): SExpression == rep(x).ccond
+
+)abbrev domain CONDATA ConstructorData
+ConstructorData: with
+    constructorData: Symbol -> %
+    name: % -> String
+    arguments: % -> List String
+  == add
+    Rep ==> Record(cname: String, _
+                   cargs: List String, _
+                   ctype: String, _
+                   cdoc: String)
+    constructorData(s: Symbol): % ==
+        t: String := string s
+        per [t, [t], t, t]
+    name(x: %): String == rep(x).cname
+    arguments(x: %): List String == rep(x).cargs
+
 )abbrev package CONINF ConstructorInformation
 ++ Provides information about FriCAS constructors.
 EXPORTS ==> Record(cats: List SExpression, sigs: List SExpression)
-TYPEDOC ==> Record(type: String, doc: String)
-OPSIG   ==> Record(name: String, typedocs: List TYPEDOC)
-DOC ==> List OPSIG
+TYPEDOC ==> Record(ftype: String, fdoc: String)
+OPSIG   ==> Record(fname: String, ftypedocs: List TYPEDOC)
+DOC ==> Record(conform: String, _
+               conkind: String, _
+               contype: String, _
+               conargs: List String, _
+               conancs: List String, _
+               condoc : String, _
+               fopsigs: List OPSIG)
 
 ConstructorInformation: with
-    documentation: String -> DOC
-      ++ documentation(c) returns the documentation of the constructor c.
-    constructorArguments: Symbol -> List Symbol
+    constructorForm: Symbol -> String
+    constructorKind: Symbol -> String
+      ++ constructorKind(c) return "category", "domain", or "package"
+      ++ depending on whether c is the name of a category, domain, or package.
+      ++ It returns "unknown-constructor", if the constructor is no know.
+    constructorArguments: Symbol -> List String
       ++ constructorArguments(c) yields the names of the arguments of
       ++ constructor c.
-    constructor: Symbol -> Symbol
+    ancestors: Symbol -> List String
+      ++ ancestors(c) returns the list of all categories that c inherits from.
+    documentation: String -> DOC
+      ++ documentation(c) returns the documentation of the constructor c.
+    constructor: Symbol -> String
       ++ constructor(x) yields the constructor name for abbreviation x.
       ++ It returns the unique symbol "unknown-abbreviation" if x is not
       ++ a known abbreviation.
@@ -21,21 +93,14 @@ ConstructorInformation: with
     operationAList: Symbol -> SExpression
       ++ operationAList(c) returns he exported functions of the
       ++ constructor c.
-    abbreviation: Symbol -> Symbol
+    abbreviation: Symbol -> String
       ++ abbreviation(c) yields the abbreviation of constructor c.
       ++ It returns the unique symbol "unknown-constructor" if there is no
       ++ constructor c.
     constructorCategory: Symbol -> EXPORTS
       ++ constructorCategory(c) returns a list of categories that c
       ++ inherits from.
-    constructorKind: Symbol -> Symbol
-      ++ constructorKind(c) return "category", "domain", or "package"
-      ++ depending on whether c is the name of a category, domain, or package.
-      ++ It returns "unknown-constructor", if the constructor is no know.
-    ancestors: Symbol -> List SExpression
-      ++ ancestors(c) returns the list of all categories that c inherits from.
 
-    constructorForm: Symbol -> SExpression
     constructorModeMap: Symbol -> SExpression
     operation: Symbol -> SExpression
     cosig: Symbol -> SExpression
@@ -45,7 +110,6 @@ ConstructorInformation: with
     hasCategory: Symbol -> SExpression
   == add
     getDB ==> GETDATABASE$Lisp
-    syUnknownConstructor  := "unknown-constructor" ::Symbol
     syUnknownAbbreviation := "unknown-abbreviation"::Symbol
     syCATEGORY := "CATEGORY"::Symbol
 
@@ -75,69 +139,130 @@ ConstructorInformation: with
             str = "One"  => "1"
             error "formatName: not a special symbol"
         error "formatName: not a (special) symbol"
+
     sex2String(s: SExpression): String ==
         symbol? s => string symbol s
         string? s => string s
         print(s::OutputForm)
-        error "toString: not a symbol or string"
+        error "sex2String: not a symbol or string"
 
-    toString(s: SExpression): String ==
+    toString(s: SExpression, args: List String): String ==
         str: String := sex2String s
         str = "%%" => "%"
         str = "," => ", "
-        str = "(" or str = ")" => str
-        str = " -> " => str
-        str.1 = char "#" => str
+        str = "(" or str = ")" or str = "#" or str = " -> " => str
+        if str.1 = char "#" then
+            str := args(ScanArabic(str(2..#str))$NumberFormats)
         concat ["\ :ref:`", str, " <", str, ">`\ "]
 
-    formatSignature(s: SExpression): String ==
+    prefix2String(s: SExpression, args: List String): String ==
+        x: SExpression := prefix2String(s)$Lisp
+        list? x => concat [toString(sex, args) for sex in destruct x]
+        toString(x, args)
+
+    formatSignature(s: SExpression, args: List String): String ==
         z: SExpression := formatSignature(s)$Lisp
         symbol? z => string symbol z
-        ls: List String := [toString t for t in destruct z]
+        ls: List String := [toString(t, args) for t in destruct z]
         concat ls
 
-    formatTypeDoc(s: SExpression): TYPEDOC ==
+    formatTypeDoc(s: SExpression, args: List String): TYPEDOC ==
         not list? s and #s ~= 2 =>
             print(s::OutputForm)
             error "formatTypeDoc: not a list"
-        type: String := formatSignature car s
+        type: String := formatSignature(car s, args)
         doc: String := stringJoin(" ++ ", sex2StringList car cdr s)
         [type, doc]
 
-    formatTypeDocs(s: SExpression): List TYPEDOC ==
+    formatTypeDocs(s: SExpression, args: List String): List TYPEDOC ==
         not list? s =>
             print(s::OutputForm)
             error "formatTypeDocs: not a list"
-        [formatTypeDoc x for x in destruct s]
+        [formatTypeDoc(x, args) for x in destruct s]
 
-    opsig(s: SExpression): OPSIG ==
+    opsig(s: SExpression, args: List String): OPSIG ==
         not list? s =>
              error "opsig: not a list"
         name: String := formatName car s
-        typedocs: List TYPEDOC := formatTypeDocs cdr s
+        typedocs: List TYPEDOC := formatTypeDocs(cdr s, args)
         [name, typedocs]
+
+    lt(s1: String, s2: String): Boolean == lowerCase s1 < lowerCase s2
+
 
 ---- end auxiliary functions
 
+    constructorKind(c: Symbol): String ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORKIND)
+        null? sex => "unknown-constructor"
+        not symbol? sex =>
+            print (sex::OutputForm)
+            error "constructorKind: unknown form"
+        string symbol sex
+
+    constructorArguments(c: Symbol): List String ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORARGS)
+        [string s for s in ((destruct sex) pretend List Symbol)]
+
+    constructorForm(c: Symbol): String ==
+        sex: SExpression := getDB(c, 'CONSTRUCTORFORM)
+        not list? sex =>
+            print (sex::OutputForm)
+            error "constructorForm: not a list"
+        l: List String := [string symbol x for x in destruct sex]
+        empty? l => string c
+        str: String := first l
+        if str = "T$" then str := "T"
+        l := rest l
+        empty? l => str
+        str := concat(concat(str, "("), first l)
+        for s in rest l repeat
+            s = "T$" => str := concat(str, ", T")
+            str := concat(concat(str, ", "), s)
+        concat(str, ")")
+
+    ancestors(c: Symbol): List String ==
+        sex: SExpression := getDB(c, 'ANCESTORS)
+        null? sex => empty()
+        args: List String := constructorArguments c
+        [prefix2String(first destruct s, args) for s in destruct sex]
+
     documentation(str: String): DOC ==
-        sex: SExpression := getDB(str::Symbol, 'DOCUMENTATION)
+        con: Symbol := str::Symbol
+        sex: SExpression := getDB(con, 'DOCUMENTATION)
         not list? sex =>
             print (sex::OutputForm)
             error "documentation: not a list"
-        [opsig x for x in destruct sex]
+        cargs: List String := constructorArguments con
+        ops: StringTable(List TYPEDOC) := table()
+        for x in destruct sex repeat
+            os: OPSIG := opsig(x, cargs)
+            ops(os.fname) := os.ftypedocs
+        cform: String := constructorForm con
+        ckind: String := constructorKind con
+        ctype: String := ""
+        cancs: List String := ancestors con
+        cdoc: String := ""
+        if key?("constructor", ops) then
+            typedocs: List TYPEDOC := ops."constructor"
+            for td in typedocs repeat
+                if td.ftype = "() -> ()" then (cdoc := td.fdoc; break)
+            typedocs := [td for td in typedocs | td.ftype ~= "() -> ()"]
+            if empty? typedocs then
+                remove!("constructor", ops)
+            else
+                ops."constructor" := typedocs
+        opsigs: List OPSIG := [[name, ops.name] for name in sort(lt, keys ops)]
+        [cform, ckind, ctype, cargs, cancs, cdoc, opsigs]
 
-    constructorArguments(c: Symbol): List Symbol ==
-        sex: SExpression := getDB(c, 'CONSTRUCTORARGS)
-        ((destruct sex) pretend List Symbol)
-
-    abbreviation(c: Symbol): Symbol ==
+    abbreviation(c: Symbol): String ==
         sex: SExpression := getDB(c, 'ABBREVIATION)
-        symbol? sex => symbol sex
-        syUnknownConstructor
-    constructor(c: Symbol): Symbol ==
+        symbol? sex => string symbol sex
+        "unknown-abbreviation"
+    constructor(c: Symbol): String ==
         sex: SExpression := getDB(c, 'CONSTRUCTOR)
-        symbol? sex => symbol sex
-        syUnknownAbbreviation
+        symbol? sex => string symbol sex
+        "unknown-constructor"
     constructor?(c: Symbol): Boolean ==
         sex: SExpression := getDB(c, 'CONSTRUCTOR?)
         not null? sex
@@ -160,21 +285,8 @@ ConstructorInformation: with
         s := rest rest destruct first s
         -- [c, [formatInfo$Lisp x for x in s]]$EXPORTS
         [c, s]$EXPORTS
-    ancestors(c: Symbol): List SExpression ==
-        sex: SExpression := getDB(c, 'ANCESTORS)
-        null? sex => empty()
-        destruct sex
-    constructorKind(c: Symbol): Symbol
-        sex: SExpression := getDB(c, 'CONSTRUCTORKIND)
-        null? sex => syUnknownConstructor
-        not symbol? sex =>
-            print (sex::OutputForm)
-            error "constructorKind: unknown form"
-        symbol sex
     cosig(c: Symbol): SExpression ==
         sex: SExpression := getDB(c, 'COSIG)
-    constructorForm(c: Symbol): SExpression ==
-        sex: SExpression := getDB(c, 'CONSTRUCTORFORM)
     constructorModeMap(c: Symbol): SExpression ==
         sex: SExpression := getDB(c, 'CONSTRUCTORMODMAP)
     cosig(c: Symbol): SExpression ==
@@ -295,24 +407,42 @@ ConstructorDocumentation: with
         s := formatDoc2(s, "\indented{", id2)
         s := formatDoc1(s, "\undocumented{", (x:String):String +-> "is undocumented.")
         s := formatDoc1(s, "\spadignore{", (x:String):String +-> x)
-        s := concat("  ", s)
 
     reStructuredText(con: String): Void ==
 --        dbgprint("reST", convert c)
         f: TextFile := open(filename("", con, "rst"), "output")
-        writeLine!(f, concat [".. __", con, ":"])
-        writeLine!(f)
+        doc: DOC := documentation(con)$ConstructorInformation
+
+        -- index the type
         writeLine!(f, concat(".. index:: ", con))
         writeLine!(f)
-        writeLine!(f, con)
-        line: String := copy con
-        fill!(line, char "=")
-        writeLine!(f, line)
+
+        -- make a label for the type
+        writeLine!(f, concat [".. __", con, ":"])
+        writeLine!(f)
+
+        -- the headear
+        str := copy doc.conform
+        writeLine!(f, str)
+        fill!(str, char "=")
+        writeLine!(f, str)
         writeLine! f
-        doc: DOC := documentation(con)$ConstructorInformation
-        for os in doc repeat
-            n: String := os.name
-            tds: List TYPEDOC := os.typedocs
+
+        -- are we dealing with category, domain or package
+        writeLine!(f, doc.conkind)
+        writeLine!(f)
+
+        -- what args does the constructor have
+        for a in doc.conargs repeat
+            writeLine!(f, concat("  * ", a))
+        writeLine!(f)
+        writeLine!(f, doc.contype)
+        writeLine!(f)
+        writeLine!(f, tex2rst(doc.condoc))
+        writeLine!(f)
+        for opsig in doc.fopsigs repeat
+            n: String := opsig.fname
+            tds: List TYPEDOC := opsig.ftypedocs
             for td in tds repeat
 --                 dbgprint("reST e", convert e)
                 writeLine!(f, ".. index::")
@@ -322,20 +452,28 @@ ConstructorDocumentation: with
                 write!(f, n)
 --                write!(f, "`\ : :spadtype:`")
                 write!(f, "`\ : ")
-                write!(f, td.type)
+                write!(f, td.ftype)
 --                write!(f, "`")
                 writeLine!(f)
                 writeLine!(f)
-                writeLine!(f, tex2rst(td.doc))
+                writeLine!(f, concat("  ", tex2rst(td.fdoc)))
                 writeLine!(f)
+        writeLine!(f, "**Ancestors:**")
+        writeLine!(f)
+        for a in doc.conancs repeat
+            writeLine!(f, concat("  * ", a))
+        writeLine!(f)
         close! f
 
     -- We don't need default domains and also not the packages
     -- defined in THIS file.
     ok?(x: SExpression): Boolean ==
         s: String := string symbol x
-        s = "ConstructorDocumentation" => false
-        s = "ConstructorInformation"   => false
+        member?(s, ["ConstructorDocumentation", _
+                    "ConstructorInformation", _
+                    "FunctionExport", _
+                    "CategoryExport", _
+                    "ConstructorData"]$List(String)) => false
         s.(#s) ~= char "&"
 
     lt(s1: String, s2: String): Boolean == lowerCase s1 < lowerCase s2
