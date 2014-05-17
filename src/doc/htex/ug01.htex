@@ -458,7 +458,7 @@ the previous single expression.
 
 The type of a symbol is either \spadtype{Symbol}
 \exptypeindex{Symbol}
-or \spadtype{Variable({\it name})} where {\it name} is the name
+or \spad{\spadtype{Variable}({\it name})} where {\it name} is the name
 of the symbol.
 
 \xtc{
