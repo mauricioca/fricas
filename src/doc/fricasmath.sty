@@ -1,0 +1,71 @@
+%% fricasmath.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright (C) 2014,  Ralf Hemmecke <ralf@hemmecke.org>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage[mathstyleoff]{breqn}
+\usepackage{tensor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{fricasmath}[1]%
+  {\def\arg{#1}%
+   \ifx\arg\empty \def\BEGIN{\begin{dmath}[compact]}%
+            \else \def\BEGIN{\begin{dmath}[compact,number={#1}]}%
+   \fi
+   \def\EulerE{e}% %e
+   \def\ImaginaryI{i}% %i
+   \def\csch{\operatorname{csch}}%
+   \def\erf{\operatorname{erf}}%
+   \def\coloneqq{\mathrel{:\mkern-1.2mu=}}
+   \def\embrace##1##2##3{\left##1\relax##3\right##2\relax}%
+   \def\BRACE{\embrace{\{}{\}}}
+   \def\BRACKET{\embrace{[}{]}}
+   \def\PAREN{\embrace{(}{)}}
+   \def\ZAG##1##2{\frac{\left.{##1}\right|}{\left|{##2}\right.}}%
+   \def\QUOTE##1{\texttt{'}##1}%
+   \def\BOX##1{\fbox{\ensuremath{##1}}}%
+   \def\SEGMENTi##1{{##1}..}%
+   \def\SEGMENTii##1##2{{##1}..{##2}}%
+   \def\SUB##1##2{{##1}_{##2}}%
+   \def\SUPER##1##2{{##1}^{##2}}%
+   \def\SLASH##1##2{\left.##1\vphantom{{##1}{##2}}\right/ ##2}%
+   \def\PRIME##1##2{{##1}^{##2}}%
+   \def\OVERLABEL##1{\FUN{OVERLABEL}(##1)}%
+   \def\REM##1##2{{##1}\mathbin{\mathrm{rem}}{##2}}%
+   \def\QUO##1##2{{##1}\mathbin{\mathrm{quo}}{##2}}%
+   \def\EXQUO##1##2{{##1}\mathbin{\mathrm{exquo}}{##2}}%
+   \def\nthroot##1##2{\sqrt[##2]{##1}}%
+   \def\EQUATNUM##1##2{(##1)\qquad ##2}%
+   \def\COMMA{,\linebreak[2]\:}% allow breaks in lists and sets
+   \def\SEMICOLON{;\:}%
+   \def\TIMES{\:}%
+   \def\theMap##1{\FUN{TheMap}(\FUN{##1})}%
+   \def\ALTSUPERSUB##1##2{\tensor*{##1}{*##2}}%
+   \def\SCRIPTS##1##2##3##4##5{\tensor*[^{##4}_{##5}]{##1}{_{##2}^{##3}}}%
+   \newenvironment{MATRIX}[1]%
+     {\setcounter{MaxMatrixCols}{##1}\begin{bmatrix}}{\end{bmatrix}}%
+   \newenvironment{PILE}{\begin{array}[t]{l}}{\end{array}}%
+   \newenvironment{VCONCAT}{\begin{array}{c}}{\end{array}}%
+   \def\DefSpecialChars{%
+     \def\^{{\tiny\ensuremath{^{\wedge}}}}%
+     \def\\{\ensuremath{\backslash}}%
+     \def\~{\char`~}%
+   }
+   \def\FUN##1{{\DefSpecialChars\operatorname{##1}}}%
+   \def\STRING##1{\texttt{\DefSpecialChars ##1}}%
+   \def\SYMBOL##1{{\DefSpecialChars ##1}}%
+   \BEGIN{}}%
+  {\end{dmath}}
