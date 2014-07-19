@@ -1,0 +1,11 @@
+Fricas
+=================
+
+Fricas is a CAS.
+
+
+Tutorial
+-----------------
+The first thing you need is, obviously, a tutorial. We'll
+provide one as soon as we figure out how to use asciidoc
+at github.
